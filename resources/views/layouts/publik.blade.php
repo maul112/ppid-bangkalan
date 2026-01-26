@@ -51,7 +51,7 @@
                                 <a href="{{ route('profil.sop') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">SOP</a>
                                 <a href="{{ route('profil.maklumat_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Maklumat Pelayanan</a>
                                 <a href="{{ route('profil.alur_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Alur Pelayanan</a>
-                                <a href="{{ route('profil.laporan_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Laporan Pelayanan</a>
+                                <a href="{{ route('profil.laporan_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Laporan PPID</a>
                             </div>
                         </div>
                     </div>
@@ -62,8 +62,20 @@
                         </button>
                         <div class="dropdown-menu absolute hidden pt-2 w-56">
                             <div class="bg-white shadow-2xl rounded-b-md py-2 border-t-4 border-blue-800">
-                                <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Bupati</a>
-                                <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Wakil Bupati</a>
+                                <a href="{{ route('profil.tentang') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Bupati</a>
+                                <a href="{{ route('profil.tugas_fungsi') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Wakl Bupati</a>
+                                <a href="{{ route('profil.visi_misi') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Sekda</a>
+                                <a href="{{ route('profil.struktur_organisasi') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Asisten</a>
+                                <a href="{{ route('profil.dasar_hukum') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Staf ahli</a>
+                                <a href="{{ route('profil.sop') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Inspektur</a>
+                                <a href="{{ route('profil.maklumat_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Kepala Badan</a>
+                                <a href="{{ route('profil.alur_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Kepala Dinas</a>
+                                <a href="{{ route('profil.laporan_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Kepala Bagian</a>
+                                <a href="{{ route('profil.laporan_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Kepala Puskesmas</a>
+                                <a href="{{ route('profil.laporan_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Camat</a>
+                                <a href="{{ route('profil.laporan_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Lurah</a>
+                                <a href="{{ route('profil.laporan_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Direktur RSD</a>
+                                <a href="{{ route('profil.laporan_pelayanan') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Direktur BUMD</a>
                             </div>
                         </div>
                     </div>
@@ -80,7 +92,30 @@
                         </div>
                     </div>
 
-                    {{-- <a href="/informasi-publik" class="text-white px-4 py-2 rounded hover:bg-white/10 text-sm font-bold">INFORMASI PUBLIK</a> --}}
+                    <div class="relative dropdown">
+                        <button class="text-white px-4 py-2 rounded group hover:bg-white/10 text-sm font-bold flex items-center">
+                            Layanan Informasi Publik <i class="fa-solid fa-chevron-down ml-2 text-[10px] group-hover:-rotate-180 transition duration-75"></i>
+                        </button>
+                        <div class="dropdown-menu absolute hidden pt-2 w-56">
+                            <div class="bg-white shadow-2xl rounded-b-md py-2 border-t-4 border-blue-800">
+                                <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Bupati</a>
+                                <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Wakil Bupati</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="relative dropdown">
+                        <button class="text-white px-4 py-2 rounded group hover:bg-white/10 text-sm font-bold flex items-center">
+                            Transparansi Pemkap <i class="fa-solid fa-chevron-down ml-2 text-[10px] group-hover:-rotate-180 transition duration-75"></i>
+                        </button>
+                        <div class="dropdown-menu absolute hidden pt-2 w-56">
+                            <div class="bg-white shadow-2xl rounded-b-md py-2 border-t-4 border-blue-800">
+                                <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 font-medium">Transparansi Pemkab</a>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div class="relative dropdown">
                         <button class="text-white px-4 py-2 rounded group hover:bg-white/10 text-sm font-bold flex items-center">
@@ -104,7 +139,7 @@
                     </div>
                 </div>
 
-                {{-- <div class="relative dropdown">
+                    <div class="relative dropdown">
                     <button class="bg-yellow-400 text-blue-900 px-6 py-1.5 rounded text-xs font-black hover:bg-yellow-500 transition shadow-sm flex items-center">
                         MASUK <i class="fa-solid fa-right-to-bracket ml-2"></i>
                     </button>
@@ -115,7 +150,7 @@
                             <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 font-bold border-t border-gray-50">Admin OPD</a>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </div>
     </nav>
