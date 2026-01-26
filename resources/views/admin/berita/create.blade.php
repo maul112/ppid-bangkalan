@@ -20,6 +20,20 @@
                 </a>
             </div>
 
+            @if ($errors->any())
+                <div class="bg-rose-50 border-l-4 border-rose-500 p-4 shadow-sm animate-fade-in-down">
+                    <div class="flex items-center mb-2">
+                        <svg class="w-5 h-5 text-rose-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="font-bold text-rose-800">Ups! Ada beberapa kesalahan:</span>
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-rose-700 space-y-1">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form action="{{ route('admin.berita.store') }}" method="POST" enctype="multipart/form-data" class="p-8 md:p-12 space-y-8">
                 @csrf
                 

@@ -68,18 +68,18 @@ class PermohonanController extends Controller
 
     public function cek(Request $request)
     {
+        // nik perlu atau tidak? karena tidak ada inputan nik
         $request->validate([
             'nomor_tiket' => 'required|string',
-            'nik'         => 'required|digits:16',
+            // 'nik'         => 'required|digits:16',
         ], [
-            'nik.digits' => 'NIK harus berjumlah 16 digit.',
-            'nik.required' => 'NIK wajib diisi untuk melihat detail.'
+            // 'nik.digits' => 'NIK harus berjumlah 16 digit.',
+            // 'nik.required' => 'NIK wajib diisi untuk melihat detail.'
         ]);
 
         $permohonan = Permohonan::where('nomor_tiket', $request->nomor_tiket)
-                                ->where('nik', $request->nik)
+                                // ->where('nik', $request->nik)
                                 ->first();
-
         if (!$permohonan) {
             return back()->with('error', 'Maaf, kombinasi Nomor Tiket dan NIK tidak ditemukan.');
         }

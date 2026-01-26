@@ -28,6 +28,9 @@ class BeritaController extends Controller
             'judul' => 'required|string|max:255',
             'isi' => 'required',
             'gambar' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ], [
+            // jika error mau bahasa indonesia
+            // 'judul.required' => 'Judul berita harus diisi.',
         ]);
 
         $nama_gambar = null;

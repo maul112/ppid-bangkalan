@@ -14,6 +14,17 @@ use Illuminate\Http\Request;
 
 /* --- 1. HALAMAN PUBLIK --- */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::prefix('profil')->name('profil.')->group(function () {
+    Route::get('/struktur-organisasi', [HomeController::class, 'struktur'])->name('struktur_organisasi');
+    Route::get('/tentang', [HomeController::class, 'tentang'])->name('tentang');
+    Route::get('/tugas-fungsi', [HomeController::class, 'tugasFungsi'])->name('tugas_fungsi');
+    Route::get('/visi-misi', [HomeController::class, 'visiMisi'])->name('visi_misi');
+    Route::get('/dasar-hukum', [HomeController::class, 'dasarHukum'])->name('dasar_hukum');
+    Route::get('/sop', [HomeController::class, 'sop'])->name('sop');
+    Route::get('/maklumat-pelayanan', [HomeController::class, 'maklumatPelayanan'])->name('maklumat_pelayanan');
+    Route::get('/alur-pelayanan', [HomeController::class, 'alurPelayanan'])->name('alur_pelayanan');
+    Route::get('/laporan-pelayanan', [HomeController::class, 'laporanPelayanan'])->name('laporan_pelayanan');
+});
 
 // Daftar Publik
 Route::get('/permohonan/daftar-publik', [PermohonanController::class, 'daftarPublik'])->name('permohonan.daftar_publik');
