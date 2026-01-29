@@ -1,74 +1,226 @@
 @extends('layouts/publik')
 
 @section('content')
-    {{-- HERO / HEADER --}}
-    <section class="relative overflow-hidden bg-sky-100">
-        {{-- dekorasi (opsional) --}}
-        <div class="pointer-events-none absolute inset-0">
-            <div class="absolute -top-16 -left-16 h-44 w-44 rounded-full bg-sky-200/60 blur-2xl"></div>
-            <div class="absolute top-10 right-10 h-24 w-24 rounded-xl bg-sky-300/40 rotate-12"></div>
-            <div class="absolute bottom-8 left-1/3 h-3 w-28 bg-sky-300/60 rounded-full"></div>
-        </div>
+<style>
+    /* ===== HERO ===== */
+    .ppid-hero{
+        position: relative;
+        overflow: hidden;
+        padding: 28px 0 56px;
+        background: linear-gradient(to bottom, #cfe8ff 0%, #e8f3ff 55%, #ffffff 100%);
+    }
+    .ppid-hero .pattern{
+        position:absolute; inset:0;
+        opacity:.16;
+        background-image: radial-gradient(#0b2a6f 0.7px, transparent 0.7px);
+        background-size: 22px 22px;
+    }
+    .ppid-hero .shape1{
+        position:absolute; left:-90px; top:-90px;
+        width:280px; height:280px; border-radius:999px;
+        background: rgba(59,130,246,.18);
+        filter: blur(34px);
+    }
+    .ppid-hero .shape2{
+        position:absolute; right:60px; top:64px;
+        width:120px; height:120px; border-radius:20px;
+        background: rgba(37,99,235,.18);
+        transform: rotate(12deg);
+    }
+    .ppid-hero .shape3{
+        position:absolute; left:160px; top:110px;
+        width:44px; height:44px;
+        border:2px solid rgba(37,99,235,.22);
+        transform: rotate(12deg);
+    }
+    .ppid-hero .shape4{
+        position:absolute; right:160px; bottom:80px;
+        width:34px; height:34px;
+        border:2px solid rgba(37,99,235,.18);
+        transform: rotate(-12deg);
+    }
+    .ppid-hero .shape5{
+        position:absolute; left:35%; bottom:90px;
+        width:160px; height:10px; border-radius:999px;
+        background: rgba(37,99,235,.16);
+    }
+    .ppid-hero .hero-inner{
+        position: relative;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 16px;
+        text-align: center;
+    }
+    .ppid-hero h1{
+        margin:0;
+        font-size: 38px;
+        font-weight: 800;
+        color:#0b2a6f;
+        letter-spacing: .2px;
+    }
+    .ppid-hero .badge{
+        display:inline-block;
+        margin-top:12px;
+        padding:10px 16px;
+        background:#facc15;
+        color:#111827;
+        font-weight:700;
+        border-radius:8px;
+        border:1px solid #f2c200;
+        box-shadow: 0 2px 10px rgba(0,0,0,.08);
+        font-size: 14px;
+    }
+    .ppid-wave{
+        position:absolute;
+        left:0; bottom:-1px;
+        width:100%;
+        height:60px;
+    }
 
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-            <div class="text-center">
-                <h1 class="text-3xl sm:text-4xl font-bold text-slate-800">
-                    Tentang PPID
-                </h1>
+    /* ===== CONTENT ===== */
+    .ppid-content{
+        background:#f8fafc;
+        padding: 18px 0 60px;
+        margin-top: -15px;
+    }
+    .ppid-wrap{
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
+    .ppid-card{
+        max-width: 920px;
+        margin: 0 auto;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(15,23,42,.08);
+        overflow:hidden;
+    }
+    .ppid-card .body{
+        padding: 26px;
+    }
+    .ppid-card h2{
+        margin:0;
+        font-size: 16px;
+        font-weight: 800;
+        color:#0f172a;
+    }
+    .ppid-text{
+        margin-top:14px;
+        color:#334155;
+        font-size: 14.5px;
+        line-height: 1.8;
+    }
+    .ppid-hr{ border:none; border-top:1px solid #e2e8f0; margin:20px 0; }
+    .ppid-grid{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:10px 16px;
+        margin-top:10px;
+        font-size:14.5px;
+        color:#334155;
+    }
+    .ppid-grid b{ color:#0f172a; }
+    @media (max-width: 640px){
+        .ppid-hero h1{ font-size: 30px; }
+        .ppid-grid{ grid-template-columns: 1fr; }
+        .ppid-card .body{ padding:18px; }
+    }
+</style>
 
-                <div class="mt-4 inline-flex items-center justify-center">
-                    <span class="px-4 py-2 rounded-md bg-yellow-400 text-slate-900 text-sm font-semibold shadow">
-                        Pengertian PPID Kabupaten Bangkalan
-                    </span>
+<section class="ppid-hero">
+    <div class="pattern"></div>
+    <div class="shape1"></div>
+    <div class="shape2"></div>
+    <div class="shape3"></div>
+    <div class="shape4"></div>
+    <div class="shape5"></div>
+
+    <div class="hero-inner">
+        <h1>Profil PPID</h1>
+        <div class="badge">PPID Kabupaten Bangkalan</div>
+    </div>
+
+    <svg class="ppid-wave" viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path fill="#f8fafc"
+            d="M0,64L60,58.7C120,53,240,43,360,42.7C480,43,600,53,720,58.7C840,64,960,64,1080,58.7C1200,53,1320,43,1380,37.3L1440,32L1440,90L0,90Z">
+        </path>
+    </svg>
+</section>
+
+<section class="ppid-content">
+    <div class="ppid-wrap">
+        <div class="ppid-card">
+            <div class="body">
+                <h2>Profil PPID Kabupaten Bangkalan</h2>
+
+                <div class="ppid-text">
+                    <p>
+                        Dalam rangka mewujudkan tata kelola pemerintahan yang baik serta transparansi informasi publik
+                        yang akuntabel di lingkungan Pemerintah Kabupaten Bangkalan, dibentuk Pedoman Pengelolaan
+                        Informasi dan Dokumentasi (PPID) sebagai upaya memenuhi hak pemohon informasi sesuai ketentuan
+                        peraturan perundang-undangan.
+                    </p>
+
+                    <p>
+                        PPID Kabupaten Bangkalan dibentuk pada tahun 2011 yang tertuang dalam Peraturan Bupati Nomor 42 Tahun 2011
+                        tentang Pedoman Pengelolaan Informasi dan Dokumentasi di Lingkungan Pemerintah Kabupaten Bangkalan
+                        dan ditindaklanjuti melalui penerbitan keputusan sebagai berikut:
+                    </p>
+
+                    <ol style="margin:10px 0 0 18px;">
+                        <li>
+                            Keputusan Bupati Nomor 188.45/47/Kpts/433.013/2011 tentang Penunjukan Pejabat Pengelola Informasi dan Dokumentasi
+                            di Lingkungan Pemerintah Kabupaten Bangkalan.
+                        </li>
+                        <li>
+                            Keputusan Bupati Nomor 188.45/174/Kpts/433.013/2016 tentang Susunan Keanggotaan Pengelola Informasi dan Dokumentasi
+                            Kabupaten Bangkalan.
+                        </li>
+                        <li>
+                            Keputusan Bupati Nomor 188.45/74/Kpts/433.013/2018 tentang Susunan Keanggotaan Tim Pengelola Informasi dan Dokumentasi
+                            Kabupaten Bangkalan.
+                        </li>
+                    </ol>
+
+                    <p style="margin-top:12px;">
+                        Hal tersebut merupakan bentuk komitmen Pemerintah Kabupaten Bangkalan dalam memberikan layanan informasi publik
+                        sebagaimana amanat Undang-Undang Keterbukaan Informasi Publik.
+                        {{-- Jika mau dibenerin: UU No. 14 Tahun 2008 --}}
+                    </p>
+
+                    <hr class="ppid-hr">
+
+                    <p style="font-weight:800; letter-spacing:.5px; text-transform:uppercase; color:#0f172a; margin-bottom:8px;">
+                        Susunan Keanggotaan PPID Kabupaten Bangkalan
+                    </p>
+
+                    <p style="margin-top:0;">
+                        Sesuai Keputusan Bupati tentang Susunan Keanggotaan Tim Pengelola Informasi dan Dokumentasi Kabupaten Bangkalan Tahun 2018,
+                        susunan PPID adalah sebagai berikut:
+                    </p>
+
+                    <ol style="margin:10px 0 0 18px;">
+                        <li>Pelindung dijabat oleh Bupati Bangkalan.</li>
+                        <li>Pembina dijabat oleh Wakil Bupati Bangkalan.</li>
+                        <li>Atasan PPID dijabat oleh Sekretaris Daerah Kabupaten Bangkalan.</li>
+                        <li>PPID/Ketua dijabat oleh Kepala Dinas Komunikasi dan Informatika Kabupaten Bangkalan.</li>
+                        <li>Sekretaris dijabat oleh Sekretaris Dinas Komunikasi dan Informatika Kabupaten Bangkalan.</li>
+                        <li>
+                            Bidang-bidang:
+                            <ul style="margin:8px 0 0 18px;">
+                                <li>Bidang Pelayanan dan Dokumentasi Informasi</li>
+                                <li>Bidang Pengolah Data dan Klasifikasi Informasi</li>
+                                <li>Bidang Penyelesaian Sengketa</li>
+                            </ul>
+                        </li>
+                        <li>PPID Pembantu: PPID Pembantu seluruh SKPD Kabupaten Bangkalan.</li>
+                    </ol>
+
                 </div>
             </div>
         </div>
-    </section>
-
-    {{-- CONTENT --}}
-    <section class="bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200">
-                    <div class="p-6 sm:p-8">
-                        <h2 class="text-sm font-semibold text-slate-700">
-                            Seputar PPID Kabupaten Bangkalan
-                        </h2>
-
-                        <div class="mt-5 space-y-4 text-slate-700 leading-relaxed text-sm sm:text-base">
-                            <p>
-                                (Isi penjelasan tentang PPID kamu taruh di sini. Bisa berupa beberapa paragraf.)
-                            </p>
-                            <p>
-                                (Paragraf berikutnya…)
-                            </p>
-
-                            <hr class="my-6">
-
-                            <div class="space-y-2 text-sm">
-                                <p class="font-semibold text-slate-800 uppercase tracking-wide">
-                                    Sekretariat PPID Kabupaten Bangkalan
-                                </p>
-                                <p>Alamat: (isi alamat)</p>
-                                <p>Telp: (isi telp)</p>
-                                <p>Email: (isi email)</p>
-                                <p>Website: (isi website)</p>
-
-                                <div class="mt-5">
-                                    <p class="font-semibold text-slate-800">Pelayanan (Di Hari & Jam Kerja)</p>
-                                    <ul class="list-disc pl-5 mt-2 space-y-1">
-                                        <li>Senin–Kamis: 08.00–15.00 WIB</li>
-                                        <li>Jum’at: 08.00–11.00 WIB & 13.00–15.00 WIB</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- jarak biar footer gak “nempel” --}}
-                <div class="h-10"></div>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 @endsection
