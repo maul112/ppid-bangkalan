@@ -15,7 +15,7 @@
   .ppid-hero2 .motif-img{
     position:absolute; inset:0;
     opacity:.10; /* kecil biar ga tembus banget */
-    background-image: url("{{ asset('img/IMG_5775.jpeg') }}");
+    background-image: url("{{ asset('img/IMG_5775.png') }}");
     background-size: cover;
     background-position: center;
     pointer-events:none;

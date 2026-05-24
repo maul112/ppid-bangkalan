@@ -29,7 +29,8 @@ class PermohonanAdminController extends Controller
 
     public function show(Permohonan $permohonan)
     {
-        return view('admin.permohonan.show', compact('permohonan'));
+        $opds = \App\Models\Opd::all();
+        return view('admin.permohonan.show', compact('permohonan', 'opds'));
     }
 
     public function updateStatus(Request $request, Permohonan $permohonan)
@@ -45,6 +46,21 @@ class PermohonanAdminController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Status permohonan berhasil diperbarui!');
+    }
+
+    public function disposisi(Request $request, Permohonan $permohonan)
+    {
+        $request->validate([
+            'opd_id' => 'required|exists:opds,id',
+        ]);
+
+        $permohonan->update([
+            'opd_id' => $request->opd_id,
+            'disposisi_at' => now(),
+            'status' => 'diverifikasi',
+        ]);
+
+        return redirect()->back()->with('success', 'Permohonan berhasil didisposisikan ke OPD terkait!');
     }
     public function destroy(Permohonan $permohonan)
 {

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DipController;
 use App\Http\Controllers\Admin\RegulasiController;
 use App\Http\Controllers\Admin\PermohonanAdminController;
 use App\Http\Controllers\Admin\PermohonanOpdController;
+use App\Http\Controllers\Admin\HariLiburController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 
@@ -57,12 +58,18 @@ Route::middleware(['auth', 'role:admin_ppid'])->prefix('admin')->name('admin.')-
     Route::patch('/permohonan/{permohonan}', [PermohonanAdminController::class, 'updateStatus'])->name('permohonan.update');
     Route::patch('/permohonan/{permohonan}/disposisi', [PermohonanAdminController::class, 'disposisi'])->name('permohonan.disposisi');
     Route::delete('/permohonan/{permohonan}', [PermohonanAdminController::class, 'destroy'])->name('permohonan.destroy');
+
+    Route::resource('hari-libur', HariLiburController::class);
 });
     
 Route::middleware(['auth', 'role:admin_opd'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/opd', function() {
-        return view('opd/dashboard');
+        return view('opd.dashboard');
     })->name('opd.dashboard');
+
+    Route::get('/opd/permohonan', [PermohonanOpdController::class, 'index'])->name('opd.permohonan.index');
+    Route::get('/opd/permohonan/{permohonan}', [PermohonanOpdController::class, 'show'])->name('opd.permohonan.show');
+    Route::patch('/opd/permohonan/{permohonan}/tanggapi', [PermohonanOpdController::class, 'tanggapi'])->name('opd.permohonan.tanggapi');
 });
             
 
