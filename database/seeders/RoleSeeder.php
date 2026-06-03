@@ -33,7 +33,7 @@ class RoleSeeder extends Seeder
 
         // 3. Buat Akun Admin OPD (Contoh: Admin Dinkes)
         User::updateOrCreate(
-            ['email' => 'dinkes@mail.com'],
+            ['email' => 'dinkes@gmail.com'],
             [
                 'name' => 'Admin OPD Kesehatan',
                 'nik' => '1111111111111111', // Tambahkan NIK formalitas
@@ -44,7 +44,7 @@ class RoleSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'disdik@mail.com'],
+            ['email' => 'disdik@gmail.com'],
             [
                 'name' => 'Admin OPD Pendidikan',
                 'nik' => '2222222222222222',
@@ -55,7 +55,7 @@ class RoleSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'pu@mail.com'],
+            ['email' => 'pu@gmail.com'],
             [
                 'name' => 'Admin OPD PU',
                 'nik' => '3333333333333333',
