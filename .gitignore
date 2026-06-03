@@ -23,4 +23,4 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 implementation_plan.md
-/database\seeders\OpdUserSeeder.php
+/database/seeders/OpdUserSeeder.php
