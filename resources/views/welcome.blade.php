@@ -1,4 +1,4 @@
-@extends('layouts/publik')
+@extends('layouts.publik')
 
 @section('content')
     <div class="relative h-[450px] md:h-[550px] overflow-hidden bg-blue-900 shadow-inner">

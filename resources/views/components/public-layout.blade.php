@@ -1,18 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="id">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? 'PPID Kabupaten Bangkalan' }}</title>
+    <title>{{ config('app.name', 'PPID Bangkalan') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .dropdown:hover .dropdown-menu { display: block; }
-    </style>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="antialiased bg-gray-50 text-gray-800">
-
+<body class="font-sans antialiased bg-gray-50 text-gray-900">
     <header style="background-image: url('{{ asset('img/IMG_5775.png') }}')" class="bg-center bg-no-repeat bg-contains bg-cover py-4 shadow-sm relative z-[60]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -31,7 +25,7 @@
             </div>
         </div>
     </header>
-
+    <!-- Navbar Replikasi (Isi Sesuai Jember) -->
     <nav class="bg-blue-700 text-white shadow-md relative z-50" x-data="{ navOpen: false, dropdownProfilOpen: false, dropdownPejabatOpen: false, dropdownDIPOpen: false, dropdownLayananOpen: false, dropdownPelaksanaOpen: false, dropdownLoginOpen: false }">
         <div class="container mx-auto px-6 py-4 flex items-center justify-between lg:justify-center flex-wrap">
             
@@ -165,81 +159,14 @@
         </div>
     </nav>
 
+    <!-- Main Content -->
     <main>
-        @yield('content')
+        {{ $slot }}
     </main>
-
-    <footer class="bg-[#0b0f1a] text-white pt-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-            <div class="flex items-center gap-4 md:gap-8">
-                <div class="w-2/5 md:w-1/5">
-                    <img class="block w-full" src="{{ asset('img/logo_ppid_2.png') }}" alt="logo">
-                </div>
-                <div>
-                    <p>Website Resmi PPID (Pejabat Pengelola Informasi dan Dokumentasi Kabupaten Bangkalan).</p>
-                </div>
-            </div>
-            <hr class="my-8 border-gray-500">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
-                <div>
-                    <h4 class="text-lg font-black mb-8 flex items-center">
-                        <span class="w-1 h-6 bg-blue-600 mr-3 rounded-full"></span>Hubungi Kami
-                    </h4>
-                    <div class="space-y-5 text-gray-400 text-sm">
-                        <div class="flex items-start">
-                            <i class="fa-solid fa-location-dot mt-1 mr-4 text-blue-500"></i>
-                            <p>Jl. Letnan Abdullah No.1, Alun-Alun Barat, Kabupaten Bangkalan, Jawa Timur 69112</p>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-phone mr-4 text-blue-500"></i>
-                            <p>(031) 3095331</p>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-envelope mr-4 text-blue-500"></i>
-                            <p>diskominfo@bangkalankab.go.id</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-black mb-8 flex items-center">
-                        <span class="w-1 h-6 bg-blue-600 mr-3 rounded-full"></span>Navigasi
-                    </h4>
-                    <ul class="space-y-3 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-blue-400 transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>Tentang PPID</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>Informasi Publik Terbuka</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>Daftar Informasi Publik (DIP)</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition-colors flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i>SOP Pelayanan</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-black mb-8 flex items-center">
-                        <span class="w-1 h-6 bg-blue-600 mr-3 rounded-full"></span>Lokasi Kami
-                    </h4>
-                    <div class="rounded-xl overflow-hidden h-48 shadow-2xl border border-gray-800">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.882885489838!2d112.7337!3d-7.0259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd8015337583f6f%3A0xb3387b38d3890f5d!2sBangkalan!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
-                            class="w-full h-full grayscale opacity-70 hover:grayscale-0 transition-all duration-700" 
-                            allowfullscreen="" loading="lazy">
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-[#070a12] py-6 border-t border-white/5">
-            <div class="max-w-7xl mx-auto px-4 text-center text-[10px] font-bold text-gray-600 tracking-[0.3em] uppercase">
-                © {{ date('Y') }} PEMERINTAH KABUPATEN BANGKALAN - DISKOMINFO
-            </div>
-        </div>
+    
+    <footer class="bg-gray-900 text-gray-400 text-center py-6 mt-12 text-sm">
+        <p>&copy; {{ date('Y') }} PPID Bangkalan. Hak Cipta Dilindungi.</p>
     </footer>
-
-    {{-- <footer class="bg-[#0b0f1a] text-white pt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 text-center text-gray-400">
-            <p>© {{ date('Y') }} PEMERINTAH KABUPATEN BANGKALAN - DISKOMINFO</p>
-        </div>
-    </footer> --}}
 
 </body>
 </html>

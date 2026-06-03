@@ -24,7 +24,8 @@ class PermohonanAdminController extends Controller
             // 3. Gunakan paginate() agar fungsi ->links() di view bekerja
             ->paginate(10); 
 
-        return view('admin.permohonan.index', compact('permohonans'));
+        $opds = \App\Models\Opd::all();
+        return view('admin.permohonan.index', compact('permohonans', 'opds'));
     }
 
     public function show(Permohonan $permohonan)
@@ -50,6 +51,18 @@ class PermohonanAdminController extends Controller
 
     public function disposisi(Request $request, Permohonan $permohonan)
     {
+        // Pencegahan Disposisi di Hari Libur / Akhir Pekan
+        $today = \Carbon\Carbon::now();
+        
+        if ($today->isWeekend()) {
+            return redirect()->back()->with('error', 'Gagal! Tidak dapat melakukan disposisi pada akhir pekan (Sabtu/Minggu).');
+        }
+
+        $isHariLibur = \App\Models\HariLibur::whereDate('tanggal', $today->format('Y-m-d'))->exists();
+        if ($isHariLibur) {
+            return redirect()->back()->with('error', 'Gagal! Tidak dapat melakukan disposisi pada tanggal merah atau hari libur nasional.');
+        }
+
         $request->validate([
             'opd_id' => 'required|exists:opds,id',
         ]);

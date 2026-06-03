@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
-                @foreach($hariLiburs as $libur)
+                @forelse($hariLiburs as $libur)
                 <tr class="hover:bg-gray-50 transition-colors">
                     <td class="p-5">
                         <span class="font-bold text-gray-800 text-sm">{{ \Carbon\Carbon::parse($libur->tanggal)->translatedFormat('d F Y') }}</span>
@@ -44,15 +44,16 @@
                         </div>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="3" class="p-20 text-center">
+                        <svg class="w-16 h-16 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <p class="text-gray-400 font-medium italic">Belum ada hari libur yang ditambahkan.</p>
+                    </td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
-        @if($hariLiburs->isEmpty())
-            <div class="text-center py-20">
-                <svg class="w-16 h-16 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                <p class="text-gray-400 font-medium italic">Belum ada hari libur yang ditambahkan.</p>
-            </div>
-        @endif
         <div class="p-5 border-t border-gray-100">
             {{ $hariLiburs->links() }}
         </div>

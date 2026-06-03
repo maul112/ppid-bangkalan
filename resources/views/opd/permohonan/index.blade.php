@@ -24,56 +24,108 @@
                     Permohonan Masuk
                 </a>
             </nav>
+            <div class="p-4 border-t border-gray-100">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="w-full flex items-center justify-center px-4 py-3 text-sm text-red-600 font-bold bg-red-50 hover:bg-red-100 rounded-xl transition-all">
+                        LOGOUT
+                    </button>
+                </form>
+            </div>
         </aside>
 
         <main class="flex-1 p-8">
-            <h2 class="text-3xl font-black text-gray-800 tracking-tight mb-8">Tabel Laporan Permohonan</h2>
+            <header class="flex justify-between items-center mb-10">
+                <div>
+                    <h2 class="text-3xl font-black text-gray-800 tracking-tight">Laporan Permohonan</h2>
+                    <p class="text-gray-500 font-medium">OPD Kabupaten Bangkalan</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="bg-blue-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">Admin OPD</span>
+                    <div class="h-12 w-12 bg-white rounded-2xl flex items-center justify-center border border-gray-200 shadow-sm font-bold text-gray-700 uppercase">
+                        {{ substr(Auth::user()->name, 0, 1) }}
+                    </div>
+                </div>
+            </header>
 
             @if(session('success'))
-                <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+                <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded-r-xl shadow-sm text-sm font-bold">
                     {{ session('success') }}
                 </div>
             @endif
 
-            <div class="bg-white shadow rounded-lg overflow-hidden">
-                <table class="min-w-full leading-normal">
+            <div class="flex items-center gap-2 mb-8">
+                <form action="{{ route('admin.opd.permohonan.index') }}" method="GET" class="flex gap-2">
+                    <input type="text" name="search" value="{{ request('search') }}" 
+                           placeholder="Cari nama, NIK atau tiket..." 
+                           class="w-64 rounded-xl border-gray-200 text-sm focus:ring-red-500 focus:border-red-500 shadow-sm">
+                    <button type="submit" class="bg-gray-900 text-white px-4 py-2 rounded-xl font-bold text-xs hover:bg-gray-800 transition shadow-md">
+                        CARI
+                    </button>
+                    @if(request('search'))
+                        <a href="{{ route('admin.opd.permohonan.index') }}" class="bg-gray-200 text-gray-600 px-4 py-2 rounded-xl font-bold text-xs hover:bg-gray-300 transition flex items-center">
+                            RESET
+                        </a>
+                    @endif
+                </form>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-200 overflow-hidden">
+                <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">No. Tiket</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Pemohon</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Sisa Waktu</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
-                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Aksi</th>
+                        <tr class="bg-gray-50 border-b border-gray-100 text-[11px] font-black text-gray-500 uppercase tracking-widest">
+                            <th class="p-5">Nomor Tiket</th>
+                            <th class="p-5">Nama Pemohon</th>
+                            <th class="p-5">Sisa Waktu</th>
+                            <th class="p-5">Status</th>
+                            <th class="p-5 text-center">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach($permohonans as $p)
-                        <tr>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 font-bold">{{ $p->nomor_tiket }}</p>
+                    <tbody class="divide-y divide-gray-100">
+                        @forelse($permohonans as $p)
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="p-5">
+                                <span class="font-mono text-red-600 font-bold bg-red-50 px-3 py-1 rounded-lg text-sm">{{ $p->nomor_tiket }}</span>
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900">{{ $p->nama_pemohon }}</p>
+                            <td class="p-5">
+                                <div class="font-bold text-gray-800 text-sm">{{ $p->nama_pemohon }}</div>
+                                <div class="text-xs text-gray-400 italic">NIK: {{ $p->nik ?? '-' }}</div>
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full {{ $p->sisa_waktu <= 3 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800' }}">
+                            <td class="p-5">
+                                <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter shadow-sm
+                                    {{ $p->sisa_waktu <= 3 ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
                                     {{ $p->sisa_waktu }} Hari
                                 </span>
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <span class="uppercase font-bold {{ $p->status == 'selesai' ? 'text-green-600' : 'text-orange-500' }}">
+                            <td class="p-5">
+                                <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-tighter shadow-sm
+                                    {{ $p->status == 'pending' ? 'bg-yellow-100 text-yellow-700' : '' }}
+                                    {{ $p->status == 'diverifikasi' ? 'bg-blue-100 text-blue-700' : '' }}
+                                    {{ $p->status == 'selesai' ? 'bg-green-100 text-green-700' : '' }}
+                                    {{ $p->status == 'ditolak' ? 'bg-red-100 text-red-700' : '' }}">
                                     {{ $p->status }}
                                 </span>
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <a href="{{ route('admin.opd.permohonan.show', $p->id) }}" class="text-blue-600 hover:text-blue-900 font-bold">Detail & Tanggapi</a>
+                            <td class="p-5">
+                                <div class="flex items-center justify-center gap-2">
+                                    <a href="{{ route('admin.opd.permohonan.show', $p->id) }}" class="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-[10px] font-bold rounded-xl hover:bg-red-600 transition shadow-sm">
+                                        DETAIL & TANGGAPI
+                                    </a>
+                                </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="5" class="p-20 text-center">
+                                <svg class="w-16 h-16 text-gray-200 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                                <p class="text-gray-400 font-medium italic">Data tidak ditemukan atau belum ada laporan masuk.</p>
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
-                <div class="p-4">
-                    {{ $permohonans->links() }}
+                <div class="p-5 border-t border-gray-100">
+                    {{ $permohonans->appends(request()->query())->links() }}
                 </div>
             </div>
         </main>

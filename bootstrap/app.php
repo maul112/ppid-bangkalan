@@ -16,6 +16,16 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'role'  => \App\Http\Middleware\CheckRole::class,
         ]);
+        
+        $middleware->redirectUsersTo(function () {
+            if (\Illuminate\Support\Facades\Auth::check()) {
+                if (\Illuminate\Support\Facades\Auth::user()->role === 'admin_opd') {
+                    return route('admin.opd.dashboard');
+                }
+                return route('admin.dashboard');
+            }
+            return '/';
+        });
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
