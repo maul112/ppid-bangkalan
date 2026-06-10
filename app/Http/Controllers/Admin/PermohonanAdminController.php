@@ -14,7 +14,7 @@ class PermohonanAdminController extends Controller
         $search = $request->query('search');
 
         // 2. Query data dengan filter pencarian jika ada
-        $permohonans = Permohonan::with('user')
+        $permohonans = Permohonan::with(['user', 'opds'])
             ->when($search, function ($query, $search) {
                 return $query->where('nama_pemohon', 'like', "%{$search}%")
                              ->orWhere('nomor_tiket', 'like', "%{$search}%")
@@ -64,23 +64,53 @@ class PermohonanAdminController extends Controller
         }
 
         $request->validate([
-            'opd_id' => 'required|exists:opds,id',
+            'opd_ids'   => 'nullable|array',
+            'opd_ids.*' => 'exists:opds,id',
         ]);
 
-        $permohonan->update([
-            'opd_id' => $request->opd_id,
-            'disposisi_at' => now(),
-            'status' => 'diverifikasi',
-        ]);
+        $submittedIds = collect($request->opd_ids ?? [])->map(fn($id) => (int)$id);
+        $existingIds  = $permohonan->opds->pluck('id');
 
-        return redirect()->back()->with('success', 'Permohonan berhasil didisposisikan ke OPD terkait!');
+        // 1. Hapus OPD yang sebelumnya dicentang tapi sekarang tidak dicentang
+        $toDetach = $existingIds->diff($submittedIds);
+        if ($toDetach->isNotEmpty()) {
+            $permohonan->opds()->detach($toDetach->toArray());
+        }
+
+        // 2. Tambahkan OPD baru yang belum ada di pivot
+        $toAttach = $submittedIds->diff($existingIds);
+        if ($toAttach->isNotEmpty()) {
+            $pivotData = [];
+            foreach ($toAttach as $opdId) {
+                $pivotData[$opdId] = [
+                    'status'       => 'menunggu',
+                    'disposisi_at' => now(),
+                ];
+            }
+            $permohonan->opds()->syncWithoutDetaching($pivotData);
+        }
+
+        // 3. Sinkronkan status permohonan
+        $totalOpd = $submittedIds->count();
+        if ($totalOpd === 0) {
+            // Tidak ada OPD — kembalikan ke pending
+            $permohonan->update(['status' => 'pending']);
+            return redirect()->back()->with('success', 'Semua OPD telah dihapus, permohonan dikembalikan ke pending.');
+        } elseif ($permohonan->status === 'pending') {
+            $permohonan->update(['status' => 'diverifikasi']);
+        }
+
+        $pesanDetach = $toDetach->isNotEmpty() ? ', ' . $toDetach->count() . ' OPD dihapus' : '';
+        $pesanAttach = $toAttach->isNotEmpty() ? $toAttach->count() . ' OPD baru ditambahkan' : 'Tidak ada OPD baru';
+
+        return redirect()->back()->with('success', $pesanAttach . $pesanDetach . '. Total ' . $totalOpd . ' OPD aktif.');
     }
-    public function destroy(Permohonan $permohonan)
-{
-    // Hapus data permohonan
-    $permohonan->delete();
 
-    return redirect()->route('admin.permohonan.index')
-                     ->with('success', 'Permohonan berhasil dihapus!');
-}
+    public function destroy(Permohonan $permohonan)
+    {
+        $permohonan->delete();
+
+        return redirect()->route('admin.permohonan.index')
+                         ->with('success', 'Permohonan berhasil dihapus!');
+    }
 }

@@ -68,15 +68,28 @@
                                 DETAIL
                             </a>
                             
-                            @if($p->opd_id === null && $p->status === 'pending')
-                            <button type="button" onclick="openDisposisiModal('{{ $p->id }}')" class="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-xl hover:bg-blue-600 hover:text-white transition shadow-sm border border-blue-100">
+                            @php 
+                                $sudahDisposisi = $p->opds->count() > 0;
+                                $disposisiIds = $p->opds->pluck('id')->toJson();
+                            @endphp
+                            @if(!$sudahDisposisi && $p->status === 'pending')
+                            <button type="button" 
+                                onclick="openDisposisiModal('{{ $p->id }}', '[]')"
+                                class="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-xl hover:bg-blue-600 hover:text-white transition shadow-sm border border-blue-100">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                                 DISPOSISI
+                            </button>
+                            @elseif($sudahDisposisi)
+                            <button type="button" 
+                                onclick="openDisposisiModal('{{ $p->id }}', '{{ addslashes($disposisiIds) }}')"
+                                class="inline-flex items-center px-4 py-2 bg-green-50 text-green-700 text-[10px] font-bold rounded-xl hover:bg-green-600 hover:text-white transition shadow-sm border border-green-100">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                                +OPD ({{ $p->opds->count() }})
                             </button>
                             @else
                             <button type="button" disabled class="inline-flex items-center px-4 py-2 bg-gray-50 text-gray-400 text-[10px] font-bold rounded-xl shadow-sm border border-gray-100 cursor-not-allowed">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                DIDISPOSISI
+                                SELESAI
                             </button>
                             @endif
                             
@@ -106,7 +119,7 @@
         </div>
     </div>
 
-    <!-- Modal Disposisi -->
+    <!-- Modal Disposisi (Multi-OPD) -->
     <div id="disposisiModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeDisposisiModal()"></div>
@@ -115,32 +128,53 @@
                 <form id="disposisiForm" method="POST" action="">
                     @csrf
                     @method('PATCH')
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <div class="sm:flex sm:items-start">
-                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
-                                <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    <div class="bg-white px-6 pt-5 pb-4">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-blue-100">
+                                <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                             </div>
-                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                                <h3 class="text-lg leading-6 font-bold text-gray-900" id="modal-title">
-                                    Disposisi Permohonan
-                                </h3>
-                                <div class="mt-4">
-                                    <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Pilih Instansi (OPD) Tujuan</label>
-                                    <select name="opd_id" required class="w-full rounded-2xl border-gray-200 focus:border-blue-600 focus:ring-0 p-3 text-sm font-bold bg-gray-50">
-                                        <option value="">-- Pilih OPD --</option>
-                                        @foreach($opds as $opd)
-                                            <option value="{{ $opd->id }}">{{ $opd->nama_opd }}</option>
-                                        @endforeach
-                                    </select>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900" id="modal-title">Disposisi Permohonan</h3>
+                                <p class="text-xs text-gray-400">Pilih satu atau lebih instansi tujuan</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-3">Pilih Instansi (OPD) Tujuan</label>
+
+                            {{-- Search filter --}}
+                            <input type="text" id="opdSearch" onkeyup="filterOpd()" placeholder="Cari OPD..." 
+                                   class="w-full mb-3 rounded-xl border-gray-200 text-sm focus:ring-blue-500 focus:border-blue-500 p-2 bg-gray-50">
+
+                            <div id="opdCheckboxList" class="max-h-64 overflow-y-auto space-y-1 border border-gray-100 rounded-xl p-3 bg-gray-50">
+                                @foreach($opds as $opd)
+                                <label class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 cursor-pointer transition opd-item" data-name="{{ strtolower($opd->nama_opd) }}" data-opd-id="{{ $opd->id }}">
+                                    <input type="checkbox" name="opd_ids[]" value="{{ $opd->id }}"
+                                           class="opd-checkbox w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                    <span class="text-sm font-medium text-gray-700 flex-1">{{ $opd->nama_opd }}</span>
+                                    <span class="opd-badge hidden items-center gap-1 text-[10px] font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded-full">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        Sudah
+                                    </span>
+                                </label>
+                                @endforeach
+                            </div>
+
+                            <div class="mt-2 flex justify-between items-center">
+                                <span class="text-xs text-gray-400" id="selectedCount">0 OPD dipilih</span>
+                                <div class="flex gap-3">
+                                    <button type="button" onclick="selectAllOpd()" class="text-xs text-blue-600 font-bold hover:underline">Pilih Semua</button>
+                                    <span class="text-gray-200">|</span>
+                                    <button type="button" onclick="deselectAllOpd()" class="text-xs text-red-500 font-bold hover:underline">Tidak Pilih Semua</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-gray-100">
-                        <button type="submit" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-bold text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm transition-all">
+                    <div class="bg-gray-50 px-6 py-3 flex flex-row-reverse gap-2 border-t border-gray-100">
+                        <button type="submit" class="inline-flex justify-center rounded-xl px-5 py-2 bg-blue-600 text-sm font-bold text-white hover:bg-blue-700 transition shadow-sm">
                             Kirim Disposisi
                         </button>
-                        <button type="button" onclick="closeDisposisiModal()" class="mt-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-bold text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm transition-all">
+                        <button type="button" onclick="closeDisposisiModal()" class="inline-flex justify-center rounded-xl border border-gray-300 px-5 py-2 bg-white text-sm font-bold text-gray-700 hover:bg-gray-50 transition">
                             Batal
                         </button>
                     </div>
@@ -150,12 +184,61 @@
     </div>
 
     <script>
-        function openDisposisiModal(id) {
+        function openDisposisiModal(id, disposisiIdsJson) {
+            const disposisiIds = JSON.parse(disposisiIdsJson || '[]').map(Number);
+
+            // Reset semua checkbox dan badge
+            document.querySelectorAll('.opd-item').forEach(item => {
+                const cb = item.querySelector('.opd-checkbox');
+                const badge = item.querySelector('.opd-badge');
+                const opdId = parseInt(item.dataset.opdId);
+
+                if (disposisiIds.includes(opdId)) {
+                    // Sudah terdisposisi: centang (tapi TETAP bisa diubah), tampilkan badge
+                    cb.checked = true;
+                    cb.disabled = false;
+                    badge.classList.remove('hidden');
+                    badge.classList.add('inline-flex');
+                } else {
+                    // Belum: reset
+                    cb.checked = false;
+                    cb.disabled = false;
+                    badge.classList.add('hidden');
+                    badge.classList.remove('inline-flex');
+                }
+            });
+
+            updateSelectedCount();
+            document.getElementById('opdSearch').value = '';
+            filterOpd();
             document.getElementById('disposisiModal').classList.remove('hidden');
             document.getElementById('disposisiForm').action = '/admin/permohonan/' + id + '/disposisi';
         }
         function closeDisposisiModal() {
             document.getElementById('disposisiModal').classList.add('hidden');
         }
+        function filterOpd() {
+            const val = document.getElementById('opdSearch').value.toLowerCase();
+            document.querySelectorAll('.opd-item').forEach(item => {
+                item.style.display = item.dataset.name.includes(val) ? '' : 'none';
+            });
+        }
+        function selectAllOpd() {
+            document.querySelectorAll('#opdCheckboxList input[type=checkbox]').forEach(cb => cb.checked = true);
+            updateSelectedCount();
+        }
+        function deselectAllOpd() {
+            document.querySelectorAll('#opdCheckboxList input[type=checkbox]').forEach(cb => cb.checked = false);
+            updateSelectedCount();
+        }
+        function updateSelectedCount() {
+            const count = document.querySelectorAll('#opdCheckboxList input[type=checkbox]:checked').length;
+            document.getElementById('selectedCount').textContent = count + ' OPD dipilih';
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('#opdCheckboxList input[type=checkbox]').forEach(cb => {
+                cb.addEventListener('change', updateSelectedCount);
+            });
+        });
     </script>
 </x-admin-panel-layout>

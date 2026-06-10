@@ -38,11 +38,21 @@ class Permohonan extends Model
     }
 
     /**
-     * Relasi ke OPD
+     * Relasi ke OPD (Legacy - Single OPD, ditinggalkan)
      */
     public function opd(): BelongsTo
     {
         return $this->belongsTo(Opd::class, 'opd_id');
+    }
+
+    /**
+     * Relasi ke OPD via pivot (Many-to-Many)
+     */
+    public function opds()
+    {
+        return $this->belongsToMany(Opd::class, 'permohonan_opd')
+                    ->withPivot(['tanggapan', 'status', 'disposisi_at', 'tanggapi_at'])
+                    ->withTimestamps();
     }
 
     /**
