@@ -112,7 +112,7 @@
                         <li><a href="https://www.lapor.go.id/" target="_blank" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">SP4N LAPOR!</a></li>
                         <li><a href="{{ route('public.layanan_berita') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Daftar Berita PPID</a></li>
                         <li><a href="https://elhkpn.kpk.go.id/portal/user/login" target="_blank" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">LHKPN</a></li>
-                        <li><a href="{{ route('public.layanan_permohonan_informasi') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Permohonan Informasi</a></li>
+                        <li><a href="{{ route('permohonan.buat') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Permohonan Informasi</a></li>
                         <li><a href="{{ route('public.layanan_formulir_keberatan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Formulir Keberatan</a></li>
                         <li><a href="{{ route('public.layanan_agenda_bulanan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Agenda Bulanan</a></li>
                         <li><a href="{{ route('public.layanan_agenda_tahunan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Agenda Tahunan</a></li>
@@ -141,18 +141,6 @@
                         <li><a href="{{ route('public.ppidpelaksana_rsd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">RSD</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_puskesmas') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Puskesmas</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_bumd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">BUMD</a></li>
-                    </ul>
-                </li>
-
-                <!-- Login Dropdown -->
-                <li class="relative" @mouseenter="dropdownLoginOpen = true" @mouseleave="dropdownLoginOpen = false">
-                    <button @click="dropdownLoginOpen = !dropdownLoginOpen" class="bg-yellow-400 text-blue-900 px-6 py-1.5 rounded text-xs font-black hover:bg-yellow-500 transition shadow-sm flex items-center focus:outline-none">
-                        MASUK <i class="fa-solid fa-right-to-bracket ml-2"></i>
-                    </button>
-                    <ul x-show="dropdownLoginOpen" x-transition class="absolute right-0 bg-white text-gray-800 shadow-xl rounded-md mt-1 w-48 z-50 py-2 border-t-4 border-yellow-500 text-left" @click.away="dropdownLoginOpen = false" x-cloak>
-                        <li><p class="px-4 py-1 text-[9px] font-bold text-gray-400 uppercase tracking-widest">Login Internal</p></li>
-                        <li><a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 font-bold">Admin PPID</a></li>
-                        <li><a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 font-bold border-t border-gray-50">Admin OPD</a></li>
                     </ul>
                 </li>
             </ul>

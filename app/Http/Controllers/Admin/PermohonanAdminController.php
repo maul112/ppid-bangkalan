@@ -30,23 +30,36 @@ class PermohonanAdminController extends Controller
 
     public function show(Permohonan $permohonan)
     {
-        $opds = \App\Models\Opd::all();
+        $permohonan->load(['user', 'opds']);
+        $opds = \App\Models\Opd::orderBy('nama_opd')->get();
         return view('admin.permohonan.show', compact('permohonan', 'opds'));
     }
 
     public function updateStatus(Request $request, Permohonan $permohonan)
     {
         $request->validate([
-            'status' => 'required',
-            'tanggapan' => 'required_if:status,selesai'
+            'status'    => 'required|in:pending,diverifikasi,selesai,ditolak',
+            'tanggapan' => 'required_if:status,selesai|required_if:status,ditolak|nullable|string',
+        ], [
+            'tanggapan.required_if' => 'Kolom tanggapan wajib diisi ketika status adalah Selesai atau Ditolak.',
         ]);
 
+        if ($request->status === 'selesai') {
+            $hasOpd = $permohonan->opds()->count() > 0;
+            if ($hasOpd) {
+                $unansweredOpds = $permohonan->opds()->wherePivot('status', '!=', 'ditanggapi')->count();
+                if ($unansweredOpds > 0) {
+                    return redirect()->back()->with('error', 'Tidak dapat menyelesaikan permohonan. Masih ada OPD yang belum memberikan tanggapan.');
+                }
+            }
+        }
+
         $permohonan->update([
-            'status' => $request->status,
+            'status'    => $request->status,
             'tanggapan' => $request->tanggapan,
         ]);
 
-        return redirect()->back()->with('success', 'Status permohonan berhasil diperbarui!');
+        return redirect()->route('admin.permohonan.index')->with('success', 'Status permohonan berhasil diperbarui menjadi "' . strtoupper($request->status) . '"!');
     }
 
     public function disposisi(Request $request, Permohonan $permohonan)

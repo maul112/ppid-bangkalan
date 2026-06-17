@@ -17,6 +17,10 @@ return new class extends Migration
         $table->string('singkatan')->unique(); // Contoh: DINKEES
         $table->timestamps();
     });
+
+    Schema::table('users', function (Blueprint $table) {
+        $table->foreign('opd_id')->references('id')->on('opds')->onDelete('set null');
+    });
 }
 
     /**

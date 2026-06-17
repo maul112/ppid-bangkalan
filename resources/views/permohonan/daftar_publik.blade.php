@@ -1,13 +1,14 @@
-<x-publik-layout>
-    {{-- Header Area --}}
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Daftar Permohonan Informasi Publik') }}
-        </h2>
-    </x-slot>
+@extends('layouts.publik')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+@section('content')
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight">Daftar Permohonan Publik</h1>
+            <div class="mt-4 mx-auto h-1 w-20 bg-blue-600 rounded-full"></div>
+            <p class="mt-4 text-gray-500 max-w-2xl mx-auto">Arsip data transparansi permohonan informasi publik Pemerintah Kabupaten Bangkalan.</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto">
             
             {{-- Notifikasi Jika NIK Salah --}}
             @if(session('error'))
@@ -153,4 +154,4 @@
             }
         }
     </script>
-</x-publik-layout>
+@endsection

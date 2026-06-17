@@ -1,8 +1,9 @@
 @extends('layouts.publik')
 
 @section('content')
-    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold text-gray-800">Dip > Sertamerta</h1>
-        <p class="mt-4 text-gray-600">Halaman ini masih kosong dan sedang dalam tahap pengembangan.</p>
-    </div>
+    <x-public-dip-table 
+        title="Informasi Serta Merta" 
+        description="Informasi publik yang dapat mengancam hajat hidup orang banyak dan ketertiban umum dan wajib diumumkan secara serta merta tanpa penundaan."
+        :dips="$dips" 
+    />
 @endsection

@@ -13,7 +13,7 @@ class BeritaController extends Controller
     public function index()
     {
         // Menggunakan latest() agar berita terbaru muncul di atas
-        $beritas = Berita::latest()->get();
+        $beritas = Berita::latest()->paginate(10);
         return view('admin.berita.index', compact('beritas'));
     }
 
@@ -47,6 +47,42 @@ class BeritaController extends Controller
         ]);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diterbitkan!');
+    }
+
+    public function edit($id)
+    {
+        $berita = Berita::findOrFail($id);
+        return view('admin.berita.edit', compact('berita'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $berita = Berita::findOrFail($id);
+
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'isi' => 'required',
+            'gambar' => 'image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        $nama_gambar = $berita->gambar;
+        if($request->hasFile('gambar')) {
+            $path = public_path('uploads/berita/' . $berita->gambar);
+            if ($berita->gambar && File::exists($path)) {
+                File::delete($path);
+            }
+            $nama_gambar = time().'.'.$request->gambar->extension();  
+            $request->gambar->move(public_path('uploads/berita'), $nama_gambar);
+        }
+
+        $berita->update([
+            'judul' => $request->judul,
+            'slug' => Str::slug($request->judul),
+            'isi' => $request->isi,
+            'gambar' => $nama_gambar
+        ]);
+
+        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui!');
     }
 
     /**

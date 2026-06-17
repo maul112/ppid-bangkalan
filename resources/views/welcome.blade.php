@@ -60,8 +60,8 @@
                 <h2 class="text-3xl font-black text-blue-900 tracking-tight">Berita & Artikel</h2>
                 <div class="mt-2 h-1 w-16 bg-blue-600 rounded-full"></div>
             </div>
-            <a href="#" class="text-blue-600 font-bold hover:text-blue-800 transition flex items-center">
-                Lihat Semua <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+            <a href="{{ route('public.layanan_berita') }}" class="text-blue-600 font-bold hover:text-blue-800 transition flex items-center">
+                Lihat Semua Berita <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
             </a>
         </div>
 
@@ -79,13 +79,64 @@
                     </p>
                     <div class="mt-auto pt-6 border-t border-gray-100 flex justify-between items-center">
                         <span class="text-[10px] font-bold text-gray-400 tracking-widest">{{ $berita->created_at->format('d M Y') }}</span>
-                        <a href="#" class="text-blue-600 font-black text-xs tracking-tighter hover:tracking-normal transition-all">Selengkapnya →</a>
+                        <a href="{{ route('public.layanan_berita_show', $berita->slug) }}" class="text-blue-600 font-black text-xs tracking-tighter hover:tracking-normal transition-all">Selengkapnya →</a>
                     </div>
                 </div>
             </article>
             @empty
             <div class="col-span-3 py-20 text-center text-gray-400 italic font-medium">Belum ada berita yang diterbitkan.</div>
             @endforelse
+        </div>
+    </section>
+
+
+
+    {{-- REGULASI SECTION --}}
+    <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+            <div>
+                <h2 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Dasar Hukum</h2>
+                <h3 class="text-3xl font-black text-blue-900 tracking-tight">Regulasi & Kebijakan</h3>
+                <div class="mt-4 h-1 w-16 bg-blue-600 rounded-full"></div>
+            </div>
+            <a href="{{ route('public.layanan_regulasi') }}" class="text-blue-600 font-bold hover:text-blue-800 transition flex items-center">
+                Lihat Semua Regulasi <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+            </a>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="py-5 px-8 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">Nomor Regulasi</th>
+                            <th class="py-5 px-8 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">Tentang / Judul</th>
+                            <th class="py-5 px-8 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 text-right">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        @forelse($regulasis as $regulasi)
+                        <tr class="hover:bg-blue-50/50 transition duration-150 group">
+                            <td class="py-5 px-8 whitespace-nowrap">
+                                <span class="font-bold text-gray-800">{{ $regulasi->nomor }}</span>
+                            </td>
+                            <td class="py-5 px-8">
+                                <p class="text-gray-700 font-medium group-hover:text-blue-700 transition">{{ $regulasi->judul }}</p>
+                            </td>
+                            <td class="py-5 px-8 text-right whitespace-nowrap">
+                                <a href="{{ asset('uploads/regulasi/' . $regulasi->file_pdf) }}" target="_blank" class="inline-flex items-center justify-center w-10 h-10 bg-blue-100 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition shadow-sm">
+                                    <i class="fa-solid fa-download"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="3" class="py-12 text-center text-gray-400 font-bold italic">Belum ada regulasi yang diunggah.</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 

@@ -13,9 +13,34 @@ return new class extends Migration
     {
         Schema::create('permohonans', function (Blueprint $table) {
             $table->id();
-            // Menghubungkan ke tabel users
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+            // Menghubungkan ke tabel users (nullable karena bisa guest)
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade'); 
             
+            // Kolom identitas pemohon
+            $table->string('nama_pemohon');
+            $table->string('nik');
+            $table->enum('pekerjaan', [
+                'Pelajar / Mahasiswa',
+                'Aparatur Sipil Negara (ASN)',
+                'TNI / POLRI',
+                'Karyawan Swasta',
+                'Wiraswasta / Pengusaha',
+                'Petani',
+                'Nelayan',
+                'Buruh / Pekerja Lepas',
+                'Guru / Dosen',
+                'Dokter / Tenaga Medis',
+                'Pengacara / Konsultan Hukum',
+                'Ibu Rumah Tangga',
+                'Pensiunan',
+                'Tidak Bekerja',
+                'Lainnya'
+            ]);
+            $table->text('alamat');
+            $table->string('email');
+            $table->string('no_hp');
+            $table->string('foto_ktp');
+
             // Nama kolom harus 'nomor_tiket' agar sesuai dengan Controller
             $table->string('nomor_tiket')->unique(); 
             
@@ -27,9 +52,9 @@ return new class extends Migration
             $table->string('cara_mendapatkan'); 
             
             // Status permohonan sesuai alur Use Case
-            $table->enum('status', ['pending', 'diverifikasi', 'disposisi', 'selesai'])->default('pending');
+            $table->enum('status', ['pending', 'diverifikasi', 'disposisi', 'selesai', 'ditolak'])->default('pending');
+            $table->text('tanggapan')->nullable();
             
-            $table->text('tanggapan_admin')->nullable();
             $table->timestamps();
         });
     }

@@ -26,8 +26,6 @@ class PermohonanSeeder extends Seeder
             'cara_memperoleh' => 'Melihat/Membaca/Mendengarkan/Mencatat',
             'cara_mendapatkan' => 'Mengambil Langsung',
             'status' => 'pending',
-            'opd_id' => null, // Belum didisposisi
-            'opd_tujuan' => 'Dinas Pekerjaan Umum',
         ]);
         
         Permohonan::create([
@@ -43,8 +41,6 @@ class PermohonanSeeder extends Seeder
             'cara_memperoleh' => 'Mendapatkan Salinan Hardcopy',
             'cara_mendapatkan' => 'Dikirim via Email',
             'status' => 'pending',
-            'opd_id' => null, // Belum didisposisi
-            'opd_tujuan' => 'Dinas Kesehatan',
         ]);
 
         Permohonan::create([
@@ -60,8 +56,6 @@ class PermohonanSeeder extends Seeder
             'cara_memperoleh' => 'Mendapatkan Salinan Softcopy',
             'cara_mendapatkan' => 'Dikirim via Email',
             'status' => 'pending',
-            'opd_id' => null, // Belum didisposisi
-            'opd_tujuan' => 'Dinas Koperasi dan UMKM',
         ]);
     }
 }

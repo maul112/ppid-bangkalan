@@ -17,6 +17,7 @@ class PermohonanController extends Controller
         $request->validate([
             'nama_pemohon'      => 'required|string|max:255',
             'nik'               => 'required|digits:16',
+            'pekerjaan'         => 'required|string',
             'alamat'            => 'required|string',
             'email'             => 'required|email',
             'no_hp'             => 'required|string',
@@ -25,6 +26,7 @@ class PermohonanController extends Controller
             'tujuan_penggunaan' => 'required|string',
             'cara_memperoleh'   => 'required',
             'cara_mendapatkan'  => 'required',
+            'terms'             => 'accepted',
         ]);
 
         $nama_file_ktp = null;
@@ -43,12 +45,11 @@ class PermohonanController extends Controller
             'nomor_tiket'       => $nomor_tiket,
             'nama_pemohon'      => $request->nama_pemohon,
             'nik'               => $request->nik,
+            'pekerjaan'         => $request->pekerjaan,
             'alamat'            => $request->alamat,
             'email'             => $request->email,
             'no_hp'             => $request->no_hp,
             'foto_ktp'          => $nama_file_ktp,
-            // 'opd_tujuan' sengaja dikosongkan agar Admin yang menentukan nanti
-            'opd_tujuan'        => null, 
             'rincian_informasi' => $request->rincian_informasi,
             'tujuan_penggunaan' => $request->tujuan_penggunaan,
             'cara_memperoleh'   => $request->cara_memperoleh,
@@ -68,20 +69,19 @@ class PermohonanController extends Controller
 
     public function cek(Request $request)
     {
-        // nik perlu atau tidak? karena tidak ada inputan nik
         $request->validate([
             'nomor_tiket' => 'required|string',
-            // 'nik'         => 'required|digits:16',
+            'nik'         => 'required|digits:16',
         ], [
-            // 'nik.digits' => 'NIK harus berjumlah 16 digit.',
-            // 'nik.required' => 'NIK wajib diisi untuk melihat detail.'
+            'nik.digits' => 'NIK harus berjumlah 16 digit.',
+            'nik.required' => 'NIK wajib diisi untuk melihat detail.'
         ]);
 
         $permohonan = Permohonan::where('nomor_tiket', $request->nomor_tiket)
-                                // ->where('nik', $request->nik)
+                                ->where('nik', $request->nik)
                                 ->first();
         if (!$permohonan) {
-            return back()->with('error', 'Maaf, kombinasi Nomor Tiket dan NIK tidak ditemukan.');
+            return back()->with('error', 'Maaf, verifikasi gagal. NIK tidak cocok dengan pemilik tiket ini.');
         }
 
         return redirect()->route('permohonan.show', $permohonan->nomor_tiket);
@@ -98,9 +98,16 @@ class PermohonanController extends Controller
         return redirect()->route('login');
     }
     
-    public function daftarPublik(Request $request)
+    public function layananInformasi(Request $request)
     {
-        $query = Permohonan::query();
+        // 1. Hitung Statistik
+        $total_permohonan = Permohonan::count();
+        $diproses = Permohonan::whereIn('status', ['pending', 'proses'])->count();
+        $selesai = Permohonan::whereIn('status', ['selesai', 'diterima'])->count();
+        $ditolak = Permohonan::where('status', 'ditolak')->count();
+
+        // 2. Ambil data permohonan untuk tabel
+        $query = Permohonan::with('opds');
 
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
@@ -120,6 +127,8 @@ class PermohonanController extends Controller
             ]);
         }
 
-        return view('permohonan.daftar_publik', compact('permohonans'));
+        return view('public.layanan.permohonan-informasi', compact(
+            'permohonans', 'total_permohonan', 'diproses', 'selesai', 'ditolak'
+        ));
     }
 }

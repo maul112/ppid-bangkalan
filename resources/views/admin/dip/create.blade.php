@@ -22,6 +22,7 @@
                             <option value="Informasi Berkala">Informasi Berkala</option>
                             <option value="Informasi Serta Merta">Informasi Serta Merta</option>
                             <option value="Informasi Setiap Saat">Informasi Setiap Saat</option>
+                            <option value="Informasi Dikecualikan">Informasi Dikecualikan</option>
                         </select>
                     </div>
 

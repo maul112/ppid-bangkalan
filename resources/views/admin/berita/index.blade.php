@@ -56,7 +56,10 @@
                             </div>
                         </td>
                         <td class="px-8 py-5">
-                            <div class="flex items-center justify-center">
+                            <div class="flex items-center justify-center gap-2">
+                                <a href="{{ route('admin.berita.edit', $b->id) }}" class="w-10 h-10 flex items-center justify-center bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all shadow-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                </a>
                                 <form action="{{ route('admin.berita.destroy', $b->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus berita ini?')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="w-10 h-10 flex items-center justify-center bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all shadow-sm">
@@ -78,6 +81,9 @@
                     @endforelse
                 </tbody>
             </table>
+            <div class="p-4 border-t border-gray-100">
+                {{ $beritas->links() }}
+            </div>
         </div>
     </div>
 </x-admin-panel-layout>

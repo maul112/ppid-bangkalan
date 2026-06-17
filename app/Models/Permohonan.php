@@ -12,19 +12,17 @@ class Permohonan extends Model
         'nomor_tiket',
         'nama_pemohon',
         'nik',
+        'pekerjaan',
         'alamat',
         'email',
         'no_hp',
         'foto_ktp',
-        'opd_tujuan',
         'rincian_informasi',
         'tujuan_penggunaan',
         'cara_memperoleh',
         'cara_mendapatkan',
         'status',
         'tanggapan', 
-        'opd_id',
-        'disposisi_at',
     ];
 
     /**

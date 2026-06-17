@@ -42,7 +42,10 @@ class PermohonanOpdController extends Controller
             abort(403, 'Akses ditolak.');
         }
 
-        return view('opd.permohonan.show', compact('permohonan', 'pivot'));
+        $today = now();
+        $isLibur = $today->isWeekend() || \App\Models\HariLibur::whereDate('tanggal', $today->format('Y-m-d'))->exists();
+
+        return view('opd.permohonan.show', compact('permohonan', 'pivot', 'isLibur'));
     }
 
     public function tanggapi(Request $request, Permohonan $permohonan)
@@ -52,6 +55,13 @@ class PermohonanOpdController extends Controller
         $pivot = $permohonan->opds()->where('opd_id', $opdId)->first();
         if (!$pivot) {
             abort(403, 'Akses ditolak.');
+        }
+
+        $today = now();
+        $isLibur = $today->isWeekend() || \App\Models\HariLibur::whereDate('tanggal', $today->format('Y-m-d'))->exists();
+
+        if ($isLibur) {
+            return back()->with('error', 'Maaf, tidak dapat memberikan tanggapan pada hari libur atau akhir pekan.');
         }
 
         $request->validate([
@@ -65,14 +75,8 @@ class PermohonanOpdController extends Controller
             'tanggapi_at' => now(),
         ]);
 
-        // Cek apakah semua OPD sudah menanggapi, jika ya set permohonan jadi selesai
-        $belumDitanggapi = $permohonan->opds()
-            ->wherePivot('status', 'menunggu')
-            ->count();
-
-        if ($belumDitanggapi === 0) {
-            $permohonan->update(['status' => 'selesai']);
-        }
+        // Cek apakah semua OPD sudah menanggapi, jika ya beri tahu PPID
+        // (Status tidak otomatis selesai, PPID yang akan menyelesaikannya)
 
         return redirect()->route('admin.opd.permohonan.index')
                          ->with('success', 'Tanggapan berhasil dikirim!');

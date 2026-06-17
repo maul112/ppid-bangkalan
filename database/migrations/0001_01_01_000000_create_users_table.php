@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('nik')->unique()->nullable();
+            $table->string('foto_ktp')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['user', 'admin_ppid', 'admin_opd'])->default('user');
+            $table->foreignId('opd_id')->nullable(); // Foreign key added in create_opds_table.php to avoid cyclic dependency
             $table->rememberToken();
             $table->timestamps();
         });

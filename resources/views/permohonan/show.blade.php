@@ -1,23 +1,23 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Detail Permohonan - PPID Bangkalan</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-50 antialiased">
+@extends('layouts.publik')
 
-    <div class="py-12">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+@section('content')
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10 no-print">
+            <h1 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight">Detail Permohonan</h1>
+            <div class="mt-4 mx-auto h-1 w-20 bg-blue-600 rounded-full"></div>
+            <p class="mt-4 text-gray-500 max-w-2xl mx-auto">Detail informasi dan status pengajuan permohonan Anda.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
             
             @if(session('success'))
-            <div class="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 rounded shadow-sm flex items-center">
-                <i class="fa-solid fa-circle-check mr-3 text-xl"></i>
-                <div>
-                    <p class="font-bold">Berhasil Terdaftar!</p>
-                    <p class="text-sm">Silakan simpan atau cetak bukti permohonan dengan nomor tiket di bawah ini.</p>
+            <div class="mb-6 p-5 bg-green-100 border-l-4 border-green-500 text-green-800 rounded-xl shadow-sm">
+                <div class="flex items-start gap-3">
+                    <i class="fa-solid fa-circle-check text-2xl mt-0.5 text-green-600"></i>
+                    <div>
+                        <p class="font-black text-base">Permohonan Berhasil Dikirim!</p>
+                        <p class="text-sm mt-1">Simpan nomor tiket di bawah ini. Anda dapat menggunakannya untuk <strong>memantau status permohonan</strong> kapan saja.</p>
+                    </div>
                 </div>
             </div>
             @endif
@@ -28,7 +28,14 @@
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                         <div>
                             <p class="text-blue-300 text-xs font-bold uppercase tracking-widest mb-1">Nomor Tiket Permohonan</p>
-                            <h2 class="text-3xl font-black uppercase">{{ $permohonan->nomor_tiket }}</h2>
+                            <h2 class="text-3xl font-black uppercase tracking-widest" id="nomorTiket">{{ $permohonan->nomor_tiket }}</h2>
+                            <div class="flex items-center gap-3 mt-3">
+                                <button onclick="copyTiket()" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-4 py-2 rounded-lg transition border border-white/30">
+                                    <i class="fa-regular fa-copy"></i> Salin Nomor Tiket
+                                </button>
+
+                            </div>
+                            <span id="copyMsg" class="hidden mt-2 text-green-300 text-xs font-bold">✓ Berhasil disalin!</span>
                         </div>
                         <div class="flex flex-col items-end gap-2">
                             <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-lg border border-white/20 text-right">
@@ -37,8 +44,14 @@
                                     @if($permohonan->status == 'pending') bg-yellow-400 text-yellow-900 
                                     @elseif($permohonan->status == 'diverifikasi') bg-blue-400 text-blue-900 
                                     @elseif($permohonan->status == 'selesai') bg-green-400 text-green-900 
-                                    @else bg-red-400 text-red-900 @endif">
-                                    {{ $permohonan->status }}
+                                    @elseif($permohonan->status == 'ditolak') bg-red-400 text-red-100
+                                    @else bg-gray-400 text-gray-900 @endif">
+                                    @if($permohonan->status == 'pending') ⏳ Menunggu Verifikasi
+                                    @elseif($permohonan->status == 'diverifikasi') 🔄 Sedang Diproses
+                                    @elseif($permohonan->status == 'selesai') ✅ Selesai
+                                    @elseif($permohonan->status == 'ditolak') ❌ Ditolak
+                                    @else {{ $permohonan->status }}
+                                    @endif
                                 </span>
                             </div>
                         </div>
@@ -70,6 +83,10 @@
                                 <div>
                                     <p class="text-[10px] text-gray-500 font-bold uppercase">Nama Lengkap</p>
                                     <p class="font-bold text-gray-800">{{ $permohonan->nama_pemohon }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-gray-500 font-bold uppercase">Pekerjaan</p>
+                                    <p class="font-bold text-gray-800">{{ $permohonan->pekerjaan }}</p>
                                 </div>
                                 <div>
                                     <p class="text-[10px] text-gray-500 font-bold uppercase">NIK (Disamarkan)</p>
@@ -145,6 +162,28 @@
                         @endif
                     </div>
 
+                    @if($permohonan->opds->count() > 0)
+                    <div class="mt-8">
+                        <h3 class="text-xs font-black text-indigo-900 uppercase tracking-widest mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-building"></i> Tanggapan / Jawaban Instansi (OPD)
+                        </h3>
+                        <div class="space-y-4">
+                            @foreach($permohonan->opds as $opd)
+                                <div class="p-6 bg-indigo-50 border-2 border-indigo-100 rounded-2xl relative overflow-hidden">
+                                    <h4 class="font-bold text-indigo-900 mb-2">{{ $opd->nama_opd }}</h4>
+                                    @if($opd->pivot->tanggapan)
+                                        <p class="text-gray-800 whitespace-pre-wrap leading-relaxed relative z-10 font-medium">
+                                            {{ $opd->pivot->tanggapan }}
+                                        </p>
+                                    @else
+                                        <p class="text-gray-500 italic text-sm">Belum memberikan tanggapan.</p>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
                     <div class="mt-12 flex flex-col sm:flex-row justify-center gap-4 no-print">
                         <button onclick="window.print()" class="bg-gray-100 text-gray-700 px-8 py-3 rounded-xl font-bold hover:bg-gray-200 transition flex items-center justify-center border border-gray-200">
                             <i class="fa-solid fa-print mr-2"></i> Cetak Bukti
@@ -157,9 +196,6 @@
 
             </div>
             
-            <p class="text-center text-gray-400 text-[10px] mt-6 font-bold uppercase tracking-widest">
-                &copy; {{ date('Y') }} PPID Kabupaten Bangkalan
-            </p>
         </div>
     </div>
 
@@ -170,5 +206,14 @@
             .shadow-xl { box-shadow: none; border: 1px solid #eee; }
         }
     </style>
-</body>
-</html>
+    <script>
+        function copyTiket() {
+            const tiket = document.getElementById('nomorTiket').textContent.trim();
+            navigator.clipboard.writeText(tiket).then(() => {
+                const msg = document.getElementById('copyMsg');
+                msg.classList.remove('hidden');
+                setTimeout(() => msg.classList.add('hidden'), 3000);
+            });
+        }
+    </script>
+@endsection

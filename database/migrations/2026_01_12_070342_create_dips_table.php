@@ -13,7 +13,7 @@ return new class extends Migration
     Schema::create('dips', function (Blueprint $table) {
         $table->id();
         $table->string('judul');
-        $table->string('kategori'); // Berkala, Serta Merta, Setiap Saat
+        $table->enum('kategori', ['Informasi Berkala', 'Informasi Serta Merta', 'Informasi Setiap Saat', 'Informasi Dikecualikan']);
         $table->string('file_pdf')->nullable(); // Untuk upload dokumen
         $table->timestamps();
     });

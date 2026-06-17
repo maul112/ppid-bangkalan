@@ -12,7 +12,6 @@
     <td class="px-6 py-4 font-bold text-gray-800 uppercase">
         {{ Str::mask($item->nama_pemohon, '*', 3) }}
     </td>
-    {{-- Kolom OPD Tujuan telah dihapus dari sini --}}
     <td class="px-6 py-4 text-gray-600">
         <span class="line-clamp-1" title="{{ $item->rincian_informasi }}">
             {{ $item->rincian_informasi }}
@@ -31,6 +30,11 @@
             {{ $item->status }}
         </span>
     </td>
+    <td class="px-6 py-4 text-gray-600 text-xs italic">
+        <span class="line-clamp-1" title="{{ $item->alasan_penolakan ?? '-' }}">
+            {{ $item->alasan_penolakan ?? '-' }}
+        </span>
+    </td>
     <td class="px-6 py-4 text-center">
         {{-- AKSI: Memanggil Modal NIK --}}
         <button onclick="openNikModal('{{ $item->nomor_tiket }}')" 
@@ -41,7 +45,6 @@
 </tr>
 @empty
 <tr>
-    {{-- Colspan diubah menjadi 7 karena satu kolom telah dihapus --}}
-    <td colspan="7" class="px-6 py-12 text-center text-gray-400 italic">Data tidak ditemukan.</td>
+    <td colspan="8" class="px-6 py-12 text-center text-gray-400 italic">Data tidak ditemukan.</td>
 </tr>
 @endforelse

@@ -10,7 +10,7 @@ class HariLiburController extends Controller
 {
     public function index()
     {
-        $hariLiburs = HariLibur::orderBy('tanggal', 'desc')->paginate(15);
+        $hariLiburs = HariLibur::orderBy('tanggal', 'desc')->paginate(10);
 
         return view('admin.hari_libur.index', compact('hariLiburs'));
     }
@@ -25,11 +25,17 @@ class HariLiburController extends Controller
         $request->validate([
             'tanggal' => 'required|date|unique:hari_liburs',
             'keterangan' => 'required|string|max:255',
+        ], [
+            'tanggal.unique' => 'Tanggal ini sudah terdaftar sebagai hari libur.',
+            'tanggal.required' => 'Tanggal wajib diisi.',
+            'tanggal.date' => 'Format tanggal tidak valid.',
+            'keterangan.required' => 'Keterangan wajib diisi.',
+            'keterangan.max' => 'Keterangan maksimal 255 karakter.',
         ]);
 
         HariLibur::create($request->all());
 
-        return redirect()->route('admin.hari_libur.index')->with('success', 'Hari libur berhasil ditambahkan.');
+        return redirect()->route('admin.hari-libur.index')->with('success', 'Hari libur berhasil ditambahkan.');
     }
 
     public function edit(HariLibur $hariLibur)
@@ -42,17 +48,23 @@ class HariLiburController extends Controller
         $request->validate([
             'tanggal' => 'required|date|unique:hari_liburs,tanggal,'.$hariLibur->id,
             'keterangan' => 'required|string|max:255',
+        ], [
+            'tanggal.unique' => 'Tanggal ini sudah terdaftar sebagai hari libur.',
+            'tanggal.required' => 'Tanggal wajib diisi.',
+            'tanggal.date' => 'Format tanggal tidak valid.',
+            'keterangan.required' => 'Keterangan wajib diisi.',
+            'keterangan.max' => 'Keterangan maksimal 255 karakter.',
         ]);
 
         $hariLibur->update($request->all());
 
-        return redirect()->route('admin.hari_libur.index')->with('success', 'Hari libur berhasil diperbarui.');
+        return redirect()->route('admin.hari-libur.index')->with('success', 'Hari libur berhasil diperbarui.');
     }
 
     public function destroy(HariLibur $hariLibur)
     {
         $hariLibur->delete();
 
-        return redirect()->route('admin.hari_libur.index')->with('success', 'Hari libur berhasil dihapus.');
+        return redirect()->route('admin.hari-libur.index')->with('success', 'Hari libur berhasil dihapus.');
     }
 }

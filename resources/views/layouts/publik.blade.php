@@ -16,14 +16,14 @@
     <header style="background-image: url('{{ asset('img/IMG_5775.png') }}')" class="bg-center bg-no-repeat bg-contains bg-cover py-4 shadow-sm relative z-[60]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="flex items-center space-x-4">
+                <a href="{{ route('home') }}" class="flex items-center space-x-4 hover:opacity-80 transition-opacity">
                     <img src="{{ asset('img/logo-ppid.png') }}" alt="Logo PPID" class="h-16 w-auto">
                     <div class="h-10 w-[1px] bg-gray-200 hidden md:block"></div>
                     <div>
                         <h1 class="text-xl font-black text-blue-900 leading-none">PPID KABUPATEN</h1>
                         <p class="text-sm font-bold text-gray-500 tracking-[0.2em]">BANGKALAN</p>
                     </div>
-                </div>
+                </a>
                 <div class="hidden lg:block text-right">
                     <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">E-Mail Resmi</p>
                     <p class="text-sm font-bold text-blue-600 italic">ppid@bangkalankab.go.id</p>
@@ -147,18 +147,6 @@
                         <li><a href="{{ route('public.ppidpelaksana_rsd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">RSD</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_puskesmas') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Puskesmas</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_bumd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">BUMD</a></li>
-                    </ul>
-                </li>
-
-                <!-- Login Dropdown -->
-                <li class="relative" @mouseenter="dropdownLoginOpen = true" @mouseleave="dropdownLoginOpen = false">
-                    <button @click="dropdownLoginOpen = !dropdownLoginOpen" class="bg-yellow-400 text-blue-900 px-6 py-1.5 rounded text-xs font-black hover:bg-yellow-500 transition shadow-sm flex items-center focus:outline-none">
-                        MASUK <i class="fa-solid fa-right-to-bracket ml-2"></i>
-                    </button>
-                    <ul x-show="dropdownLoginOpen" x-transition class="absolute right-0 bg-white text-gray-800 shadow-xl rounded-md mt-1 w-48 z-50 py-2 border-t-4 border-yellow-500 text-left" @click.away="dropdownLoginOpen = false" x-cloak>
-                        <li><p class="px-4 py-1 text-[9px] font-bold text-gray-400 uppercase tracking-widest">Login Internal</p></li>
-                        <li><a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 font-bold">Admin PPID</a></li>
-                        <li><a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 font-bold border-t border-gray-50">Admin OPD</a></li>
                     </ul>
                 </li>
             </ul>

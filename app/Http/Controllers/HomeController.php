@@ -15,11 +15,8 @@ class HomeController extends Controller
         $banners = Banner::all();
         $beritas = Berita::latest()->take(3)->get(); 
         $regulasis = Regulasi::latest()->take(5)->get();
-        // 4. Ambil data DIP (Daftar Informasi Publik)
-        // Jika hanya ingin menampilkan beberapa, gunakan take(). Jika semua, gunakan all()
-        $dips = Dip::latest()->take(5)->get(); 
 
-        return view('welcome', compact('banners', 'beritas', 'regulasis', 'dips'));
+        return view('welcome', compact('banners', 'beritas', 'regulasis'));
     }
 
     public function struktur() {

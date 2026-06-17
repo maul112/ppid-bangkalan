@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class BannerController extends Controller
 {
     public function index() {
-        $banners = Banner::latest()->get();
+        $banners = Banner::latest()->paginate(10);
         return view('admin.banner.index', compact('banners'));
     }
 

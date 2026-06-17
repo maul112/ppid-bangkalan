@@ -1,21 +1,31 @@
 <x-admin-panel-layout>
     <x-slot name="header">Daftar Permohonan Informasi</x-slot>
 
-    <div class="flex items-center gap-2 mb-8">
-        <form action="{{ route('admin.permohonan.index') }}" method="GET" class="flex gap-2">
-            <input type="text" name="search" value="{{ request('search') }}" 
-                   placeholder="Cari nama, NIK atau tiket..." 
-                   class="w-64 rounded-xl border-gray-200 text-sm focus:ring-red-500 focus:border-red-500 shadow-sm">
-            <button type="submit" class="bg-gray-900 text-white px-4 py-2 rounded-xl font-bold text-xs hover:bg-gray-800 transition shadow-md">
-                CARI
-            </button>
-            @if(request('search'))
-                <a href="{{ route('admin.permohonan.index') }}" class="bg-gray-200 text-gray-600 px-4 py-2 rounded-xl font-bold text-xs hover:bg-gray-300 transition flex items-center">
-                    RESET
+    <div class="space-y-6">
+        {{-- Action Bar --}}
+        <div class="flex justify-between items-center bg-white p-4 rounded-[2rem] border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 ml-4">
+                <a href="{{ route('admin.dashboard') }}" class="w-10 h-10 flex items-center justify-center bg-white rounded-xl border border-gray-200 text-gray-400 hover:text-red-600 hover:border-red-200 transition-all shadow-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </a>
-            @endif
-        </form>
-    </div>
+                <span class="text-sm font-black text-gray-400 uppercase tracking-widest">Daftar Permohonan</span>
+            </div>
+            <div class="flex items-center gap-2 mr-2">
+                <form action="{{ route('admin.permohonan.index') }}" method="GET" class="flex gap-2">
+                    <input type="text" name="search" value="{{ request('search') }}" 
+                           placeholder="Cari nama, NIK atau tiket..." 
+                           class="w-64 rounded-xl border-gray-200 text-sm focus:ring-red-500 focus:border-red-500 shadow-sm">
+                    <button type="submit" class="bg-gray-900 text-white px-4 py-2 rounded-xl font-bold text-xs hover:bg-gray-800 transition shadow-md">
+                        CARI
+                    </button>
+                    @if(request('search'))
+                        <a href="{{ route('admin.permohonan.index') }}" class="bg-gray-200 text-gray-600 px-4 py-2 rounded-xl font-bold text-xs hover:bg-gray-300 transition flex items-center">
+                            RESET
+                        </a>
+                    @endif
+                </form>
+            </div>
+        </div>
 
     @if(session('success'))
         <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded-r-xl shadow-sm text-sm font-bold">
@@ -64,8 +74,8 @@
                     </td>
                     <td class="p-5">
                         <div class="flex items-center justify-center gap-2">
-                            <a href="{{ route('admin.permohonan.show', $p->id) }}" class="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-[10px] font-bold rounded-xl hover:bg-red-600 transition shadow-sm">
-                                DETAIL
+                            <a href="{{ route('admin.permohonan.show', $p->id) }}" class="w-10 h-10 flex items-center justify-center bg-purple-50 text-purple-500 rounded-xl hover:bg-purple-600 hover:text-white transition-all shadow-sm" title="Detail">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                             </a>
                             
                             @php 
@@ -75,19 +85,19 @@
                             @if(!$sudahDisposisi && $p->status === 'pending')
                             <button type="button" 
                                 onclick="openDisposisiModal('{{ $p->id }}', '[]')"
-                                class="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-xl hover:bg-blue-600 hover:text-white transition shadow-sm border border-blue-100">
+                                class="inline-flex items-center px-4 h-10 bg-blue-50 text-blue-600 text-[10px] font-bold rounded-xl hover:bg-blue-600 hover:text-white transition-all shadow-sm">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                                 DISPOSISI
                             </button>
                             @elseif($sudahDisposisi)
                             <button type="button" 
                                 onclick="openDisposisiModal('{{ $p->id }}', '{{ addslashes($disposisiIds) }}')"
-                                class="inline-flex items-center px-4 py-2 bg-green-50 text-green-700 text-[10px] font-bold rounded-xl hover:bg-green-600 hover:text-white transition shadow-sm border border-green-100">
+                                class="inline-flex items-center px-4 h-10 bg-green-50 text-green-700 text-[10px] font-bold rounded-xl hover:bg-green-600 hover:text-white transition-all shadow-sm">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                                 +OPD ({{ $p->opds->count() }})
                             </button>
                             @else
-                            <button type="button" disabled class="inline-flex items-center px-4 py-2 bg-gray-50 text-gray-400 text-[10px] font-bold rounded-xl shadow-sm border border-gray-100 cursor-not-allowed">
+                            <button type="button" disabled class="inline-flex items-center px-4 h-10 bg-gray-50 text-gray-400 text-[10px] font-bold rounded-xl shadow-sm border border-gray-100 cursor-not-allowed">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                 SELESAI
                             </button>
@@ -96,8 +106,8 @@
                             <form action="{{ route('admin.permohonan.destroy', $p->id) }}" method="POST" onsubmit="return confirm('Hapus permohonan ini?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="inline-flex items-center px-4 py-2 bg-red-50 text-red-600 text-[10px] font-bold rounded-xl hover:bg-red-600 hover:text-white transition shadow-sm border border-red-100">
-                                    HAPUS
+                                <button type="submit" class="w-10 h-10 flex items-center justify-center bg-red-50 text-red-500 rounded-xl hover:bg-red-600 hover:text-white transition-all shadow-sm" title="Hapus">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                 </button>
                             </form>
                         </div>
@@ -241,4 +251,5 @@
             });
         });
     </script>
+    </div>
 </x-admin-panel-layout>

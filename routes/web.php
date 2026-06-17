@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\BannerController;
@@ -12,6 +13,17 @@ use App\Http\Controllers\Admin\PermohonanOpdController;
 use App\Http\Controllers\Admin\HariLiburController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
+
+/* --- 0. PORTAL ADMIN (TERSEMBUNYI) --- */
+Route::get('/portal-admin', function () {
+    if (Auth::check()) {
+        $role = Auth::user()->role;
+        return $role === 'admin_opd'
+            ? redirect()->route('admin.opd.dashboard')
+            : redirect()->route('admin.dashboard');
+    }
+    return view('auth.login');
+})->name('portal.admin');
 
 /* --- 1. HALAMAN PUBLIK --- */
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -27,13 +39,10 @@ Route::prefix('profil')->name('profil.')->group(function () {
     Route::get('/laporan-pelayanan', [HomeController::class, 'laporanPelayanan'])->name('laporan_pelayanan');
 });
 
-// Daftar Publik
-Route::get('/permohonan/daftar-publik', [PermohonanController::class, 'daftarPublik'])->name('permohonan.daftar_publik');
+// Daftar Publik (Dialihkan ke layanan permohonan informasi)
+// Route::get('/permohonan/daftar-publik', [PermohonanController::class, 'daftarPublik'])->name('permohonan.daftar_publik');
 
-// Fitur Tracking
-Route::get('/permohonan/lacak', function () {
-    return view('permohonan.tracking');
-})->name('permohonan.tracking');
+
 
 // PERBAIKAN: Diarahkan ke PermohonanController@cek untuk validasi NIK
 Route::post('/permohonan/cek', [PermohonanController::class, 'cek'])->name('permohonan.cek');
@@ -105,12 +114,14 @@ Route::view('/profil/pejabat/camat', 'public.profil.pejabat.camat')->name('publi
 Route::view('/profil/pejabat/lurah', 'public.profil.pejabat.lurah')->name('public.profil_pejabat_lurah');
 Route::view('/profil/pejabat/direkturrsd', 'public.profil.pejabat.direkturrsd')->name('public.profil_pejabat_direkturrsd');
 Route::view('/profil/pejabat/direkturbumd', 'public.profil.pejabat.direkturbumd')->name('public.profil_pejabat_direkturbumd');
-Route::view('/dip/berkala', 'public.dip.berkala')->name('public.dip_berkala');
-Route::view('/dip/setiapsaat', 'public.dip.setiapsaat')->name('public.dip_setiapsaat');
-Route::view('/dip/sertamerta', 'public.dip.sertamerta')->name('public.dip_sertamerta');
-Route::view('/dip/dikecualikan', 'public.dip.dikecualikan')->name('public.dip_dikecualikan');
-Route::view('/layanan/berita', 'public.layanan.berita')->name('public.layanan_berita');
-Route::view('/layanan/permohonan-informasi', 'public.layanan.permohonan-informasi')->name('public.layanan_permohonan_informasi');
+Route::get('/dip/berkala', [\App\Http\Controllers\PublicDipController::class, 'berkala'])->name('public.dip_berkala');
+Route::get('/dip/setiapsaat', [\App\Http\Controllers\PublicDipController::class, 'setiapsaat'])->name('public.dip_setiapsaat');
+Route::get('/dip/sertamerta', [\App\Http\Controllers\PublicDipController::class, 'sertamerta'])->name('public.dip_sertamerta');
+Route::get('/dip/dikecualikan', [\App\Http\Controllers\PublicDipController::class, 'dikecualikan'])->name('public.dip_dikecualikan');
+Route::get('/layanan/berita', [\App\Http\Controllers\PublicBeritaController::class, 'index'])->name('public.layanan_berita');
+Route::get('/layanan/berita/{slug}', [\App\Http\Controllers\PublicBeritaController::class, 'show'])->name('public.layanan_berita_show');
+Route::get('/layanan/regulasi', [\App\Http\Controllers\PublicRegulasiController::class, 'index'])->name('public.layanan_regulasi');
+Route::get('/layanan/permohonan-informasi', [\App\Http\Controllers\PermohonanController::class, 'layananInformasi'])->name('public.layanan_permohonan_informasi');
 Route::view('/layanan/formulir-keberatan', 'public.layanan.formulir-keberatan')->name('public.layanan_formulir_keberatan');
 Route::view('/layanan/agenda-bulanan', 'public.layanan.agenda-bulanan')->name('public.layanan_agenda_bulanan');
 Route::view('/layanan/agenda-tahunan', 'public.layanan.agenda-tahunan')->name('public.layanan_agenda_tahunan');
