@@ -30,7 +30,13 @@
             @forelse($beritas as $berita)
             <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 group flex flex-col">
                 <div class="relative overflow-hidden">
-                    <img src="{{ asset('uploads/berita/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class="w-full h-56 object-cover group-hover:scale-110 transition duration-500">
+                    @if($berita->gambar && file_exists(public_path('uploads/berita/' . $berita->gambar)))
+                        <img src="{{ asset('uploads/berita/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class="w-full h-56 object-cover group-hover:scale-110 transition duration-500">
+                    @else
+                        <div class="w-full h-56 bg-gray-100 flex items-center justify-center text-gray-300 group-hover:scale-110 transition duration-500">
+                            <i class="fa-regular fa-image text-5xl"></i>
+                        </div>
+                    @endif
                     <div class="absolute top-4 left-4 bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest shadow-lg">Berita Terkini</div>
                 </div>
                 <div class="p-8 flex flex-col flex-grow">

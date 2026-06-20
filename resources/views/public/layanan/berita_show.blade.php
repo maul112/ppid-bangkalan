@@ -44,7 +44,7 @@
 
         <div class="w-full">
             {{-- Berita Image --}}
-            @if($berita->gambar)
+            @if($berita->gambar && file_exists(public_path('uploads/berita/' . $berita->gambar)))
                 <div class="mb-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative">
                     <div class="absolute top-4 left-4 bg-blue-600 text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest shadow-lg z-10">
                         Berita Terkini
@@ -93,9 +93,13 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                     @foreach($beritaLain as $lain)
                         <article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 group flex flex-col border border-gray-100">
-                            @if($lain->gambar)
+                            @if($lain->gambar && file_exists(public_path('uploads/berita/' . $lain->gambar)))
                                 <div class="relative overflow-hidden h-48">
                                     <img src="{{ asset('uploads/berita/' . $lain->gambar) }}" alt="{{ $lain->judul }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                            @else
+                                <div class="relative overflow-hidden h-48 bg-gray-100 flex items-center justify-center text-gray-300 group-hover:scale-110 transition duration-500">
+                                    <i class="fa-regular fa-image text-5xl"></i>
                                 </div>
                             @endif
                             <div class="p-6 flex flex-col flex-grow">

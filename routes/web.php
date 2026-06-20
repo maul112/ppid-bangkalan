@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\RegulasiController;
 use App\Http\Controllers\Admin\PermohonanAdminController;
 use App\Http\Controllers\Admin\PermohonanOpdController;
 use App\Http\Controllers\Admin\HariLiburController;
+use App\Http\Controllers\Admin\DokumenController;
+use App\Http\Controllers\PublicDokumenController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 
@@ -32,8 +34,8 @@ Route::prefix('profil')->name('profil.')->group(function () {
     Route::get('/tentang', [HomeController::class, 'tentang'])->name('tentang');
     Route::get('/tugas-fungsi', [HomeController::class, 'tugasFungsi'])->name('tugas_fungsi');
     Route::get('/visi-misi', [HomeController::class, 'visiMisi'])->name('visi_misi');
-    Route::get('/dasar-hukum', [HomeController::class, 'dasarHukum'])->name('dasar_hukum');
-    Route::get('/sop', [HomeController::class, 'sop'])->name('sop');
+    Route::get('/dasar-hukum', [PublicDokumenController::class, 'dasarHukum'])->name('dasar_hukum');
+    Route::get('/sop', [PublicDokumenController::class, 'sop'])->name('sop');
     Route::get('/maklumat-pelayanan', [HomeController::class, 'maklumatPelayanan'])->name('maklumat_pelayanan');
     Route::get('/alur-pelayanan', [HomeController::class, 'alurPelayanan'])->name('alur_pelayanan');
     Route::get('/laporan-pelayanan', [HomeController::class, 'laporanPelayanan'])->name('laporan_pelayanan');
@@ -41,6 +43,9 @@ Route::prefix('profil')->name('profil.')->group(function () {
 
 // Daftar Publik (Dialihkan ke layanan permohonan informasi)
 // Route::get('/permohonan/daftar-publik', [PermohonanController::class, 'daftarPublik'])->name('permohonan.daftar_publik');
+
+Route::get('/dokumen/{slug}', [PublicDokumenController::class, 'show'])->name('public.dokumen.show');
+Route::get('/dokumen/{slug}/download', [PublicDokumenController::class, 'download'])->name('public.dokumen.download');
 
 
 
@@ -69,6 +74,7 @@ Route::middleware(['auth', 'role:admin_ppid'])->prefix('admin')->name('admin.')-
     Route::delete('/permohonan/{permohonan}', [PermohonanAdminController::class, 'destroy'])->name('permohonan.destroy');
 
     Route::resource('hari-libur', HariLiburController::class);
+    Route::resource('dokumen', DokumenController::class);
 });
     
 Route::middleware(['auth', 'role:admin_opd'])->prefix('admin')->name('admin.')->group(function () {
@@ -95,8 +101,8 @@ Route::view('/profil/ppid/tentang', 'public.profil.ppid.tentang')->name('public.
 Route::view('/profil/ppid/tupoksi', 'public.profil.ppid.tupoksi')->name('public.profil_ppid_tupoksi');
 Route::view('/profil/ppid/visimisi', 'public.profil.ppid.visimisi')->name('public.profil_ppid_visimisi');
 Route::view('/profil/ppid/strukturorganisasi', 'public.profil.ppid.strukturorganisasi')->name('public.profil_ppid_strukturorganisasi');
-Route::view('/profil/ppid/dasarhukum', 'public.profil.ppid.dasarhukum')->name('public.profil_ppid_dasarhukum');
-Route::view('/profil/ppid/sop', 'public.profil.ppid.sop')->name('public.profil_ppid_sop');
+Route::get('/profil/ppid/dasarhukum', [PublicDokumenController::class, 'dasarHukum'])->name('public.profil_ppid_dasarhukum');
+Route::get('/profil/ppid/sop', [PublicDokumenController::class, 'sop'])->name('public.profil_ppid_sop');
 Route::view('/profil/ppid/maklumatpelayanan', 'public.profil.ppid.maklumatpelayanan')->name('public.profil_ppid_maklumatpelayanan');
 Route::view('/profil/ppid/alurpelayanan', 'public.profil.ppid.alurpelayanan')->name('public.profil_ppid_alurpelayanan');
 Route::view('/profil/ppid/laporan', 'public.profil.ppid.laporan')->name('public.profil_ppid_laporan');

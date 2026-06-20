@@ -45,7 +45,7 @@
             </button>
 
             <!-- Navigation Menu -->
-            <ul :class="navOpen ? 'block' : 'hidden'" class="w-full lg:flex lg:space-x-1 lg:items-center lg:w-auto mt-4 lg:mt-0 text-xs font-semibold">
+            <ul :class="navOpen ? 'block' : 'hidden'" class="w-full lg:flex lg:space-x-4 lg:items-center lg:w-auto mt-4 lg:mt-0 text-sm font-semibold">
 
                 <li>
                     <a href="/" class="block py-2 px-4 hover:text-yellow-300">Beranda</a>
