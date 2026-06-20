@@ -77,8 +77,8 @@
                         <svg class="ml-1 w-4 h-4 transform transition-transform" :class="dropdownPejabatOpen ? 'rotate-180' : ''" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
                     <ul x-show="dropdownPejabatOpen" x-transition class="absolute bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 max-h-96 overflow-y-auto py-2 border border-gray-100" @click.away="dropdownPejabatOpen = false" x-cloak>
-                        <li><a href="{{ route('public.profil_pejabat_bupati') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Bupati</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_wakilbupati') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Wakil Bupati</a></li>
+                        <li><a href="{{ route('public.profil_pejabat_bupati') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Anggota</a></li>
+                        {{-- <li><a href="{{ route('public.profil_pejabat_wakilbupati') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Wakil Bupati</a></li>
                         <li><a href="{{ route('public.profil_pejabat_sekda') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Sekda</a></li>
                         <li><a href="{{ route('public.profil_pejabat_asisten') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Asisten</a></li>
                         <li><a href="{{ route('public.profil_pejabat_stafahli') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Staf Ahli</a></li>
@@ -90,7 +90,7 @@
                         <li><a href="{{ route('public.profil_pejabat_camat') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Camat</a></li>
                         <li><a href="{{ route('public.profil_pejabat_lurah') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Lurah</a></li>
                         <li><a href="{{ route('public.profil_pejabat_direkturrsd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Direktur RSD</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_direkturbumd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Direktur BUMD</a></li>
+                        <li><a href="{{ route('public.profil_pejabat_direkturbumd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Direktur BUMD</a></li> --}}
                     </ul>
                 </li>
 
