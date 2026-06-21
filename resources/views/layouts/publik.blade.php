@@ -206,11 +206,14 @@
                         <span class="w-1 h-6 bg-blue-600 mr-3 rounded-full"></span>Lokasi Kami
                     </h4>
                     <div class="rounded-xl overflow-hidden h-48 shadow-2xl border border-gray-800">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.882885489838!2d112.7337!3d-7.0259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd8015337583f6f%3A0xb3387b38d3890f5d!2sBangkalan!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
-                            class="w-full h-full grayscale opacity-70 hover:grayscale-0 transition-all duration-700" 
-                            allowfullscreen="" loading="lazy">
-                        </iframe>
+                        <iframe
+                        src="https://maps.google.com/maps?q=-7.0472059,112.7384428&z=17&output=embed"
+                        width="100%"
+                        height="250"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
                     </div>
                 </div>
             </div>
