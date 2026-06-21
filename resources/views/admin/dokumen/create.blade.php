@@ -19,10 +19,24 @@
                         {{-- Kategori --}}
                         <div>
                             <label class="block text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-3 ml-1">Kategori <span class="text-red-500">*</span></label>
-                            <select name="kategori" class="w-full border-none bg-gray-50 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-blue-500 shadow-inner text-gray-700 font-bold transition-all" required>
+                            <select name="kategori" ... required>
                                 <option value="">-- Pilih Kategori --</option>
-                                <option value="SOP" {{ old('kategori') == 'SOP' ? 'selected' : '' }}>SOP</option>
-                                <option value="Dasar Hukum" {{ old('kategori') == 'Dasar Hukum' ? 'selected' : '' }}>Dasar Hukum</option>
+                            
+                                <option value="SOP" {{ old('kategori') == 'SOP' ? 'selected' : '' }}>
+                                    SOP
+                                </option>
+                            
+                                <option value="Dasar Hukum" {{ old('kategori') == 'Dasar Hukum' ? 'selected' : '' }}>
+                                    Dasar Hukum
+                                </option>
+                            
+                                <option value="Alur Pelayanan" {{ old('kategori') == 'Alur Pelayanan' ? 'selected' : '' }}>
+                                    Alur Pelayanan
+                                </option>
+                            
+                                <option value="Laporan PPID" {{ old('kategori') == 'Laporan PPID' ? 'selected' : '' }}>
+                                    Laporan PPID
+                                </option>
                             </select>
                             @error('kategori') <p class="text-red-500 text-xs mt-2 ml-2">{{ $message }}</p> @enderror
                         </div>

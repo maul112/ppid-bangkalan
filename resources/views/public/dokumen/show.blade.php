@@ -69,12 +69,16 @@
                 </div>
             </div>
 
-            <!-- PDF Viewer -->
-            <div class="bg-gray-100 rounded-3xl overflow-hidden shadow-inner border border-gray-200 mb-8 p-2">
-                <div class="bg-white rounded-2xl overflow-hidden">
-                    <iframe src="{{ asset('storage/' . $dokumen->file_path) }}#toolbar=0&navpanes=0&scrollbar=0" class="w-full h-[600px] md:h-[800px]" frameborder="0"></iframe>
-                </div>
-            </div>
+<!-- PDF Viewer -->
+<div class="bg-gray-100 rounded-3xl overflow-hidden shadow-inner border border-gray-200 mb-8 p-2">
+    <div class="bg-white rounded-2xl overflow-hidden">
+        <iframe
+            src="{{ asset('storage/' . $dokumen->file_path) }}"
+            class="w-full h-[600px] md:h-[800px]"
+            frameborder="0">
+        </iframe>
+    </div>
+</div>
 
             <!-- Download Action -->
             <div class="flex justify-end">

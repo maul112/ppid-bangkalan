@@ -34,11 +34,18 @@ Route::prefix('profil')->name('profil.')->group(function () {
     Route::get('/tentang', [HomeController::class, 'tentang'])->name('tentang');
     Route::get('/tugas-fungsi', [HomeController::class, 'tugasFungsi'])->name('tugas_fungsi');
     Route::get('/visi-misi', [HomeController::class, 'visiMisi'])->name('visi_misi');
+
     Route::get('/dasar-hukum', [PublicDokumenController::class, 'dasarHukum'])->name('dasar_hukum');
     Route::get('/sop', [PublicDokumenController::class, 'sop'])->name('sop');
-    Route::get('/maklumat-pelayanan', [HomeController::class, 'maklumatPelayanan'])->name('maklumat_pelayanan');
-    Route::get('/alur-pelayanan', [HomeController::class, 'alurPelayanan'])->name('alur_pelayanan');
-    Route::get('/laporan-pelayanan', [HomeController::class, 'laporanPelayanan'])->name('laporan_pelayanan');
+
+    Route::get('/maklumat-pelayanan', [HomeController::class, 'maklumatPelayanan'])
+        ->name('maklumat_pelayanan');
+
+    Route::get('/alur-pelayanan', [PublicDokumenController::class, 'alurPelayanan'])
+        ->name('alur_pelayanan');
+
+    Route::get('/laporan-pelayanan', [PublicDokumenController::class, 'laporanPpid'])
+        ->name('laporan_pelayanan');
 });
 
 // Daftar Publik (Dialihkan ke layanan permohonan informasi)
@@ -104,8 +111,14 @@ Route::view('/profil/ppid/strukturorganisasi', 'public.profil.ppid.strukturorgan
 Route::get('/profil/ppid/dasarhukum', [PublicDokumenController::class, 'dasarHukum'])->name('public.profil_ppid_dasarhukum');
 Route::get('/profil/ppid/sop', [PublicDokumenController::class, 'sop'])->name('public.profil_ppid_sop');
 Route::view('/profil/ppid/maklumatpelayanan', 'public.profil.ppid.maklumatpelayanan')->name('public.profil_ppid_maklumatpelayanan');
-Route::view('/profil/ppid/alurpelayanan', 'public.profil.ppid.alurpelayanan')->name('public.profil_ppid_alurpelayanan');
-Route::view('/profil/ppid/laporan', 'public.profil.ppid.laporan')->name('public.profil_ppid_laporan');
+Route::get(
+    '/profil/ppid/alurpelayanan',
+    [PublicDokumenController::class, 'alurPelayanan']
+)->name('public.profil_ppid_alurpelayanan');
+Route::get(
+    '/profil/ppid/laporan',
+    [PublicDokumenController::class, 'laporanPpid']
+)->name('public.profil_ppid_laporan');
 Route::view('/profil/pejabat/bupati', 'public.profil.pejabat.bupati')->name('public.profil_pejabat_bupati');
 Route::view('/profil/pejabat/wakilbupati', 'public.profil.pejabat.wakilbupati')->name('public.profil_pejabat_wakilbupati');
 Route::view('/profil/pejabat/sekda', 'public.profil.pejabat.sekda')->name('public.profil_pejabat_sekda');
