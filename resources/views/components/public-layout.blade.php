@@ -33,7 +33,7 @@
         </div>
     </header>
 
-    <nav class="bg-blue-700 text-white shadow-md relative z-50" x-data="{ navOpen: false, dropdownProfilOpen: false, dropdownPejabatOpen: false, dropdownDIPOpen: false, dropdownLayananOpen: false, dropdownPelaksanaOpen: false, dropdownLoginOpen: false }">
+    <nav class="bg-blue-700 text-white shadow-md relative z-50" x-data="{ navOpen: false }">
         <div class="container mx-auto px-6 py-4 flex items-center justify-between lg:justify-center flex-wrap">
             
             <a href="/" class="text-xl font-bold lg:hidden">PPID Bangkalan</a>
@@ -53,12 +53,12 @@
                 </li>
 
                 <!-- Profil PPID -->
-                <li class="relative" @mouseenter="dropdownProfilOpen = true" @mouseleave="dropdownProfilOpen = false">
-                    <button @click="dropdownProfilOpen = !dropdownProfilOpen" class="flex items-center w-full py-2 px-4 hover:text-yellow-300 focus:outline-none">
+                <li class="relative group">
+                    <button class="flex items-center w-full py-2 px-4 hover:text-yellow-300 focus:outline-none">
                         Profil PPID
-                        <svg class="ml-1 w-4 h-4 transform transition-transform" :class="dropdownProfilOpen ? 'rotate-180' : ''" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+                        <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
-                    <ul x-show="dropdownProfilOpen" x-transition class="absolute bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 py-2 border border-gray-100" @click.away="dropdownProfilOpen = false" x-cloak>
+                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 py-2 border border-gray-100">
                         <li><a href="{{ route('public.profil_ppid_tentang') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Tentang PPID</a></li>
                         <li><a href="{{ route('public.profil_ppid_tupoksi') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Tugas Pokok dan Fungsi</a></li>
                         <li><a href="{{ route('public.profil_ppid_visimisi') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Visi dan Misi</a></li>
@@ -72,12 +72,12 @@
                 </li>
 
                 <!-- Pejabat PPID -->
-                <li class="relative" @mouseenter="dropdownPejabatOpen = true" @mouseleave="dropdownPejabatOpen = false">
-                    <button @click="dropdownPejabatOpen = !dropdownPejabatOpen" class="flex items-center w-full py-2 px-4 hover:text-yellow-300 focus:outline-none">
+                <li class="relative group">
+                    <button class="flex items-center w-full py-2 px-4 hover:text-yellow-300 focus:outline-none">
                         Pejabat PPID
-                        <svg class="ml-1 w-4 h-4 transform transition-transform" :class="dropdownPejabatOpen ? 'rotate-180' : ''" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+                        <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
-                    <ul x-show="dropdownPejabatOpen" x-transition class="absolute bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 max-h-96 overflow-y-auto py-2 border border-gray-100" @click.away="dropdownPejabatOpen = false" x-cloak>
+                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 max-h-96 overflow-y-auto py-2 border border-gray-100">
                         <li><a href="{{ route('public.profil_pejabat_bupati') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Bupati</a></li>
                         <li><a href="{{ route('public.profil_pejabat_wakilbupati') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Wakil Bupati</a></li>
                         <li><a href="{{ route('public.profil_pejabat_sekda') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Sekda</a></li>
@@ -96,12 +96,12 @@
                 </li>
 
                 <!-- DIP -->
-                <li class="relative" @mouseenter="dropdownDIPOpen = true" @mouseleave="dropdownDIPOpen = false">
-                    <button @click="dropdownDIPOpen = !dropdownDIPOpen" class="flex items-center w-full py-2 px-4 hover:text-yellow-300 focus:outline-none">
+                <li class="relative group">
+                    <button class="flex items-center w-full py-2 px-4 hover:text-yellow-300 focus:outline-none">
                         Daftar Informasi Publik
-                        <svg class="ml-1 w-4 h-4 transform transition-transform" :class="dropdownDIPOpen ? 'rotate-180' : ''" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+                        <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
-                    <ul x-show="dropdownDIPOpen" x-transition class="absolute bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-64 z-50 py-2 border border-gray-100" @click.away="dropdownDIPOpen = false" x-cloak>
+                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-64 z-50 py-2 border border-gray-100">
                         <li><a href="{{ route('public.dip_berkala') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Daftar Informasi Berkala</a></li>
                         <li><a href="{{ route('public.dip_setiapsaat') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Daftar Informasi Setiap Saat</a></li>
                         <li><a href="{{ route('public.dip_sertamerta') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Daftar Informasi Serta Merta</a></li>
@@ -110,12 +110,12 @@
                 </li>
 
                 <!-- Layanan Informasi -->
-                <li class="relative" @mouseenter="dropdownLayananOpen = true" @mouseleave="dropdownLayananOpen = false">
-                    <button @click="dropdownLayananOpen = !dropdownLayananOpen" class="flex items-center w-full py-2 px-4 hover:text-yellow-300 focus:outline-none">
+                <li class="relative group">
+                    <button class="flex items-center w-full py-2 px-4 hover:text-yellow-300 focus:outline-none">
                         Layanan Informasi Publik
-                        <svg class="ml-1 w-4 h-4 transform transition-transform" :class="dropdownLayananOpen ? 'rotate-180' : ''" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+                        <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
-                    <ul x-show="dropdownLayananOpen" x-transition class="absolute bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 py-2 border border-gray-100" @click.away="dropdownLayananOpen = false" x-cloak>
+                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 py-2 border border-gray-100">
                         <li><a href="https://www.lapor.go.id/" target="_blank" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">SP4N LAPOR!</a></li>
                         <li><a href="{{ route('public.layanan_berita') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Daftar Berita PPID</a></li>
                         <li><a href="https://elhkpn.kpk.go.id/portal/user/login" target="_blank" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">LHKPN</a></li>
@@ -132,12 +132,12 @@
                 </li>
 
                 <!-- PPID Pelaksana -->
-                <li class="relative" @mouseenter="dropdownPelaksanaOpen = true" @mouseleave="dropdownPelaksanaOpen = false">
-                    <button @click="dropdownPelaksanaOpen = !dropdownPelaksanaOpen" class="flex items-center w-full py-2 px-4 hover:text-yellow-300 focus:outline-none">
+                <li class="relative group">
+                    <button class="flex items-center w-full py-2 px-4 hover:text-yellow-300 focus:outline-none">
                         PPID Pelaksana
-                        <svg class="ml-1 w-4 h-4 transform transition-transform" :class="dropdownPelaksanaOpen ? 'rotate-180' : ''" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+                        <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
-                    <ul x-show="dropdownPelaksanaOpen" x-transition class="absolute right-0 bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 py-2 border border-gray-100" @click.away="dropdownPelaksanaOpen = false" x-cloak>
+                    <ul class="absolute hidden group-hover:block right-0 bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 py-2 border border-gray-100">
                         <li><a href="{{ route('public.ppidpelaksana_badan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Badan</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_bagian') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Bagian</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_inspektorat') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Inspektorat</a></li>
@@ -145,7 +145,7 @@
                         <li><a href="{{ route('public.ppidpelaksana_dinas') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Dinas</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_kecamatan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kecamatan</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_kelurahan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kelurahan</a></li>
-                        <li><a href="{{ route('public.ppidpelaksana_rsd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">RSD</a></li>
+                        <li><a href="{{ route('public.ppidpelaksana_rsud') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">RSUD</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_puskesmas') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Puskesmas</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_bumd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">BUMD</a></li>
                     </ul>

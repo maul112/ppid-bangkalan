@@ -47,8 +47,7 @@ Route::prefix('profil')->name('profil.')->group(function () {
     Route::get('/laporan-pelayanan', [PublicDokumenController::class, 'laporanPpid'])
         ->name('laporan_pelayanan');
         
-    Route::get('/lhkpn', [PublicDokumenController::class, 'lhkpn'])
-    ->name('public.lhkpn');
+
 });
 
 // Daftar Publik (Dialihkan ke layanan permohonan informasi)
@@ -143,6 +142,7 @@ Route::get('/dip/dikecualikan', [\App\Http\Controllers\PublicDipController::clas
 Route::get('/layanan/berita', [\App\Http\Controllers\PublicBeritaController::class, 'index'])->name('public.layanan_berita');
 Route::get('/layanan/berita/{slug}', [\App\Http\Controllers\PublicBeritaController::class, 'show'])->name('public.layanan_berita_show');
 Route::get('/layanan/regulasi', [\App\Http\Controllers\PublicRegulasiController::class, 'index'])->name('public.layanan_regulasi');
+Route::get('/layanan/lhkpn', [PublicDokumenController::class, 'lhkpn'])->name('public.lhkpn');
 Route::get('/layanan/permohonan-informasi', [\App\Http\Controllers\PermohonanController::class, 'layananInformasi'])->name('public.layanan_permohonan_informasi');
 Route::view('/layanan/formulir-keberatan', 'public.layanan.formulir-keberatan')->name('public.layanan_formulir_keberatan');
 Route::view('/layanan/agenda-bulanan', 'public.layanan.agenda-bulanan')->name('public.layanan_agenda_bulanan');
@@ -155,6 +155,6 @@ Route::view('/ppidpelaksana/setwan', 'public.ppidpelaksana.setwan')->name('publi
 Route::view('/ppidpelaksana/dinas', 'public.ppidpelaksana.dinas')->name('public.ppidpelaksana_dinas');
 Route::view('/ppidpelaksana/kecamatan', 'public.ppidpelaksana.kecamatan')->name('public.ppidpelaksana_kecamatan');
 Route::view('/ppidpelaksana/kelurahan', 'public.ppidpelaksana.kelurahan')->name('public.ppidpelaksana_kelurahan');
-Route::view('/ppidpelaksana/rsd', 'public.ppidpelaksana.rsd')->name('public.ppidpelaksana_rsd');
+Route::view('/ppidpelaksana/rsud', 'public.ppidpelaksana.rsud')->name('public.ppidpelaksana_rsud');
 Route::view('/ppidpelaksana/puskesmas', 'public.ppidpelaksana.puskesmas')->name('public.ppidpelaksana_puskesmas');
 Route::view('/ppidpelaksana/bumd', 'public.ppidpelaksana.bumd')->name('public.ppidpelaksana_bumd');
