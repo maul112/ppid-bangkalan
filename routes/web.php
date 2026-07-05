@@ -46,6 +46,9 @@ Route::prefix('profil')->name('profil.')->group(function () {
 
     Route::get('/laporan-pelayanan', [PublicDokumenController::class, 'laporanPpid'])
         ->name('laporan_pelayanan');
+        
+    Route::get('/lhkpn', [PublicDokumenController::class, 'lhkpn'])
+    ->name('public.lhkpn');
 });
 
 // Daftar Publik (Dialihkan ke layanan permohonan informasi)

@@ -65,7 +65,7 @@ class DokumenController extends Controller
     public function update(Request $request, Dokumen $dokumen)
     {
         $request->validate([
-            'kategori' => 'required|in:SOP,Dasar Hukum,Alur Pelayanan,Laporan PPID',
+            'kategori' => 'required|in:SOP,Dasar Hukum,Alur Pelayanan,Laporan PPID,LHKPN',
             'judul' => 'required|string|max:255',
             'tahun' => 'required|integer',
             'opd_id' => 'required|exists:opds,id',

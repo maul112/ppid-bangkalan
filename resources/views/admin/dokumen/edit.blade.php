@@ -38,6 +38,7 @@
                                 <option value="Laporan PPID" {{ old('kategori', $dokumen->kategori) == 'Laporan PPID' ? 'selected' : '' }}>
                                     Laporan PPID
                                 </option>
+                                
                             </select>
                             @error('kategori') <p class="text-red-500 text-xs mt-2 ml-2">{{ $message }}</p> @enderror
                         </div>

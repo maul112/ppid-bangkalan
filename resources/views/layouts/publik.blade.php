@@ -117,7 +117,12 @@
                     <ul x-show="dropdownLayananOpen" x-transition class="absolute bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 py-2 border border-gray-100" @click.away="dropdownLayananOpen = false" x-cloak>
                         <li><a href="https://www.lapor.go.id/" target="_blank" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">SP4N LAPOR!</a></li>
                         <li><a href="{{ route('public.layanan_berita') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Daftar Berita PPID</a></li>
-                        <li><a href="https://elhkpn.kpk.go.id/portal/user/login" target="_blank" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">LHKPN</a></li>
+                        <li>
+                            <a href="{{ route('public.profil_ppid_lhkpn') }}"
+                               class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">
+                               LHKPN
+                            </a>
+                        </li>
                         <li><a href="{{ route('public.layanan_permohonan_informasi') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Permohonan Informasi</a></li>
                         <li><a href="{{ route('public.layanan_formulir_keberatan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Formulir Keberatan</a></li>
                         <li><a href="{{ route('public.layanan_agenda_bulanan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Agenda Bulanan</a></li>
