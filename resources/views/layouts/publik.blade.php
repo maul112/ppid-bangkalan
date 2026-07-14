@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="is-public-page" content="true">
     <title>{{ $title ?? 'PPID Kabupaten Bangkalan' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .dropdown:hover .dropdown-menu { display: block; }
     </style>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="antialiased bg-gray-50 text-gray-800">
 
@@ -18,21 +18,21 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                 <a href="{{ route('home') }}" class="flex items-center space-x-4 hover:opacity-80 transition-opacity">
                     <img src="{{ asset('img/logo-ppid.png') }}" alt="Logo PPID" class="h-16 w-auto">
-                    <div class="h-10 w-[1px] bg-gray-200 hidden md:block"></div>
+                    <div class="h-10 w-[1px] bg-blue-300 hidden md:block"></div>
                     <div>
                         <h1 class="text-xl font-black text-blue-900 leading-none">PPID KABUPATEN</h1>
-                        <p class="text-sm font-bold text-gray-500 tracking-[0.2em]">BANGKALAN</p>
+                        <p class="text-sm font-bold text-blue-700 tracking-[0.2em]">BANGKALAN</p>
                     </div>
                 </a>
                 <div class="hidden lg:block text-right">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">E-Mail Resmi</p>
-                    <p class="text-sm font-bold text-blue-600 italic">ppid@bangkalankab.go.id</p>
+                    <p class="text-[10px] font-bold text-gray-700 uppercase tracking-widest leading-none mb-1">E-Mail Resmi</p>
+                    <p class="text-sm font-bold text-blue-800 italic">ppid@bangkalankab.go.id</p>
                 </div>
             </div>
         </div>
     </header>
 
-    <<nav class="bg-blue-700 text-white shadow-md relative z-[9999]" x-data="{ navOpen: false }">
+    <nav class="bg-blue-700 text-white shadow-md relative z-[9999]" x-data="{ navOpen: false }">
         <div class="container mx-auto px-6 py-4 flex items-center justify-between lg:justify-center flex-wrap">
             
             <a href="/" class="text-xl font-bold lg:hidden">PPID Bangkalan</a>
