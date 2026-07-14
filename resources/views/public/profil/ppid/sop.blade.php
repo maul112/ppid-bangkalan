@@ -100,25 +100,7 @@ $items = [
 
 <style>
 
-.ppid-hero{
-padding:60px 0;
-text-align:center;
-background:linear-gradient(180deg,#dbeafe,#ffffff);
-}
 
-.hero-title{
-font-size:40px;
-font-weight:800;
-}
-
-.hero-badge{
-display:inline-block;
-padding:10px 20px;
-background:#facc15;
-border-radius:10px;
-font-weight:700;
-margin-top:10px;
-}
 
 .document-grid{
 max-width:1200px;
@@ -180,12 +162,7 @@ border-radius:10px;
 
 </style>
 
-<section class="ppid-hero">
-<h1 class="hero-title">SOP PPID</h1>
-<div class="hero-badge">
-Standar Operasional Prosedur
-</div>
-</section>
+<x-public-header title="SOP PPID" subtitle="Standar Operasional Prosedur" />
 
 <div class="document-grid">
 

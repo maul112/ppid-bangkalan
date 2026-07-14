@@ -54,6 +54,9 @@ return new class extends Migration
             // Status permohonan sesuai alur Use Case
             $table->enum('status', ['pending', 'diverifikasi', 'disposisi', 'selesai', 'ditolak'])->default('pending');
             $table->text('tanggapan')->nullable();
+            $table->string('file_pendukung')->nullable();
+            $table->string('file_tanggapan')->nullable();
+            $table->string('link_tanggapan')->nullable();
             
             $table->timestamps();
         });

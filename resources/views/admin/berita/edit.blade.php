@@ -1,7 +1,19 @@
 <x-admin-panel-layout>
     <x-slot name="header">Edit Berita</x-slot>
 
-    <div class="max-w-5xl mx-auto pb-12">
+    <div class="w-full pb-12">
+        {{-- Tombol Kembali --}}
+        <div class="mb-6">
+            <a href="{{ route('admin.berita.index') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-red-600 font-bold transition-colors group">
+                <div class="w-8 h-8 flex items-center justify-center bg-white rounded-lg border border-gray-200 group-hover:border-red-200 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </div>
+                <span>Kembali ke Daftar</span>
+            </a>
+        </div>
+
         <div class="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden">
             {{-- Header Form --}}
             <div class="p-8 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
@@ -10,14 +22,10 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                     </div>
                     <div>
-                        <h3 class="text-xl font-black text-gray-800 tracking-tight">Editor Berita</h3>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Perbarui Informasi</p>
+                        <h3 class="text-xl font-black text-gray-800 tracking-tight">Edit Berita</h3>
+                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Perbarui Informasi Berita</p>
                     </div>
                 </div>
-                <a href="{{ route('admin.berita.index') }}" class="text-gray-400 hover:text-red-600 font-bold text-sm uppercase tracking-widest transition-all flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    Batal
-                </a>
             </div>
 
             @if ($errors->any())

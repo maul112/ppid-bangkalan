@@ -1,13 +1,22 @@
 <x-admin-panel-layout>
     <x-slot name="header">Verifikasi Berkas Masuk</x-slot>
 
-    <div class="space-y-6">
+    <div class="space-y-6 w-full pb-12">
+        {{-- Tombol Kembali --}}
+        <div class="mb-2">
+            <a href="{{ route('admin.permohonan.index') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-red-600 font-bold transition-colors group">
+                <div class="w-8 h-8 flex items-center justify-center bg-white rounded-lg border border-gray-200 group-hover:border-red-200 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </div>
+                <span>Kembali ke Daftar</span>
+            </a>
+        </div>
+
         {{-- Action Bar --}}
         <div class="flex justify-between items-center bg-white p-4 rounded-[2rem] border border-gray-100 shadow-sm">
             <div class="flex items-center gap-3 ml-4">
-                <a href="{{ route('admin.permohonan.index') }}" class="w-10 h-10 bg-white border border-gray-200 rounded-xl flex items-center justify-center hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition shadow-sm">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                </a>
                 <div>
                     <span class="text-sm font-black text-gray-400 uppercase tracking-widest">Tiket: {{ $permohonan->nomor_tiket }}</span>
                 </div>
@@ -84,6 +93,16 @@
                             <p class="text-xs text-red-500 italic font-bold">File KTP tidak ditemukan</p>
                         @endif
                     </div>
+
+                    @if($permohonan->file_pendukung)
+                    <hr class="border-gray-100 my-4">
+                    <div>
+                        <label class="text-[10px] text-gray-400 font-bold uppercase block mb-2">File Pendukung</label>
+                        <a href="{{ asset('uploads/permohonan/pendukung/' . $permohonan->file_pendukung) }}" target="_blank" class="flex items-center gap-2 p-3 bg-blue-50 border border-blue-100 rounded-xl text-blue-600 font-bold hover:bg-blue-600 hover:text-white transition">
+                            <i class="fa-solid fa-file-arrow-down"></i> Unduh File
+                        </a>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>

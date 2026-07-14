@@ -104,11 +104,20 @@
                                                     <i class="fa-solid fa-magnifying-glass-plus text-white text-xl"></i>
                                                 </div>
                                             </a>
-                                        @else
                                             <p class="text-xs text-red-500 italic">Foto KTP tidak tersedia</p>
                                         @endif
                                     </div>
                                 </div>
+                                @if($permohonan->file_pendukung)
+                                <div>
+                                    <p class="text-[10px] text-gray-500 font-bold uppercase mt-4">File Pendukung</p>
+                                    <div class="mt-2">
+                                        <a href="{{ asset('uploads/permohonan/pendukung/' . $permohonan->file_pendukung) }}" target="_blank" class="inline-flex items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-lg text-xs font-bold transition border border-blue-100">
+                                            <i class="fa-solid fa-file-arrow-down"></i> Unduh File Pendukung
+                                        </a>
+                                    </div>
+                                </div>
+                                @endif
                             </div>
                         </div>
 
@@ -144,14 +153,6 @@
                                 <p class="text-gray-800 whitespace-pre-wrap leading-relaxed relative z-10 font-medium">
                                     {{ $permohonan->tanggapan }}
                                 </p>
-                                
-                                @if($permohonan->file_jawaban) 
-                                    <div class="mt-6 pt-4 border-t border-blue-200">
-                                        <a href="{{ asset('storage/' . $permohonan->file_jawaban) }}" target="_blank" class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition">
-                                            <i class="fa-solid fa-file-arrow-down mr-2"></i> Unduh Lampiran Informasi
-                                        </a>
-                                    </div>
-                                @endif
                             </div>
                         @else
                             <div class="p-10 bg-gray-50 border-2 border-dashed border-gray-200 rounded-2xl text-center">
@@ -175,6 +176,20 @@
                                         <p class="text-gray-800 whitespace-pre-wrap leading-relaxed relative z-10 font-medium">
                                             {{ $opd->pivot->tanggapan }}
                                         </p>
+                                        @if($opd->pivot->file_tanggapan || $opd->pivot->link_tanggapan)
+                                            <div class="mt-4 pt-3 border-t border-indigo-200 flex flex-wrap gap-2">
+                                                @if($opd->pivot->file_tanggapan)
+                                                <a href="{{ asset('uploads/permohonan/tanggapan_opd/' . $opd->pivot->file_tanggapan) }}" target="_blank" class="inline-flex items-center bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-indigo-700 transition">
+                                                    <i class="fa-solid fa-file-arrow-down mr-2"></i> File Lampiran
+                                                </a>
+                                                @endif
+                                                @if($opd->pivot->link_tanggapan)
+                                                <a href="{{ $opd->pivot->link_tanggapan }}" target="_blank" class="inline-flex items-center bg-white text-indigo-600 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-indigo-50 transition border border-indigo-200">
+                                                    <i class="fa-solid fa-link mr-2"></i> Link Terkait
+                                                </a>
+                                                @endif
+                                            </div>
+                                        @endif
                                     @else
                                         <p class="text-gray-500 italic text-sm">Belum memberikan tanggapan.</p>
                                     @endif

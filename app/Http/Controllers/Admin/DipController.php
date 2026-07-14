@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 
 class DipController extends Controller
 {
-    public function index() {
-        $dips = Dip::latest()->paginate(10);
-        return view('admin.dip.index', compact('dips'));
+    public function index(Request $request) {
+        $kategori = $request->input('kategori');
+        $query = Dip::latest();
+        if ($kategori) {
+            $query->where('kategori', $kategori);
+        }
+        $dips = $query->paginate(10)->appends(['kategori' => $kategori]);
+        return view('admin.dip.index', compact('dips', 'kategori'));
     }
 
     public function create() {

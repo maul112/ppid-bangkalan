@@ -26,7 +26,29 @@ class PermohonanController extends Controller
             'tujuan_penggunaan' => 'required|string',
             'cara_memperoleh'   => 'required',
             'cara_mendapatkan'  => 'required',
+            'file_pendukung'    => 'nullable|file|max:10240', // Max 10MB
             'terms'             => 'accepted',
+        ], [
+            'nama_pemohon.required' => 'Nama lengkap wajib diisi.',
+            'nama_pemohon.max' => 'Nama lengkap maksimal 255 karakter.',
+            'nik.required' => 'NIK wajib diisi.',
+            'nik.digits' => 'NIK harus tepat 16 digit angka.',
+            'pekerjaan.required' => 'Pekerjaan wajib diisi.',
+            'alamat.required' => 'Alamat wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'no_hp.required' => 'Nomor HP/Telepon wajib diisi.',
+            'foto_ktp.required' => 'Foto KTP wajib dilampirkan.',
+            'foto_ktp.image' => 'File KTP harus berupa gambar.',
+            'foto_ktp.mimes' => 'Format foto KTP harus jpeg, png, atau jpg.',
+            'foto_ktp.max' => 'Ukuran foto KTP maksimal 2MB.',
+            'rincian_informasi.required' => 'Rincian informasi yang dibutuhkan wajib diisi.',
+            'tujuan_penggunaan.required' => 'Tujuan penggunaan informasi wajib diisi.',
+            'cara_memperoleh.required' => 'Cara memperoleh informasi wajib dipilih.',
+            'cara_mendapatkan.required' => 'Cara mendapatkan salinan informasi wajib dipilih.',
+            'file_pendukung.file' => 'File pendukung harus berupa file.',
+            'file_pendukung.max' => 'Ukuran file pendukung maksimal 10MB.',
+            'terms.accepted' => 'Anda harus menyetujui syarat dan ketentuan.',
         ]);
 
         $nama_file_ktp = null;
@@ -36,6 +58,15 @@ class PermohonanController extends Controller
             $tujuan_upload = public_path('uploads/ktp');
             if (!File::exists($tujuan_upload)) { File::makeDirectory($tujuan_upload, 0755, true); }
             $file->move($tujuan_upload, $nama_file_ktp);
+        }
+
+        $nama_file_pendukung = null;
+        if ($request->hasFile('file_pendukung')) {
+            $file_pendukung = $request->file('file_pendukung');
+            $nama_file_pendukung = 'PENDUKUNG-' . time() . '-' . Str::random(5) . '.' . $file_pendukung->getClientOriginalExtension();
+            $tujuan_upload_pendukung = public_path('uploads/permohonan/pendukung');
+            if (!File::exists($tujuan_upload_pendukung)) { File::makeDirectory($tujuan_upload_pendukung, 0755, true); }
+            $file_pendukung->move($tujuan_upload_pendukung, $nama_file_pendukung);
         }
 
         $nomor_tiket = 'REQ-' . date('Ymd') . '-' . strtoupper(Str::random(5));
@@ -50,6 +81,7 @@ class PermohonanController extends Controller
             'email'             => $request->email,
             'no_hp'             => $request->no_hp,
             'foto_ktp'          => $nama_file_ktp,
+            'file_pendukung'    => $nama_file_pendukung,
             'rincian_informasi' => $request->rincian_informasi,
             'tujuan_penggunaan' => $request->tujuan_penggunaan,
             'cara_memperoleh'   => $request->cara_memperoleh,

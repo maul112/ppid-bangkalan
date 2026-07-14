@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\PermohonanAdminController;
 use App\Http\Controllers\Admin\PermohonanOpdController;
 use App\Http\Controllers\Admin\HariLiburController;
 use App\Http\Controllers\Admin\DokumenController;
+use App\Http\Controllers\Admin\PejabatController;
+use App\Http\Controllers\Admin\LhkpnController;
 use App\Http\Controllers\PublicDokumenController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
@@ -84,6 +86,8 @@ Route::middleware(['auth', 'role:admin_ppid'])->prefix('admin')->name('admin.')-
 
     Route::resource('hari-libur', HariLiburController::class);
     Route::resource('dokumen', DokumenController::class);
+    Route::resource('pejabat', PejabatController::class);
+    Route::resource('lhkpn', LhkpnController::class);
 });
     
 Route::middleware(['auth', 'role:admin_opd'])->prefix('admin')->name('admin.')->group(function () {
@@ -123,18 +127,7 @@ Route::get(
 )->name('public.profil_ppid_laporan');
 Route::view('/profil/pejabat/bupati', 'public.profil.pejabat.bupati')->name('public.profil_pejabat_bupati');
 Route::view('/profil/pejabat/wakilbupati', 'public.profil.pejabat.wakilbupati')->name('public.profil_pejabat_wakilbupati');
-Route::view('/profil/pejabat/sekda', 'public.profil.pejabat.sekda')->name('public.profil_pejabat_sekda');
-Route::view('/profil/pejabat/asisten', 'public.profil.pejabat.asisten')->name('public.profil_pejabat_asisten');
-Route::view('/profil/pejabat/stafahli', 'public.profil.pejabat.stafahli')->name('public.profil_pejabat_stafahli');
-Route::view('/profil/pejabat/inspektur', 'public.profil.pejabat.inspektur')->name('public.profil_pejabat_inspektur');
-Route::view('/profil/pejabat/kepalabadan', 'public.profil.pejabat.kepalabadan')->name('public.profil_pejabat_kepalabadan');
-Route::view('/profil/pejabat/kepaladinas', 'public.profil.pejabat.kepaladinas')->name('public.profil_pejabat_kepaladinas');
-Route::view('/profil/pejabat/kepalabagian', 'public.profil.pejabat.kepalabagian')->name('public.profil_pejabat_kepalabagian');
-Route::view('/profil/pejabat/kepalapuskesmas', 'public.profil.pejabat.kepalapuskesmas')->name('public.profil_pejabat_kepalapuskesmas');
-Route::view('/profil/pejabat/camat', 'public.profil.pejabat.camat')->name('public.profil_pejabat_camat');
-Route::view('/profil/pejabat/lurah', 'public.profil.pejabat.lurah')->name('public.profil_pejabat_lurah');
-Route::view('/profil/pejabat/direkturrsd', 'public.profil.pejabat.direkturrsd')->name('public.profil_pejabat_direkturrsd');
-Route::view('/profil/pejabat/direkturbumd', 'public.profil.pejabat.direkturbumd')->name('public.profil_pejabat_direkturbumd');
+Route::get('/profil/pejabat/{kategori}', [\App\Http\Controllers\PublicPejabatController::class, 'index'])->name('public.profil_pejabat');
 Route::get('/dip/berkala', [\App\Http\Controllers\PublicDipController::class, 'berkala'])->name('public.dip_berkala');
 Route::get('/dip/setiapsaat', [\App\Http\Controllers\PublicDipController::class, 'setiapsaat'])->name('public.dip_setiapsaat');
 Route::get('/dip/sertamerta', [\App\Http\Controllers\PublicDipController::class, 'sertamerta'])->name('public.dip_sertamerta');

@@ -177,20 +177,7 @@
 @endphp
 
 {{-- HERO --}}
-<section class="ppid-hero2">
-  <div class="motif-img"></div>
-  <div class="wash"></div>
-  <div class="pattern"></div>
-  <div class="shape-left"></div>
-  <div class="shape-right"></div>
-
-  <div class="container position-relative" style="z-index:2;">
-    <div class="text-center">
-      <h1 class="display-6">Maklumat Pelayanan</h1>
-      <div class="badge-yellow">Maklumat Pelayanan Informasi Publik • PPID Kabupaten Bangkalan</div>
-    </div>
-  </div>
-</section>
+<x-public-header title="Maklumat Pelayanan" subtitle="Maklumat Pelayanan Informasi Publik • PPID Kabupaten Bangkalan" />
 
 {{-- KONTEN --}}
 <div class="doc-wrap">

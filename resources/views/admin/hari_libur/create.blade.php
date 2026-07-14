@@ -1,7 +1,20 @@
 <x-admin-panel-layout>
     <x-slot name="header">Tambah Hari Libur</x-slot>
 
-    <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-200">
+    <div class="w-full pb-12">
+        {{-- Tombol Kembali --}}
+        <div class="mb-6">
+            <a href="{{ route('admin.hari-libur.index') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-red-600 font-bold transition-colors group">
+                <div class="w-8 h-8 flex items-center justify-center bg-white rounded-lg border border-gray-200 group-hover:border-red-200 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </div>
+                <span>Kembali ke Daftar</span>
+            </a>
+        </div>
+
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-200">
         @if($errors->any())
             <div class="mb-6 bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl text-sm font-bold">
                 <ul class="list-disc pl-5">
@@ -22,10 +35,10 @@
                 <label class="block text-[11px] font-black text-gray-500 uppercase tracking-widest mb-2">Keterangan / Nama Libur</label>
                 <input type="text" name="keterangan" required class="w-full rounded-2xl border-gray-200 focus:ring-red-500 focus:border-red-500 p-4 text-sm font-bold bg-gray-50" value="{{ old('keterangan') }}" placeholder="Contoh: Idul Fitri 1445 H">
             </div>
-            <div class="flex gap-4 pt-4 border-t border-gray-100">
-                <a href="{{ route('admin.hari-libur.index') }}" class="px-8 py-3 bg-gray-100 text-gray-600 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-gray-200 transition-all">BATAL</a>
+            <div class="flex pt-4 border-t border-gray-100">
                 <button type="submit" class="px-8 py-3 bg-red-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-xl shadow-red-200 hover:bg-red-700 transition-all">SIMPAN</button>
             </div>
         </form>
+    </div>
     </div>
 </x-admin-panel-layout>

@@ -11,11 +11,19 @@ use Illuminate\Support\Str;
 
 class DokumenController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $dokumens = Dokumen::with('opd')->latest()->paginate(10);
+        $kategori = $request->input('kategori');
 
-        return view('admin.dokumen.index', compact('dokumens'));
+        $query = Dokumen::with('opd')->latest();
+
+        if ($kategori) {
+            $query->where('kategori', $kategori);
+        }
+
+        $dokumens = $query->paginate(10)->appends(['kategori' => $kategori]);
+
+        return view('admin.dokumen.index', compact('dokumens', 'kategori'));
     }
 
     public function create()

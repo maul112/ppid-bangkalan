@@ -98,6 +98,14 @@
                                 <textarea name="tujuan_penggunaan" class="border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg shadow-sm w-full text-sm" rows="2" required placeholder="Alasan mengapa Anda membutuhkan informasi tersebut">{{ old('tujuan_penggunaan') }}</textarea>
                             </div>
 
+                            <div>
+                                <label class="block font-bold text-xs text-gray-500 uppercase tracking-wider mb-1">File Pendukung (Opsional)</label>
+                                <div class="mt-1 flex items-center p-4 border-2 border-dashed border-gray-200 rounded-lg hover:bg-gray-50 transition">
+                                    <input type="file" name="file_pendukung" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                                </div>
+                                <p class="text-[10px] text-gray-400 mt-2 font-bold uppercase">* Jika ada dokumen/foto tambahan (Maksimal 10MB)</p>
+                            </div>
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block font-bold text-xs text-gray-500 uppercase tracking-wider mb-1">Cara Memperoleh Informasi</label>

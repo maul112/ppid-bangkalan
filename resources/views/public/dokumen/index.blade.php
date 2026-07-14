@@ -1,17 +1,5 @@
 <x-public-layout title="{{ $kategoriTitle }}">
-    <!-- Header Section -->
-    <section class="bg-blue-100 bg-opacity-20 rounded-xl text-blue-700 py-14 px-4 relative mt-10">
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <h4 class="text-4xl font-bold text-blue-800">{{ $kategoriTitle }}</h4>
-            <p class="mt-4 text-lg">
-                <span class="inline-block bg-yellow-400 text-black font-bold px-2 py-1 rounded">
-                    Daftar Dokumen {{ $kategoriTitle }} PPID
-                </span>
-            </p>
-        </div>
-        <!-- Background decorative pattern -->
-        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#2563eb 1px, transparent 1px); background-size: 20px 20px;"></div>
-    </section>
+    <x-public-header title="{{ $kategoriTitle }}" subtitle="Daftar Dokumen {{ $kategoriTitle }} PPID" />
 
     <!-- Content Section -->
     <section class="py-12 bg-gray-50 min-h-[50vh]">

@@ -139,19 +139,7 @@
 }
 </style>
 
-<section class="ppid-hero2">
-    <div class="pattern"></div>
-
-    <div class="container text-center">
-        <h1 class="display-6">
-            ALUR PELAYANAN INFORMASI
-        </h1>
-
-        <div class="badge-yellow">
-            PPID Kabupaten Bangkalan
-        </div>
-    </div>
-</section>
+<x-public-header title="ALUR PELAYANAN INFORMASI" subtitle="PPID Kabupaten Bangkalan" />
 
 <div class="dh-wrap">
 

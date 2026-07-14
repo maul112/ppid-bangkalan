@@ -52,41 +52,7 @@ $items = [
 
 <style>
 
-/* HERO */
-.ppid-hero{
-    position:relative;
-    overflow:hidden;
-    padding:45px 0;
-    background:linear-gradient(to bottom,#cfe8ff 0%,#e8f3ff 55%,#ffffff 100%);
-}
 
-.ppid-hero .pattern{
-    position:absolute;
-    inset:0;
-    opacity:.15;
-    background-image:radial-gradient(#0b2a6f 0.7px, transparent 0.7px);
-    background-size:22px 22px;
-}
-
-.hero-inner{
-    position:relative;
-    text-align:center;
-}
-
-.hero-inner h1{
-    font-size:38px;
-    font-weight:800;
-    color:#0b2a6f;
-}
-
-.hero-badge{
-    display:inline-block;
-    margin-top:12px;
-    padding:10px 18px;
-    background:#facc15;
-    border-radius:10px;
-    font-weight:700;
-}
 
 /* LIST */
 .document-list{
@@ -195,16 +161,7 @@ $items = [
 }
 </style>
 
-<section class="ppid-hero">
-    <div class="pattern"></div>
-
-    <div class="container hero-inner">
-        <h1>DASAR HUKUM PPID</h1>
-        <div class="hero-badge">
-            PPID Kabupaten Bangkalan
-        </div>
-    </div>
-</section>
+<x-public-header title="DASAR HUKUM PPID" subtitle="PPID Kabupaten Bangkalan" />
 
 <div class="document-list">
 

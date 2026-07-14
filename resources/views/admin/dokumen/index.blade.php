@@ -2,17 +2,30 @@
     <x-slot name="header">Daftar Dokumen Publik</x-slot>
     <div class="space-y-6">
         {{-- Action Bar --}}
-        <div class="flex justify-between items-center bg-white p-4 rounded-[2rem] border border-gray-100 shadow-sm">
-            <div class="flex items-center gap-3 ml-4">
-                <a href="{{ route('admin.dashboard') }}" class="w-10 h-10 flex items-center justify-center bg-white rounded-xl border border-gray-200 text-gray-400 hover:text-red-600 hover:border-red-200 transition-all shadow-sm">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-[2rem] border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 ml-2 md:ml-4 w-full md:w-auto">
+                <a href="{{ route('admin.dashboard') }}" class="w-10 h-10 flex items-center justify-center bg-white rounded-xl border border-gray-200 text-gray-400 hover:text-red-600 hover:border-red-200 transition-all shadow-sm flex-shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </a>
-                <span class="text-sm font-black text-gray-400 uppercase tracking-widest">Manajemen Dokumen Publik</span>
+                <span class="text-sm font-black text-gray-400 uppercase tracking-widest hidden sm:inline">Manajemen Dokumen Publik</span>
             </div>
-            <a href="{{ route('admin.dokumen.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-lg shadow-blue-100 transition flex items-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                TAMBAH DOKUMEN
-            </a>
+
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mr-2">
+                <form action="{{ route('admin.dokumen.index') }}" method="GET" class="w-full sm:w-auto">
+                    <select name="kategori" class="w-full border border-gray-200 rounded-2xl text-sm font-bold text-gray-600 pl-4 pr-10 py-3 focus:ring-2 focus:ring-blue-100 focus:border-blue-300 transition-all cursor-pointer" onchange="this.form.submit()">
+                        <option value="">Semua Kategori</option>
+                        <option value="SOP" {{ request('kategori') == 'SOP' ? 'selected' : '' }}>SOP</option>
+                        <option value="Dasar Hukum" {{ request('kategori') == 'Dasar Hukum' ? 'selected' : '' }}>Dasar Hukum</option>
+                        <option value="Alur Pelayanan" {{ request('kategori') == 'Alur Pelayanan' ? 'selected' : '' }}>Alur Pelayanan</option>
+                        <option value="Laporan PPID" {{ request('kategori') == 'Laporan PPID' ? 'selected' : '' }}>Laporan PPID</option>
+                    </select>
+                </form>
+
+                <a href="{{ route('admin.dokumen.create') }}" class="w-full sm:w-auto justify-center bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-lg shadow-red-100 transition flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    TAMBAH DOKUMEN
+                </a>
+            </div>
         </div>
 
         @if(session('success'))

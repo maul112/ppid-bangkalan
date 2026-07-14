@@ -1,7 +1,19 @@
 <x-admin-panel-layout>
     <x-slot name="header">Tambah Regulasi Baru</x-slot>
 
-    <div class="max-w-4xl mx-auto pb-12">
+    <div class="w-full pb-12">
+        {{-- Tombol Kembali --}}
+        <div class="mb-6">
+            <a href="{{ route('admin.regulasi.index') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-red-600 font-bold transition-colors group">
+                <div class="w-8 h-8 flex items-center justify-center bg-white rounded-lg border border-gray-200 group-hover:border-red-200 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </div>
+                <span>Kembali ke Daftar</span>
+            </a>
+        </div>
+
         <div class="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden">
             {{-- Header Form --}}
             <div class="p-8 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between">
@@ -14,7 +26,6 @@
                         <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest">Input Dasar Hukum & Aturan Publik</p>
                     </div>
                 </div>
-                <a href="{{ route('admin.regulasi.index') }}" class="text-gray-400 hover:text-red-600 font-black text-xs uppercase tracking-widest transition-all">Batal</a>
             </div>
 
             <form action="{{ route('admin.regulasi.store') }}" method="POST" enctype="multipart/form-data" class="p-8 md:p-12 space-y-8">
