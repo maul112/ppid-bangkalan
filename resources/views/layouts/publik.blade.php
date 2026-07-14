@@ -32,7 +32,7 @@
         </div>
     </header>
 
-    <nav class="bg-blue-700 text-white shadow-md relative z-50" x-data="{ navOpen: false }">
+    <<nav class="bg-blue-700 text-white shadow-md relative z-[9999]" x-data="{ navOpen: false }">
         <div class="container mx-auto px-6 py-4 flex items-center justify-between lg:justify-center flex-wrap">
             
             <a href="/" class="text-xl font-bold lg:hidden">PPID Bangkalan</a>
@@ -45,7 +45,8 @@
             </button>
 
             <!-- Navigation Menu -->
-            <ul :class="navOpen ? 'block' : 'hidden'" class="w-full lg:flex lg:space-x-4 lg:items-center lg:w-auto mt-4 lg:mt-0 text-sm font-semibold">
+            <ul :class="navOpen ? 'block' : 'hidden'"
+            class="absolute left-0 top-full w-full bg-blue-700 z-[9999] lg:static lg:flex lg:space-x-4 lg:items-center lg:w-auto mt-0 text-sm font-semibold">
 
                 <li>
                     <a href="/" class="block py-2 px-4 hover:text-yellow-300">Beranda</a>
