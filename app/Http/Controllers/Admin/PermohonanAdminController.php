@@ -38,8 +38,8 @@ class PermohonanAdminController extends Controller
     public function updateStatus(Request $request, Permohonan $permohonan)
     {
         $request->validate([
-            'status'    => 'required|in:pending,diverifikasi,selesai,ditolak',
-            'tanggapan' => 'required_if:status,selesai|required_if:status,ditolak|nullable|string',
+            'status'         => 'required|in:pending,diverifikasi,selesai,ditolak',
+            'tanggapan'      => 'required_if:status,selesai|required_if:status,ditolak|nullable|string',
         ], [
             'tanggapan.required_if' => 'Kolom tanggapan wajib diisi ketika status adalah Selesai atau Ditolak.',
         ]);
@@ -55,8 +55,8 @@ class PermohonanAdminController extends Controller
         }
 
         $permohonan->update([
-            'status'    => $request->status,
-            'tanggapan' => $request->tanggapan,
+            'status'         => $request->status,
+            'tanggapan'      => $request->tanggapan,
         ]);
 
         return redirect()->route('admin.permohonan.index')->with('success', 'Status permohonan berhasil diperbarui menjadi "' . strtoupper($request->status) . '"!');

@@ -1,12 +1,16 @@
 <x-admin-panel-layout title="Tambah Dokumen Publik">
     <x-slot name="header">Tambah Dokumen Publik</x-slot>
 
-    <div class="max-w-4xl mx-auto pb-12">
+    <div class="w-full pb-12">
         {{-- Back Button --}}
         <div class="mb-6">
-            <a href="{{ route('admin.dokumen.index') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-blue-600 font-bold transition-all group">
-                <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                Kembali ke Daftar Dokumen
+            <a href="{{ route('admin.dokumen.index') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-red-600 font-bold transition-colors group">
+                <div class="w-8 h-8 flex items-center justify-center bg-white rounded-lg border border-gray-200 group-hover:border-red-200 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </div>
+                <span>Kembali ke Daftar</span>
             </a>
         </div>
 
@@ -43,10 +47,6 @@
 
         <option value="Laporan PPID" {{ old('kategori') == 'Laporan PPID' ? 'selected' : '' }}>
             Laporan PPID
-        </option>
-
-        <option value="LHKPN" {{ old('kategori') == 'LHKPN' ? 'selected' : '' }}>
-            LHKPN
         </option>
     </select>
 

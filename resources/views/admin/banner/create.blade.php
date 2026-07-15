@@ -4,7 +4,7 @@
         Upload Banner Baru
     </x-slot>
 
-    <div class="max-w-4xl mx-auto">
+    <div class="w-full">
         {{-- Tombol Kembali --}}
         <div class="mb-6">
             <a href="{{ route('admin.banner.index') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-red-600 font-bold transition-colors group">

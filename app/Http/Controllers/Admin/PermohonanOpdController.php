@@ -65,14 +65,29 @@ class PermohonanOpdController extends Controller
         }
 
         $request->validate([
-            'tanggapan' => 'required|string',
+            'tanggapan'      => 'required|string',
+            'file_tanggapan' => 'nullable|file|max:10240', // Max 10MB
+            'link_tanggapan' => 'nullable|string|url',
+        ], [
+            'link_tanggapan.url' => 'Format link tanggapan tidak valid. Pastikan menggunakan http:// atau https://.',
         ]);
+
+        $nama_file_tanggapan = $pivot->file_tanggapan;
+        if ($request->hasFile('file_tanggapan')) {
+            $file_tanggapan = $request->file('file_tanggapan');
+            $nama_file_tanggapan = 'TANGGAPAN-OPD-' . time() . '-' . \Illuminate\Support\Str::random(5) . '.' . $file_tanggapan->getClientOriginalExtension();
+            $tujuan_upload_tanggapan = public_path('uploads/permohonan/tanggapan_opd');
+            if (!\Illuminate\Support\Facades\File::exists($tujuan_upload_tanggapan)) { \Illuminate\Support\Facades\File::makeDirectory($tujuan_upload_tanggapan, 0755, true); }
+            $file_tanggapan->move($tujuan_upload_tanggapan, $nama_file_tanggapan);
+        }
 
         // Update data di pivot table untuk OPD ini saja
         $permohonan->opds()->updateExistingPivot($opdId, [
-            'tanggapan'   => $request->tanggapan,
-            'status'      => 'ditanggapi',
-            'tanggapi_at' => now(),
+            'tanggapan'      => $request->tanggapan,
+            'status'         => 'ditanggapi',
+            'tanggapi_at'    => now(),
+            'file_tanggapan' => $nama_file_tanggapan,
+            'link_tanggapan' => $request->link_tanggapan,
         ]);
 
         // Cek apakah semua OPD sudah menanggapi, jika ya beri tahu PPID

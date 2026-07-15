@@ -20,7 +20,13 @@ class HomeController extends Controller
     }
 
     public function struktur() {
-        return view('profil.struktur-organisasi');
+        $struktur = \App\Models\StrukturOrganisasi::first();
+        return view('profil.struktur-organisasi', compact('struktur'));
+    }
+
+    public function strukturPpid() {
+        $struktur = \App\Models\StrukturOrganisasi::first();
+        return view('public.profil.ppid.strukturorganisasi', compact('struktur'));
     }
 
     public function tentang()

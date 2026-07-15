@@ -54,13 +54,11 @@ class PublicDokumenController extends Controller
 
     public function lhkpn()
     {
-        $dokumens = Dokumen::where('kategori', 'LHKPN')
-            ->latest()
+        $lhkpns = \App\Models\PejabatLhkpn::with('pejabat')
+            ->latest('tahun')
             ->paginate(10);
 
-        $kategoriTitle = 'LHKPN';
-
-        return view('public.dokumen.index', compact('dokumens', 'kategoriTitle'));
+        return view('public.dokumen.lhkpn', compact('lhkpns'));
     }
 
     public function show($slug)

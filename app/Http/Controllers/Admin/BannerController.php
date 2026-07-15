@@ -8,8 +8,17 @@ use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
-    public function index() {
-        $banners = Banner::latest()->paginate(10);
+    public function index(Request $request)
+    {
+        $query = Banner::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('judul', 'like', "%{$search}%")
+                  ->orWhere('deskripsi', 'like', "%{$search}%");
+        }
+
+        $banners = $query->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.banner.index', compact('banners'));
     }
 

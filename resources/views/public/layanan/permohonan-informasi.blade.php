@@ -1,35 +1,11 @@
 @extends('layouts.publik')
 
 @section('content')
-    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        
-        {{-- Breadcrumb Navigation --}}
-        <nav class="flex mb-8" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3 text-sm">
-                <li class="inline-flex items-center">
-                    <a href="{{ route('home') }}" class="text-gray-400 hover:text-blue-600 font-medium flex items-center transition">
-                        <i class="fa-solid fa-home mr-2"></i> Beranda
-                    </a>
-                </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <i class="fa-solid fa-chevron-right text-gray-400 text-xs mx-2"></i>
-                        <span class="text-gray-600 font-bold">Layanan</span>
-                    </div>
-                </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <i class="fa-solid fa-chevron-right text-gray-400 text-xs mx-2"></i>
-                        <span class="text-gray-600 font-bold">Permohonan Informasi</span>
-                    </div>
-                </li>
-            </ol>
-        </nav>
+    <x-public-header title="Layanan Permohonan Informasi" subtitle="Layanan" />
 
-        <div class="text-center mb-10">
-            <h1 class="text-3xl md:text-4xl font-black text-gray-900 tracking-tight">Layanan Permohonan Informasi</h1>
-            <div class="mt-4 mx-auto h-1 w-20 bg-blue-600 rounded-full"></div>
-            <p class="mt-4 text-gray-500 max-w-2xl mx-auto">Ajukan permohonan informasi publik secara online atau pantau status permohonan yang telah diajukan.</p>
+    <div class="max-w-7xl mx-auto pb-16 pt-8 px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <p class="text-gray-500 text-lg font-medium">Ajukan permohonan informasi publik secara online atau pantau status permohonan yang telah diajukan.</p>
         </div>
 
         {{-- Call to Action: Ajukan Permohonan --}}

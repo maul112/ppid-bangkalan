@@ -139,19 +139,7 @@
 }
 </style>
 
-<section class="ppid-hero2">
-    <div class="pattern"></div>
-
-    <div class="container text-center">
-        <h1 class="display-6">
-            ALUR PELAYANAN INFORMASI
-        </h1>
-
-        <div class="badge-yellow">
-            PPID Kabupaten Bangkalan
-        </div>
-    </div>
-</section>
+<x-public-header title="ALUR PELAYANAN INFORMASI" subtitle="PPID Kabupaten Bangkalan" />
 
 <div class="dh-wrap">
 
@@ -183,7 +171,7 @@
 
                 </div>
 
-                <a href="{{ asset('alur-layanan/Alur_Pengaduan_Melalui_Aplikasi_(1).pdf') }}"
+                <a href="{{ asset('files/alur-layanan/Alur_Pengaduan_Melalui_Aplikasi_(1).pdf') }}"
                    target="_blank"
                    class="btn-download">
                     Buka Dokumen
@@ -214,7 +202,7 @@
 
                 </div>
 
-                <a href="{{ asset('alur-layanan/Alur_Pengaduan_Melalui_Aplikasi_(2).pdf') }}"
+                <a href="{{ asset('files/alur-layanan/Alur_Pengaduan_Melalui_Aplikasi_(2).pdf') }}"
                    target="_blank"
                    class="btn-download">
                     Buka Dokumen

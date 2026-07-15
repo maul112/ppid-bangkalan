@@ -116,13 +116,16 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white shadow-sm rounded-2xl p-4 sm:p-6 border border-slate-200">
 
-            {{-- PDF Embed --}}
             <div class="w-full overflow-hidden rounded-xl border border-slate-200">
-                <iframe
-                    src="{{ asset('img/struktur/struktur-organisasi-ppid-bkl.pdf') }}"
-                    style="width:100%; height:650px;"
-                    frameborder="0">
-                </iframe>
+                @if($struktur && $struktur->gambar && file_exists(public_path('uploads/struktur/' . $struktur->gambar)))
+                    <img src="{{ asset('uploads/struktur/' . $struktur->gambar) }}" alt="Struktur Organisasi PPID Kabupaten Bangkalan" class="w-full h-auto object-contain">
+                @else
+                    <div class="p-16 text-center bg-gray-50 flex flex-col items-center justify-center">
+                        <svg class="w-20 h-20 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <p class="text-xl font-bold text-gray-400 mb-2">Belum Ada Struktur Organisasi</p>
+                        <p class="text-gray-500">Struktur organisasi sedang dalam proses pembaruan data.</p>
+                    </div>
+                @endif
             </div>
 
         </div>

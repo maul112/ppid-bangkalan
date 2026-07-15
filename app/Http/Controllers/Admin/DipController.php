@@ -8,9 +8,25 @@ use Illuminate\Http\Request;
 
 class DipController extends Controller
 {
-    public function index() {
-        $dips = Dip::latest()->paginate(10);
-        return view('admin.dip.index', compact('dips'));
+    public function index(Request $request) {
+        $kategori = $request->input('kategori');
+        $search = $request->input('search');
+        
+        $query = Dip::latest();
+        
+        if ($kategori) {
+            $query->where('kategori', $kategori);
+        }
+
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('judul', 'like', "%{$search}%")
+                  ->orWhere('kategori', 'like', "%{$search}%");
+            });
+        }
+        
+        $dips = $query->paginate(10)->appends(['kategori' => $kategori, 'search' => $search]);
+        return view('admin.dip.index', compact('dips', 'kategori'));
     }
 
     public function create() {

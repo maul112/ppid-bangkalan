@@ -117,25 +117,7 @@
 
 
 {{-- HERO --}}
-<section class="ppid-hero">
-    <div class="pattern"></div>
-    <div class="shape1"></div>
-    <div class="shape2"></div>
-    <div class="shape3"></div>
-    <div class="shape4"></div>
-    <div class="shape5"></div>
-
-    <div class="hero-inner">
-        <h1>Visi dan Misi</h1>
-        <div class="badge">PPID Kabupaten Bangkalan</div>
-    </div>
-
-    <svg class="ppid-wave" viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path fill="#f8fafc"
-              d="M0,64L60,58.7C120,53,240,43,360,42.7C480,43,600,53,720,58.7C840,64,960,64,1080,58.7C1200,53,1320,43,1380,37.3L1440,32L1440,90L0,90Z">
-        </path>
-    </svg>
-</section>
+<x-public-header title="Visi dan Misi" />
 
 {{-- CONTENT --}}
 <section class="bg-slate-50">

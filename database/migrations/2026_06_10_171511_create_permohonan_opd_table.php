@@ -16,6 +16,8 @@ return new class extends Migration
             $table->enum('status', ['menunggu', 'ditanggapi'])->default('menunggu');
             $table->timestamp('disposisi_at')->nullable();
             $table->timestamp('tanggapi_at')->nullable();
+            $table->string('file_tanggapan')->nullable();
+            $table->string('link_tanggapan')->nullable();
             $table->timestamps();
 
             $table->unique(['permohonan_id', 'opd_id']);

@@ -3,23 +3,24 @@
 
     <div class="space-y-6">
         {{-- Action Bar --}}
-        <div class="flex justify-between items-center bg-white p-4 rounded-[2rem] border border-gray-100 shadow-sm">
-            <div class="flex items-center gap-3 ml-4">
-                <a href="{{ route('admin.dashboard') }}" class="w-10 h-10 flex items-center justify-center bg-white rounded-xl border border-gray-200 text-gray-400 hover:text-red-600 hover:border-red-200 transition-all shadow-sm">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-[2rem] border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 ml-2 md:ml-4 w-full md:w-auto">
+                <a href="{{ route('admin.dashboard') }}" class="w-10 h-10 flex items-center justify-center bg-white rounded-xl border border-gray-200 text-gray-400 hover:text-red-600 hover:border-red-200 transition-all shadow-sm flex-shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </a>
-                <span class="text-sm font-black text-gray-400 uppercase tracking-widest">Daftar Permohonan</span>
+                <span class="text-sm font-black text-gray-400 uppercase tracking-widest hidden sm:inline">Daftar Permohonan</span>
             </div>
-            <div class="flex items-center gap-2 mr-2">
-                <form action="{{ route('admin.permohonan.index') }}" method="GET" class="flex gap-2">
+            
+            <div class="flex items-center w-full md:w-auto mr-2">
+                <form action="{{ route('admin.permohonan.index') }}" method="GET" class="flex flex-col sm:flex-row gap-2 w-full">
                     <input type="text" name="search" value="{{ request('search') }}" 
                            placeholder="Cari nama, NIK atau tiket..." 
-                           class="w-64 rounded-xl border-gray-200 text-sm focus:ring-red-500 focus:border-red-500 shadow-sm">
-                    <button type="submit" class="bg-gray-900 text-white px-4 py-2 rounded-xl font-bold text-xs hover:bg-gray-800 transition shadow-md">
+                           class="w-full sm:w-64 border border-gray-200 rounded-2xl text-sm font-bold text-gray-600 px-4 py-3 focus:ring-2 focus:ring-red-100 focus:border-red-300 transition-all">
+                    <button type="submit" class="w-full sm:w-auto justify-center bg-gray-900 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-lg shadow-gray-200 transition flex items-center gap-2">
                         CARI
                     </button>
                     @if(request('search'))
-                        <a href="{{ route('admin.permohonan.index') }}" class="bg-gray-200 text-gray-600 px-4 py-2 rounded-xl font-bold text-xs hover:bg-gray-300 transition flex items-center">
+                        <a href="{{ route('admin.permohonan.index') }}" class="w-full sm:w-auto justify-center bg-gray-100 text-gray-600 px-6 py-3 rounded-2xl text-sm font-black transition flex items-center gap-2 hover:bg-gray-200">
                             RESET
                         </a>
                     @endif

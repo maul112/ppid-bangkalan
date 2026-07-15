@@ -11,11 +11,27 @@ use Illuminate\Support\Str;
 
 class DokumenController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $dokumens = Dokumen::with('opd')->latest()->paginate(10);
+        $kategori = $request->input('kategori');
 
-        return view('admin.dokumen.index', compact('dokumens'));
+        $query = Dokumen::with('opd')->latest();
+        $search = $request->input('search');
+
+        if ($kategori) {
+            $query->where('kategori', $kategori);
+        }
+
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('judul', 'like', "%{$search}%")
+                  ->orWhere('keterangan', 'like', "%{$search}%");
+            });
+        }
+
+        $dokumens = $query->paginate(10)->appends(['kategori' => $kategori, 'search' => $search]);
+
+        return view('admin.dokumen.index', compact('dokumens', 'kategori'));
     }
 
     public function create()

@@ -22,7 +22,10 @@ class Permohonan extends Model
         'cara_memperoleh',
         'cara_mendapatkan',
         'status',
-        'tanggapan', 
+        'tanggapan',
+        'file_pendukung',
+        'file_tanggapan',
+        'link_tanggapan',
     ];
 
     /**
@@ -49,7 +52,7 @@ class Permohonan extends Model
     public function opds()
     {
         return $this->belongsToMany(Opd::class, 'permohonan_opd')
-                    ->withPivot(['tanggapan', 'status', 'disposisi_at', 'tanggapi_at'])
+                    ->withPivot(['tanggapan', 'status', 'disposisi_at', 'tanggapi_at', 'file_tanggapan', 'link_tanggapan'])
                     ->withTimestamps();
     }
 

@@ -8,8 +8,17 @@ use Illuminate\Http\Request;
 
 class RegulasiController extends Controller
 {
-    public function index() {
-        $regulasis = Regulasi::latest()->paginate(10);
+    public function index(Request $request)
+    {
+        $query = Regulasi::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('judul', 'like', "%{$search}%")
+                  ->orWhere('nomor', 'like', "%{$search}%");
+        }
+
+        $regulasis = $query->latest()->paginate(10);
         return view('admin.regulasi.index', compact('regulasis'));
     }
 

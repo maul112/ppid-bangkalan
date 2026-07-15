@@ -1,20 +1,31 @@
 <x-admin-panel-layout>
     <x-slot name="header">Edit Regulasi</x-slot>
 
-    <div class="max-w-4xl mx-auto pb-12">
+    <div class="w-full pb-12">
+        {{-- Tombol Kembali --}}
+        <div class="mb-6">
+            <a href="{{ route('admin.regulasi.index') }}" class="inline-flex items-center gap-2 text-gray-500 hover:text-red-600 font-bold transition-colors group">
+                <div class="w-8 h-8 flex items-center justify-center bg-white rounded-lg border border-gray-200 group-hover:border-red-200 shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </div>
+                <span>Kembali ke Daftar</span>
+            </a>
+        </div>
+
         <div class="bg-white rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden">
             {{-- Header Form --}}
             <div class="p-8 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between">
                 <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-red-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-red-100">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-blue-100">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                     </div>
                     <div>
-                        <h3 class="text-xl font-black text-gray-800 tracking-tight">Perbarui Regulasi</h3>
-                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest">Edit Dasar Hukum & Aturan Publik</p>
+                        <h3 class="text-xl font-black text-gray-800 tracking-tight">Edit Regulasi</h3>
+                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest">Update Data Aturan</p>
                     </div>
                 </div>
-                <a href="{{ route('admin.regulasi.index') }}" class="text-gray-400 hover:text-red-600 font-black text-xs uppercase tracking-widest transition-all">Batal</a>
             </div>
 
             <form action="{{ route('admin.regulasi.update', $regulasi->id) }}" method="POST" enctype="multipart/form-data" class="p-8 md:p-12 space-y-8">

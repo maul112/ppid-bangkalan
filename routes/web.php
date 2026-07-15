@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\PermohonanAdminController;
 use App\Http\Controllers\Admin\PermohonanOpdController;
 use App\Http\Controllers\Admin\HariLiburController;
 use App\Http\Controllers\Admin\DokumenController;
+use App\Http\Controllers\Admin\PejabatController;
+use App\Http\Controllers\Admin\LhkpnController;
 use App\Http\Controllers\PublicDokumenController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
@@ -84,6 +86,13 @@ Route::middleware(['auth', 'role:admin_ppid'])->prefix('admin')->name('admin.')-
 
     Route::resource('hari-libur', HariLiburController::class);
     Route::resource('dokumen', DokumenController::class);
+    Route::resource('pejabat', PejabatController::class);
+    Route::resource('lhkpn', LhkpnController::class);
+    Route::resource('agenda', \App\Http\Controllers\Admin\AgendaController::class);
+
+    Route::get('struktur-organisasi', [\App\Http\Controllers\Admin\StrukturOrganisasiController::class, 'index'])->name('struktur-organisasi.index');
+    Route::post('struktur-organisasi', [\App\Http\Controllers\Admin\StrukturOrganisasiController::class, 'store'])->name('struktur-organisasi.store');
+    Route::put('struktur-organisasi/{id}', [\App\Http\Controllers\Admin\StrukturOrganisasiController::class, 'update'])->name('struktur-organisasi.update');
 });
     
 Route::middleware(['auth', 'role:admin_opd'])->prefix('admin')->name('admin.')->group(function () {
@@ -109,7 +118,7 @@ require __DIR__.'/auth.php';
 Route::view('/profil/ppid/tentang', 'public.profil.ppid.tentang')->name('public.profil_ppid_tentang');
 Route::view('/profil/ppid/tupoksi', 'public.profil.ppid.tupoksi')->name('public.profil_ppid_tupoksi');
 Route::view('/profil/ppid/visimisi', 'public.profil.ppid.visimisi')->name('public.profil_ppid_visimisi');
-Route::view('/profil/ppid/strukturorganisasi', 'public.profil.ppid.strukturorganisasi')->name('public.profil_ppid_strukturorganisasi');
+Route::get('/profil/ppid/strukturorganisasi', [App\Http\Controllers\HomeController::class, 'strukturPpid'])->name('public.profil_ppid_strukturorganisasi');
 Route::get('/profil/ppid/dasarhukum', [PublicDokumenController::class, 'dasarHukum'])->name('public.profil_ppid_dasarhukum');
 Route::get('/profil/ppid/sop', [PublicDokumenController::class, 'sop'])->name('public.profil_ppid_sop');
 Route::view('/profil/ppid/maklumatpelayanan', 'public.profil.ppid.maklumatpelayanan')->name('public.profil_ppid_maklumatpelayanan');
@@ -121,20 +130,9 @@ Route::get(
     '/profil/ppid/laporan',
     [PublicDokumenController::class, 'laporanPpid']
 )->name('public.profil_ppid_laporan');
-Route::view('/profil/pejabat/bupati', 'public.profil.pejabat.bupati')->name('public.profil_pejabat_bupati');
-Route::view('/profil/pejabat/wakilbupati', 'public.profil.pejabat.wakilbupati')->name('public.profil_pejabat_wakilbupati');
-Route::view('/profil/pejabat/sekda', 'public.profil.pejabat.sekda')->name('public.profil_pejabat_sekda');
-Route::view('/profil/pejabat/asisten', 'public.profil.pejabat.asisten')->name('public.profil_pejabat_asisten');
-Route::view('/profil/pejabat/stafahli', 'public.profil.pejabat.stafahli')->name('public.profil_pejabat_stafahli');
-Route::view('/profil/pejabat/inspektur', 'public.profil.pejabat.inspektur')->name('public.profil_pejabat_inspektur');
-Route::view('/profil/pejabat/kepalabadan', 'public.profil.pejabat.kepalabadan')->name('public.profil_pejabat_kepalabadan');
-Route::view('/profil/pejabat/kepaladinas', 'public.profil.pejabat.kepaladinas')->name('public.profil_pejabat_kepaladinas');
-Route::view('/profil/pejabat/kepalabagian', 'public.profil.pejabat.kepalabagian')->name('public.profil_pejabat_kepalabagian');
-Route::view('/profil/pejabat/kepalapuskesmas', 'public.profil.pejabat.kepalapuskesmas')->name('public.profil_pejabat_kepalapuskesmas');
-Route::view('/profil/pejabat/camat', 'public.profil.pejabat.camat')->name('public.profil_pejabat_camat');
-Route::view('/profil/pejabat/lurah', 'public.profil.pejabat.lurah')->name('public.profil_pejabat_lurah');
-Route::view('/profil/pejabat/direkturrsd', 'public.profil.pejabat.direkturrsd')->name('public.profil_pejabat_direkturrsd');
-Route::view('/profil/pejabat/direkturbumd', 'public.profil.pejabat.direkturbumd')->name('public.profil_pejabat_direkturbumd');
+Route::get('/profil/pejabat/bupati', [\App\Http\Controllers\PublicPejabatController::class, 'index'])->defaults('kategori', 'bupati')->name('public.profil_pejabat_bupati');
+Route::get('/profil/pejabat/wakilbupati', [\App\Http\Controllers\PublicPejabatController::class, 'index'])->defaults('kategori', 'wakilbupati')->name('public.profil_pejabat_wakilbupati');
+Route::get('/profil/pejabat/{kategori}', [\App\Http\Controllers\PublicPejabatController::class, 'index'])->name('public.profil_pejabat');
 Route::get('/dip/berkala', [\App\Http\Controllers\PublicDipController::class, 'berkala'])->name('public.dip_berkala');
 Route::get('/dip/setiapsaat', [\App\Http\Controllers\PublicDipController::class, 'setiapsaat'])->name('public.dip_setiapsaat');
 Route::get('/dip/sertamerta', [\App\Http\Controllers\PublicDipController::class, 'sertamerta'])->name('public.dip_sertamerta');
@@ -145,8 +143,7 @@ Route::get('/layanan/regulasi', [\App\Http\Controllers\PublicRegulasiController:
 Route::get('/layanan/lhkpn', [PublicDokumenController::class, 'lhkpn'])->name('public.lhkpn');
 Route::get('/layanan/permohonan-informasi', [\App\Http\Controllers\PermohonanController::class, 'layananInformasi'])->name('public.layanan_permohonan_informasi');
 Route::view('/layanan/formulir-keberatan', 'public.layanan.formulir-keberatan')->name('public.layanan_formulir_keberatan');
-Route::view('/layanan/agenda-bulanan', 'public.layanan.agenda-bulanan')->name('public.layanan_agenda_bulanan');
-Route::view('/layanan/agenda-tahunan', 'public.layanan.agenda-tahunan')->name('public.layanan_agenda_tahunan');
+Route::get('/layanan/agenda', [\App\Http\Controllers\PublicAgendaController::class, 'index'])->name('public.layanan_agenda');
 Route::view('/transparansi-pemkab', 'public.transparansi-pemkab')->name('public.transparansi_pemkab');
 Route::view('/ppidpelaksana/badan', 'public.ppidpelaksana.badan')->name('public.ppidpelaksana_badan');
 Route::view('/ppidpelaksana/bagian', 'public.ppidpelaksana.bagian')->name('public.ppidpelaksana_bagian');

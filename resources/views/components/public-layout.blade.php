@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title ?? 'PPID Kabupaten Bangkalan' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .dropdown:hover .dropdown-menu { display: block; }
     </style>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="antialiased bg-gray-50 text-gray-800">
 
@@ -58,7 +56,7 @@
                         Profil PPID
                         <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
-                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 py-2 border border-gray-100">
+                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg w-56 z-50 py-2 border border-gray-100">
                         <li><a href="{{ route('public.profil_ppid_tentang') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Tentang PPID</a></li>
                         <li><a href="{{ route('public.profil_ppid_tupoksi') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Tugas Pokok dan Fungsi</a></li>
                         <li><a href="{{ route('public.profil_ppid_visimisi') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Visi dan Misi</a></li>
@@ -77,21 +75,19 @@
                         Pejabat PPID
                         <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
-                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 max-h-96 overflow-y-auto py-2 border border-gray-100">
-                        <li><a href="{{ route('public.profil_pejabat_bupati') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Bupati</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_wakilbupati') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Wakil Bupati</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_sekda') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Sekda</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_asisten') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Asisten</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_stafahli') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Staf Ahli</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_inspektur') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Inspektur</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_kepalabadan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kepala Badan</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_kepaladinas') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kepala Dinas</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_kepalabagian') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kepala Bagian</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_kepalapuskesmas') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kepala Puskesmas</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_camat') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Camat</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_lurah') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Lurah</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_direkturrsd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Direktur RSD</a></li>
-                        <li><a href="{{ route('public.profil_pejabat_direkturbumd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Direktur BUMD</a></li>
+                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg w-56 z-50 max-h-96 overflow-y-auto py-2 border border-gray-100">
+                        <li><a href="{{ route('public.profil_pejabat_bupati') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Profil</a></li>
+                        <li><a href="{{ route('public.profil_pejabat', 'sekda') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Sekda</a></li>
+                        <li><a href="{{ route('public.profil_pejabat', 'asisten') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Asisten</a></li>
+                        <li><a href="{{ route('public.profil_pejabat', 'stafahli') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Staf Ahli</a></li>
+                        <li><a href="{{ route('public.profil_pejabat', 'sekretaris-dprd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Sekretaris DPRD</a></li>
+                        <li><a href="{{ route('public.profil_pejabat', 'inspektur') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Inspektur</a></li>
+                        <li><a href="{{ route('public.profil_pejabat', 'kepala-dinas') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kepala Dinas</a></li>
+                        <li><a href="{{ route('public.profil_pejabat', 'kepala-badan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kepala Badan</a></li>
+                        <li><a href="{{ route('public.profil_pejabat', 'direktur-rsud') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Direktur RSUD</a></li>
+                        <li><a href="{{ route('public.profil_pejabat', 'camat') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Camat</a></li>
+                        <li><a href="{{ route('public.profil_pejabat', 'kepala-pelaksana-bpbd') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kepala Pelaksana BPBD</a></li>
+                        <li><a href="{{ route('public.profil_pejabat', 'kepala-bagian') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kepala Bagian</a></li>
                     </ul>
                 </li>
 
@@ -101,7 +97,7 @@
                         Daftar Informasi Publik
                         <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
-                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-64 z-50 py-2 border border-gray-100">
+                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg w-64 z-50 py-2 border border-gray-100">
                         <li><a href="{{ route('public.dip_berkala') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Daftar Informasi Berkala</a></li>
                         <li><a href="{{ route('public.dip_setiapsaat') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Daftar Informasi Setiap Saat</a></li>
                         <li><a href="{{ route('public.dip_sertamerta') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Daftar Informasi Serta Merta</a></li>
@@ -115,10 +111,10 @@
                         Layanan Informasi Publik
                         <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
-                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 py-2 border border-gray-100">
+                    <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg w-56 z-50 py-2 border border-gray-100">
                         <li><a href="https://www.lapor.go.id/" target="_blank" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">SP4N LAPOR!</a></li>
                         <li><a href="{{ route('public.layanan_berita') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Daftar Berita PPID</a></li>
-                        <li><a href="https://elhkpn.kpk.go.id/portal/user/login" target="_blank" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">LHKPN</a></li>
+                        <li><a href="{{ route('public.lhkpn') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">LHKPN</a></li>
                         <li><a href="{{ route('public.layanan_permohonan_informasi') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Permohonan Informasi</a></li>
                         <li><a href="{{ route('public.layanan_formulir_keberatan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Formulir Keberatan</a></li>
                         <li><a href="{{ route('public.layanan_agenda_bulanan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Agenda Bulanan</a></li>
@@ -137,7 +133,7 @@
                         PPID Pelaksana
                         <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
-                    <ul class="absolute hidden group-hover:block right-0 bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-56 z-50 py-2 border border-gray-100">
+                    <ul class="absolute hidden group-hover:block right-0 bg-white text-gray-800 shadow-xl rounded-lg w-56 z-50 py-2 border border-gray-100">
                         <li><a href="{{ route('public.ppidpelaksana_badan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Badan</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_bagian') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Bagian</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_inspektorat') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Inspektorat</a></li>
