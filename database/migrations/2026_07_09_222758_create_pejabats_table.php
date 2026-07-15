@@ -13,17 +13,18 @@ return new class extends Migration
     {
         Schema::create('pejabats', function (Blueprint $table) {
             $table->id();
-            $table->enum('kategori_pejabat', [
-                'Sekda', 'Asisten', 'Staf Ahli', 'Sekretaris DPRD', 
-                'Inspektur', 'Kepala Dinas', 'Kepala Badan', 'Direktur RSUD', 
-                'Camat', 'Kepala Pelaksana BPBD', 'Kepala Bagian'
-            ]);
+            $table->string('kategori_pejabat');
             $table->string('nama');
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->string('jabatan_keterangan');
             $table->string('instansi')->nullable();
             $table->string('nip')->nullable();
             $table->string('pangkat')->nullable();
             $table->string('golongan')->nullable();
+            $table->text('riwayat_pendidikan')->nullable();
+            $table->text('riwayat_karir')->nullable();
+            $table->text('penghargaan')->nullable();
             $table->string('foto')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();

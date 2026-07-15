@@ -12,6 +12,18 @@
             </div>
 
             <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mr-2">
+                <form action="{{ route('admin.lhkpn.index') }}" method="GET" class="w-full sm:w-auto flex gap-2">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari tahun/nama pejabat..." class="w-full sm:w-64 border border-gray-200 rounded-2xl text-sm font-bold text-gray-600 px-4 py-3 focus:ring-2 focus:ring-red-100 focus:border-red-300 transition-all">
+                    <button type="submit" class="bg-gray-900 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-lg shadow-gray-200 transition flex items-center gap-2 hover:bg-gray-800">
+                        CARI
+                    </button>
+                    @if(request('search'))
+                        <a href="{{ route('admin.lhkpn.index') }}" class="bg-gray-100 text-gray-600 px-6 py-3 rounded-2xl text-sm font-black transition flex items-center gap-2 hover:bg-gray-200">
+                            RESET
+                        </a>
+                    @endif
+                </form>
+
                 <a href="{{ route('admin.lhkpn.create') }}" class="w-full sm:w-auto justify-center bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-lg shadow-red-100 transition flex items-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     TAMBAH LHKPN

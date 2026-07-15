@@ -26,7 +26,7 @@
                             <select name="pejabat_id" class="w-full border-none bg-gray-50 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-blue-500 shadow-inner text-gray-700 font-bold transition-all" required>
                                 <option value="">-- Pilih Pejabat --</option>
                                 @foreach($pejabats as $pejabat)
-                                    <option value="{{ $pejabat->id }}" {{ old('pejabat_id') == $pejabat->id ? 'selected' : '' }}>{{ $pejabat->nama }} ({{ $pejabat->kategori_pejabat }})</option>
+                                    <option value="{{ $pejabat->id }}" {{ old('pejabat_id', $selectedPejabatId ?? '') == $pejabat->id ? 'selected' : '' }}>{{ $pejabat->nama }} ({{ $pejabat->kategori_pejabat }})</option>
                                 @endforeach
                             </select>
                             @error('pejabat_id') <p class="text-red-500 text-xs mt-2 ml-2">{{ $message }}</p> @enderror

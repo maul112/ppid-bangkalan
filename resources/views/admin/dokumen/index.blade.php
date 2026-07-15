@@ -11,14 +11,25 @@
             </div>
 
             <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mr-2">
-                <form action="{{ route('admin.dokumen.index') }}" method="GET" class="w-full sm:w-auto">
-                    <select name="kategori" class="w-full border border-gray-200 rounded-2xl text-sm font-bold text-gray-600 pl-4 pr-10 py-3 focus:ring-2 focus:ring-blue-100 focus:border-blue-300 transition-all cursor-pointer" onchange="this.form.submit()">
+                <form action="{{ route('admin.dokumen.index') }}" method="GET" class="w-full sm:w-auto flex flex-col sm:flex-row gap-2">
+                    <select name="kategori" class="w-full sm:w-auto border border-gray-200 rounded-2xl text-sm font-bold text-gray-600 pl-4 pr-10 py-3 focus:ring-2 focus:ring-blue-100 focus:border-blue-300 transition-all cursor-pointer" onchange="this.form.submit()">
                         <option value="">Semua Kategori</option>
                         <option value="SOP" {{ request('kategori') == 'SOP' ? 'selected' : '' }}>SOP</option>
                         <option value="Dasar Hukum" {{ request('kategori') == 'Dasar Hukum' ? 'selected' : '' }}>Dasar Hukum</option>
                         <option value="Alur Pelayanan" {{ request('kategori') == 'Alur Pelayanan' ? 'selected' : '' }}>Alur Pelayanan</option>
                         <option value="Laporan PPID" {{ request('kategori') == 'Laporan PPID' ? 'selected' : '' }}>Laporan PPID</option>
                     </select>
+
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari judul/keterangan..." class="w-full sm:w-64 border border-gray-200 rounded-2xl text-sm font-bold text-gray-600 px-4 py-3 focus:ring-2 focus:ring-red-100 focus:border-red-300 transition-all">
+                    
+                    <button type="submit" class="bg-gray-900 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-lg shadow-gray-200 transition flex items-center gap-2 hover:bg-gray-800">
+                        CARI
+                    </button>
+                    @if(request('search'))
+                        <a href="{{ route('admin.dokumen.index') }}" class="bg-gray-100 text-gray-600 px-6 py-3 rounded-2xl text-sm font-black transition flex items-center justify-center gap-2 hover:bg-gray-200">
+                            RESET
+                        </a>
+                    @endif
                 </form>
 
                 <a href="{{ route('admin.dokumen.create') }}" class="w-full sm:w-auto justify-center bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-lg shadow-red-100 transition flex items-center gap-2">

@@ -73,9 +73,9 @@
                             <div class="md:col-span-2">
                                 <label class="block font-bold text-xs text-gray-500 uppercase tracking-wider mb-1">Unggah Foto KTP</label>
                                 <div class="mt-1 flex items-center p-4 border-2 border-dashed border-gray-200 rounded-lg hover:bg-gray-50 transition">
-                                    <input type="file" name="foto_ktp" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" required>
+                                    <input type="file" name="foto_ktp" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" accept="image/*" required>
                                 </div>
-                                <p class="text-[10px] text-red-500 mt-2 font-bold uppercase">* Format: JPG, PNG, PDF (Maksimal 2MB)</p>
+                                <p class="text-[10px] text-red-500 mt-2 font-bold uppercase">* Format: JPG, PNG (Maksimal 2MB)</p>
                             </div>
                         </div>
                     </div>

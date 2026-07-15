@@ -14,6 +14,11 @@ class Pejabat extends Model
         'nip',
         'pangkat',
         'golongan',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'riwayat_pendidikan',
+        'riwayat_karir',
+        'penghargaan',
         'foto',
         'is_active',
     ];

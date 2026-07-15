@@ -16,12 +16,20 @@ class DokumenController extends Controller
         $kategori = $request->input('kategori');
 
         $query = Dokumen::with('opd')->latest();
+        $search = $request->input('search');
 
         if ($kategori) {
             $query->where('kategori', $kategori);
         }
 
-        $dokumens = $query->paginate(10)->appends(['kategori' => $kategori]);
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('judul', 'like', "%{$search}%")
+                  ->orWhere('keterangan', 'like', "%{$search}%");
+            });
+        }
+
+        $dokumens = $query->paginate(10)->appends(['kategori' => $kategori, 'search' => $search]);
 
         return view('admin.dokumen.index', compact('dokumens', 'kategori'));
     }

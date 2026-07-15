@@ -8,10 +8,17 @@ use Illuminate\Http\Request;
 
 class HariLiburController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $hariLiburs = HariLibur::orderBy('tanggal', 'desc')->paginate(10);
+        $query = HariLibur::query();
 
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('keterangan', 'like', "%{$search}%")
+                  ->orWhere('tanggal', 'like', "%{$search}%");
+        }
+
+        $hariLiburs = $query->orderBy('tanggal', 'desc')->paginate(10);
         return view('admin.hari_libur.index', compact('hariLiburs'));
     }
 

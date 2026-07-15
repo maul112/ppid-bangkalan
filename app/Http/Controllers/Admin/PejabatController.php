@@ -12,9 +12,17 @@ class PejabatController extends Controller
     public function index(Request $request)
     {
         $query = Pejabat::query();
+        $search = $request->input('search');
 
         if ($request->has('kategori') && $request->kategori != '') {
             $query->where('kategori_pejabat', $request->kategori);
+        }
+
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%")
+                  ->orWhere('jabatan', 'like', "%{$search}%");
+            });
         }
 
         $pejabats = $query->orderBy('kategori_pejabat')->orderBy('id')->get();

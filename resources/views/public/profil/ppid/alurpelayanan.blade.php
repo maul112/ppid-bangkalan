@@ -171,7 +171,7 @@
 
                 </div>
 
-                <a href="{{ asset('alur-layanan/Alur_Pengaduan_Melalui_Aplikasi_(1).pdf') }}"
+                <a href="{{ asset('files/alur-layanan/Alur_Pengaduan_Melalui_Aplikasi_(1).pdf') }}"
                    target="_blank"
                    class="btn-download">
                     Buka Dokumen
@@ -202,7 +202,7 @@
 
                 </div>
 
-                <a href="{{ asset('alur-layanan/Alur_Pengaduan_Melalui_Aplikasi_(2).pdf') }}"
+                <a href="{{ asset('files/alur-layanan/Alur_Pengaduan_Melalui_Aplikasi_(2).pdf') }}"
                    target="_blank"
                    class="btn-download">
                     Buka Dokumen

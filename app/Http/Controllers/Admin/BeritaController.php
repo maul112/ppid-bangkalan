@@ -10,10 +10,17 @@ use Illuminate\Support\Facades\File; // Gunakan Facade File agar lebih rapi
 
 class BeritaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Menggunakan latest() agar berita terbaru muncul di atas
-        $beritas = Berita::latest()->paginate(10);
+        $query = Berita::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('judul', 'like', "%{$search}%")
+                  ->orWhere('kategori', 'like', "%{$search}%");
+        }
+
+        $beritas = $query->latest()->paginate(10);
         return view('admin.berita.index', compact('beritas'));
     }
 

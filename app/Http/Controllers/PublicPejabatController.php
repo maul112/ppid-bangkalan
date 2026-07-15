@@ -11,6 +11,8 @@ class PublicPejabatController extends Controller
     {
         // Map slug back to category enum
         $kategoriMap = [
+            'bupati' => 'Bupati',
+            'wakilbupati' => 'Wakil Bupati',
             'sekda' => 'Sekda',
             'asisten' => 'Asisten',
             'stafahli' => 'Staf Ahli',
@@ -19,9 +21,11 @@ class PublicPejabatController extends Controller
             'kepala-dinas' => 'Kepala Dinas',
             'kepala-badan' => 'Kepala Badan',
             'direktur-rsud' => 'Direktur RSUD',
+            'direktur' => 'Direktur',
             'camat' => 'Camat',
             'kepala-pelaksana-bpbd' => 'Kepala Pelaksana BPBD',
             'kepala-bagian' => 'Kepala Bagian',
+            'lainnya' => 'Lainnya',
         ];
 
         if (!array_key_exists($kategori, $kategoriMap)) {
@@ -34,6 +38,11 @@ class PublicPejabatController extends Controller
                             ->where('is_active', true)
                             ->orderBy('id')
                             ->get();
+
+        if (in_array($kategori, ['bupati', 'wakilbupati'])) {
+            $pejabat = $pejabats->first();
+            return view('public.pejabat.bupati', compact('pejabat', 'namaKategori'));
+        }
 
         return view('public.pejabat.index', compact('pejabats', 'namaKategori'));
     }

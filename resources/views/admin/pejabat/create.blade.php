@@ -23,7 +23,7 @@
                         <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Kategori Pejabat</label>
                         <select name="kategori_pejabat" class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all px-4 py-3" required>
                             <option value="">Pilih Kategori</option>
-                            @foreach(['Sekda', 'Asisten', 'Staf Ahli', 'Sekretaris DPRD', 'Inspektur', 'Kepala Dinas', 'Kepala Badan', 'Direktur RSUD', 'Camat', 'Kepala Pelaksana BPBD', 'Kepala Bagian'] as $kat)
+                            @foreach(['Bupati', 'Wakil Bupati', 'Sekda', 'Asisten', 'Staf Ahli', 'Sekretaris DPRD', 'Inspektur', 'Kepala Dinas', 'Kepala Badan', 'Direktur RSUD', 'Camat', 'Kepala Pelaksana BPBD', 'Kepala Bagian'] as $kat)
                                 <option value="{{ $kat }}">{{ $kat }}</option>
                             @endforeach
                         </select>
@@ -71,7 +71,34 @@
                         </label>
                     </div>
 
-                    <div class="col-span-1 md:col-span-2">
+                    <!-- Data Lanjutan (Khusus Bupati / Wakil Bupati) -->
+                    <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6" id="advanced-fields" style="display: none;">
+                        <div class="col-span-1 md:col-span-2 mt-4">
+                            <h3 class="text-sm font-bold text-gray-800 border-b pb-2 mb-2">Data Khusus Pimpinan Daerah</h3>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Tempat Lahir</label>
+                            <input type="text" name="tempat_lahir" value="{{ old('tempat_lahir') }}" class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all px-4 py-3">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Tanggal Lahir</label>
+                            <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all px-4 py-3">
+                        </div>
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Riwayat Pendidikan</label>
+                            <textarea name="riwayat_pendidikan" rows="4" class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all px-4 py-3">{{ old('riwayat_pendidikan') }}</textarea>
+                        </div>
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Riwayat Karir</label>
+                            <textarea name="riwayat_karir" rows="4" class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all px-4 py-3">{{ old('riwayat_karir') }}</textarea>
+                        </div>
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Penghargaan</label>
+                            <textarea name="penghargaan" rows="4" class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all px-4 py-3">{{ old('penghargaan') }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-span-1 md:col-span-2 mt-4">
                         <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Foto Profil</label>
                         <input type="file" name="foto" accept="image/*" class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100 transition-all px-4 py-2">
                         <p class="text-xs text-gray-400 mt-2">Format: JPG, PNG. Maksimal 2MB.</p>
@@ -88,4 +115,22 @@
             </form>
         </div>
     </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const kategoriSelect = document.querySelector('select[name="kategori_pejabat"]');
+            const advancedFields = document.getElementById('advanced-fields');
+
+            function toggleAdvancedFields() {
+                if (kategoriSelect.value === 'Bupati' || kategoriSelect.value === 'Wakil Bupati') {
+                    advancedFields.style.display = 'grid';
+                } else {
+                    advancedFields.style.display = 'none';
+                }
+            }
+
+            kategoriSelect.addEventListener('change', toggleAdvancedFields);
+            toggleAdvancedFields(); // Run on load in case of old input
+        });
+    </script>
 </x-admin-panel-layout>

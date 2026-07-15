@@ -10,16 +10,30 @@ use Illuminate\Support\Facades\Storage;
 
 class LhkpnController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $lhkpns = PejabatLhkpn::with('pejabat')->latest()->paginate(10);
+        $query = PejabatLhkpn::with('pejabat')->latest();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('tahun_pelaporan', 'like', "%{$search}%")
+                  ->orWhereHas('pejabat', function($q) use ($search) {
+                      $q->where('nama', 'like', "%{$search}%")
+                        ->orWhere('jabatan', 'like', "%{$search}%");
+                  });
+        }
+
+        $lhkpns = $query->paginate(10);
         return view('admin.lhkpn.index', compact('lhkpns'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $pejabats = Pejabat::orderBy('nama')->get();
-        return view('admin.lhkpn.create', compact('pejabats'));
+        $pejabats = Pejabat::whereIn('kategori_pejabat', ['Bupati', 'Wakil Bupati', 'Sekda', 'Asisten', 'Staf Ahli'])
+            ->orderBy('nama')
+            ->get();
+        $selectedPejabatId = $request->query('pejabat_id');
+        return view('admin.lhkpn.create', compact('pejabats', 'selectedPejabatId'));
     }
 
     public function store(Request $request)
@@ -45,7 +59,9 @@ class LhkpnController extends Controller
 
     public function edit(PejabatLhkpn $lhkpn)
     {
-        $pejabats = Pejabat::orderBy('nama')->get();
+        $pejabats = Pejabat::whereIn('kategori_pejabat', ['Bupati', 'Wakil Bupati', 'Sekda', 'Asisten', 'Staf Ahli'])
+            ->orderBy('nama')
+            ->get();
         return view('admin.lhkpn.edit', compact('lhkpn', 'pejabats'));
     }
 

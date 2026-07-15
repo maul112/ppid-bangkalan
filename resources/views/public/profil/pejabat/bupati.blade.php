@@ -10,7 +10,7 @@
     <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 
         <iframe
-            src="{{ asset('dokumen/Profil_Bupati_Wabup_dan_Kepala_OPD.pdf') }}"
+            src="{{ asset('files/dokumen/Profil_Bupati_Wabup_dan_Kepala_OPD.pdf') }}"
             width="100%"
             height="900"
             class="border-0">
@@ -19,7 +19,7 @@
     </div>
 
     <div class="mt-6 text-center">
-        <a href="{{ asset('dokumen/Profil_Bupati_Wabup_dan_Kepala_OPD.pdf') }}"
+        <a href="{{ asset('files/dokumen/Profil_Bupati_Wabup_dan_Kepala_OPD.pdf') }}"
            target="_blank"
            class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
 

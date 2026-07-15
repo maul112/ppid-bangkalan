@@ -3,17 +3,32 @@
 
     <div class="space-y-6">
         {{-- Action Bar --}}
-        <div class="flex justify-between items-center bg-white p-4 rounded-[2rem] border border-gray-100 shadow-sm">
-            <div class="flex items-center gap-3 ml-4">
-                <a href="{{ route('admin.dashboard') }}" class="w-10 h-10 flex items-center justify-center bg-white rounded-xl border border-gray-200 text-gray-400 hover:text-red-600 hover:border-red-200 transition-all shadow-sm">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-[2rem] border border-gray-100 shadow-sm">
+            <div class="flex items-center gap-3 ml-2 md:ml-4 w-full md:w-auto">
+                <a href="{{ route('admin.dashboard') }}" class="w-10 h-10 flex items-center justify-center bg-white rounded-xl border border-gray-200 text-gray-400 hover:text-red-600 hover:border-red-200 transition-all shadow-sm flex-shrink-0">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </a>
-                <span class="text-sm font-black text-gray-400 uppercase tracking-widest">Dasar Hukum & Aturan</span>
+                <span class="text-sm font-black text-gray-400 uppercase tracking-widest hidden sm:inline">Dasar Hukum & Aturan</span>
             </div>
-            <a href="{{ route('admin.regulasi.create') }}" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-lg shadow-red-100 transition flex items-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                TAMBAH REGULASI
-            </a>
+            
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto mr-2">
+                <form action="{{ route('admin.regulasi.index') }}" method="GET" class="w-full sm:w-auto flex gap-2">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari judul/nomor..." class="w-full sm:w-64 border border-gray-200 rounded-2xl text-sm font-bold text-gray-600 px-4 py-3 focus:ring-2 focus:ring-red-100 focus:border-red-300 transition-all">
+                    <button type="submit" class="bg-gray-900 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-lg shadow-gray-200 transition flex items-center gap-2 hover:bg-gray-800">
+                        CARI
+                    </button>
+                    @if(request('search'))
+                        <a href="{{ route('admin.regulasi.index') }}" class="bg-gray-100 text-gray-600 px-6 py-3 rounded-2xl text-sm font-black transition flex items-center gap-2 hover:bg-gray-200">
+                            RESET
+                        </a>
+                    @endif
+                </form>
+
+                <a href="{{ route('admin.regulasi.create') }}" class="w-full sm:w-auto justify-center bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-lg shadow-red-100 transition flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    TAMBAH REGULASI
+                </a>
+            </div>
         </div>
 
         {{-- Table Card --}}
