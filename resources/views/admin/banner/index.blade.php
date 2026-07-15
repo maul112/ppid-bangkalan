@@ -84,7 +84,7 @@
             @endforelse
         </div>
         <div class="mt-8">
-            {{ $banners->links() }}
+            {{ $banners->appends(request()->query())->links() }}
         </div>
     </div>
 </x-admin-panel-layout>

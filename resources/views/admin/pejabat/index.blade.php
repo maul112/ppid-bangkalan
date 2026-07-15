@@ -116,5 +116,10 @@
                 </tbody>
             </table>
         </div>
+        @if($pejabats->hasPages())
+            <div class="px-6 py-4 border-t border-gray-100">
+                {{ $pejabats->appends(request()->query())->links() }}
+            </div>
+        @endif
     </div>
 </x-admin-panel-layout>

@@ -81,7 +81,7 @@
             </tbody>
         </table>
             <div class="p-4 border-t border-gray-100">
-                {{ $hariLiburs->links() }}
+                {{ $hariLiburs->appends(request()->query())->links() }}
             </div>
     </div>
     </div>

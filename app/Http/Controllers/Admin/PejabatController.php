@@ -25,7 +25,7 @@ class PejabatController extends Controller
             });
         }
 
-        $pejabats = $query->orderBy('kategori_pejabat')->orderBy('id')->get();
+        $pejabats = $query->orderBy('kategori_pejabat')->orderBy('id')->paginate(10);
         return view('admin.pejabat.index', compact('pejabats'));
     }
 

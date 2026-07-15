@@ -103,7 +103,7 @@
 
         @if($lhkpns->hasPages())
             <div class="mt-6">
-                {{ $lhkpns->links() }}
+                {{ $lhkpns->appends(request()->query())->links() }}
             </div>
         @endif
     </div>

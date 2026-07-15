@@ -84,7 +84,7 @@
                 </tbody>
             </table>
             <div class="p-4 border-t border-gray-100">
-                {{ $regulasis->links() }}
+                {{ $regulasis->appends(request()->query())->links() }}
             </div>
         </div>
     </div>

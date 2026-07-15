@@ -97,7 +97,7 @@
                 </tbody>
             </table>
             <div class="p-4 border-t border-gray-100">
-                {{ $beritas->links() }}
+                {{ $beritas->appends(request()->query())->links() }}
             </div>
         </div>
     </div>
