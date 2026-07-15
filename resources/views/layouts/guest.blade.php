@@ -8,6 +8,7 @@
         <!-- <title>{{ config('app.name', '') }}</title> -->
 
         <title>PPID Kabupaten Bangkalan</title>
+        <link rel="icon" type="image/jpeg" href="{{ asset('img/IMG_5776.jpeg') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

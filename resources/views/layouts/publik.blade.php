@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="is-public-page" content="true">
     <title>{{ $title ?? 'PPID Kabupaten Bangkalan' }}</title>
+    <link rel="icon" type="image/jpeg" href="{{ asset('img/IMG_5776.jpeg') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .dropdown:hover .dropdown-menu { display: block; }
