@@ -125,7 +125,7 @@
                             </a>
                         </li>
                         <li><a href="{{ route('public.layanan_permohonan_informasi') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Permohonan Informasi</a></li>
-                        <li><a href="{{ route('public.layanan_formulir_keberatan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Formulir Keberatan</a></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfjCdzqXvizYlBh1-PemiPp-OtiUmkXW4j9et6_vDeVqlzaAQ/viewform?usp=publish-editor" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Formulir Keberatan</a></li>
                         <li><a href="{{ route('public.layanan_agenda') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Agenda</a></li>
                     </ul>
                 </li>
@@ -143,15 +143,15 @@
                         <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
                     <ul class="absolute hidden group-hover:block right-0 bg-white text-gray-800 shadow-xl rounded-lg w-56 z-50 py-2 border border-gray-100">
-                        <li><a href="{{ route('public.ppidpelaksana_badan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Badan</a></li>
-                        <li><a href="{{ route('public.ppidpelaksana_bagian') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Bagian</a></li>
+                        <li><a href="{{ route('public.ppidpelaksana.index', 'badan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Badan</a></li>
+                        <li><a href="{{ route('public.ppidpelaksana.index', 'bagian') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Bagian</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_inspektorat') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Inspektorat</a></li>
                         <li><a href="{{ route('public.ppidpelaksana_setwan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Sekretariat DPRD</a></li>
-                        <li><a href="{{ route('public.ppidpelaksana_dinas') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Dinas</a></li>
-                        <li><a href="{{ route('public.ppidpelaksana_kecamatan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kecamatan</a></li>
-                        <li><a href="{{ route('public.ppidpelaksana_kelurahan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kelurahan</a></li>
-                        <li><a href="{{ route('public.ppidpelaksana_rsud') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">RSUD</a></li>
-                        <!-- <li><a href="{{ route('public.ppidpelaksana_puskesmas') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Puskesmas</a></li> -->
+                        <li><a href="{{ route('public.ppidpelaksana.index', 'dinas') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Dinas</a></li>
+                        <li><a href="{{ route('public.ppidpelaksana.index', 'kecamatan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kecamatan</a></li>
+                        <li><a href="{{ route('public.ppidpelaksana.index', 'kelurahan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Kelurahan</a></li>
+                        <li><a href="{{ route('public.ppidpelaksana.index', 'rsud') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">RSUD</a></li>
+                        <!-- <li><a href="{{ route('public.ppidpelaksana.index', 'puskesmas') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Puskesmas</a></li> -->
                     </ul>
                 </li>
             </ul>
@@ -210,11 +210,11 @@
                     <h4 class="text-lg font-black mb-8 flex items-center">
                         <span class="w-1 h-6 bg-blue-600 mr-3 rounded-full"></span>Lokasi Kami
                     </h4>
-                    <div class="rounded-xl overflow-hidden h-48 shadow-2xl border border-gray-800">
+                    <div class="rounded-xl overflow-hidden h-56 shadow-2xl border border-gray-800">
                         <iframe
                         src="https://maps.google.com/maps?q=-7.0472059,112.7384428&z=17&output=embed"
                         width="100%"
-                        height="250"
+                        height="100%"
                         style="border:0;"
                         allowfullscreen=""
                         loading="lazy">
@@ -230,12 +230,6 @@
             </div>
         </div>
     </footer>
-
-    {{-- <footer class="bg-[#0b0f1a] text-white pt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 text-center text-gray-400">
-            <p>© {{ date('Y') }} PEMERINTAH KABUPATEN BANGKALAN - DISKOMINFO</p>
-        </div>
-    </footer> --}}
 
 </body>
 </html>

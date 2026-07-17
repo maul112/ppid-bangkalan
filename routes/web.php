@@ -93,6 +93,10 @@ Route::middleware(['auth', 'role:admin_ppid'])->prefix('admin')->name('admin.')-
     Route::get('struktur-organisasi', [\App\Http\Controllers\Admin\StrukturOrganisasiController::class, 'index'])->name('struktur-organisasi.index');
     Route::post('struktur-organisasi', [\App\Http\Controllers\Admin\StrukturOrganisasiController::class, 'store'])->name('struktur-organisasi.store');
     Route::put('struktur-organisasi/{id}', [\App\Http\Controllers\Admin\StrukturOrganisasiController::class, 'update'])->name('struktur-organisasi.update');
+
+    Route::resource('ppid_pelaksana', \App\Http\Controllers\Admin\PpidPelaksanaController::class);
+    Route::post('ppid_dokumen_wajib', [\App\Http\Controllers\Admin\PpidDokumenWajibController::class, 'store'])->name('ppid_dokumen_wajib.store');
+    Route::delete('ppid_dokumen_wajib/{id}', [\App\Http\Controllers\Admin\PpidDokumenWajibController::class, 'destroy'])->name('ppid_dokumen_wajib.destroy');
 });
     
 Route::middleware(['auth', 'role:admin_opd'])->prefix('admin')->name('admin.')->group(function () {
@@ -145,13 +149,16 @@ Route::get('/layanan/permohonan-informasi', [\App\Http\Controllers\PermohonanCon
 Route::view('/layanan/formulir-keberatan', 'public.layanan.formulir-keberatan')->name('public.layanan_formulir_keberatan');
 Route::get('/layanan/agenda', [\App\Http\Controllers\PublicAgendaController::class, 'index'])->name('public.layanan_agenda');
 Route::view('/transparansi-pemkab', 'public.transparansi-pemkab')->name('public.transparansi_pemkab');
-Route::view('/ppidpelaksana/badan', 'public.ppidpelaksana.badan')->name('public.ppidpelaksana_badan');
-Route::view('/ppidpelaksana/bagian', 'public.ppidpelaksana.bagian')->name('public.ppidpelaksana_bagian');
-Route::view('/ppidpelaksana/inspektorat', 'public.ppidpelaksana.inspektorat')->name('public.ppidpelaksana_inspektorat');
-Route::view('/ppidpelaksana/setwan', 'public.ppidpelaksana.setwan')->name('public.ppidpelaksana_setwan');
-Route::view('/ppidpelaksana/dinas', 'public.ppidpelaksana.dinas')->name('public.ppidpelaksana_dinas');
-Route::view('/ppidpelaksana/kecamatan', 'public.ppidpelaksana.kecamatan')->name('public.ppidpelaksana_kecamatan');
-Route::view('/ppidpelaksana/kelurahan', 'public.ppidpelaksana.kelurahan')->name('public.ppidpelaksana_kelurahan');
-Route::view('/ppidpelaksana/rsud', 'public.ppidpelaksana.rsud')->name('public.ppidpelaksana_rsud');
-Route::view('/ppidpelaksana/puskesmas', 'public.ppidpelaksana.puskesmas')->name('public.ppidpelaksana_puskesmas');
-Route::view('/ppidpelaksana/bumd', 'public.ppidpelaksana.bumd')->name('public.ppidpelaksana_bumd');
+
+// Single Data Routes (Inspektorat, Setwan)
+Route::get('/ppidpelaksana/inspektorat', [\App\Http\Controllers\PublicPpidPelaksanaController::class, 'showSingle'])->defaults('type', 'inspektorat')->name('public.ppidpelaksana_inspektorat');
+Route::get('/ppidpelaksana/setwan', [\App\Http\Controllers\PublicPpidPelaksanaController::class, 'showSingle'])->defaults('type', 'setwan')->name('public.ppidpelaksana_setwan');
+
+// Detail Data Route
+Route::get('/ppidpelaksana/detail/{id}', [\App\Http\Controllers\PublicPpidPelaksanaController::class, 'show'])->name('public.ppidpelaksana.show');
+
+// Jamak Data Routes
+Route::get('/ppidpelaksana/{kategori}', [\App\Http\Controllers\PublicPpidPelaksanaController::class, 'index'])
+    ->where('kategori', 'badan|bagian|dinas|kecamatan|kelurahan|rsud|puskesmas|bumd')
+    ->name('public.ppidpelaksana.index');
+

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dokumens', function (Blueprint $table) {
             $table->id();
-            $table->enum('kategori', ['SOP', 'Dasar Hukum']);
+            $table->enum('kategori', ['SOP', 'Dasar Hukum', 'Alur Pelayanan', 'Laporan PPID']);
             $table->string('judul');
             $table->string('slug')->unique();
             $table->integer('tahun');

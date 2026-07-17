@@ -12,7 +12,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             OpdUserSeeder::class,
             PermohonanSeeder::class,
-            PejabatSeeder::class
+            PejabatSeeder::class,
+            PpidPelaksanaSeeder::class,
         ]);
     }
 }

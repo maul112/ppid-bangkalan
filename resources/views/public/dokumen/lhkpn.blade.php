@@ -1,8 +1,6 @@
-<x-public-layout>
-    <x-slot name="title">
-        LHKPN Pejabat - PPID Kabupaten Bangkalan
-    </x-slot>
+@extends('layouts.publik')
 
+@section('content')
     <x-public-header title="LHKPN" subtitle="Daftar Informasi Publik" />
 
     <div class="max-w-7xl mx-auto pb-16 px-4 sm:px-6 lg:px-8 min-h-screen">
@@ -64,4 +62,4 @@
             @endif
         </div>
     </div>
-</x-public-layout>
+@endsection

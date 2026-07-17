@@ -11,7 +11,7 @@
         <!-- Search Form -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
             <form action="{{ route('public.layanan_agenda') }}" method="GET" class="flex flex-col md:flex-row gap-4">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari berdasarkan judul atau uraian..." class="flex-1 bg-gray-50 border border-gray-200 text-gray-800 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all px-4 py-3">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari berdasarkan judul atau lokasi..." class="flex-1 bg-gray-50 border border-gray-200 text-gray-800 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all px-4 py-3">
                 <select name="status" class="w-full md:w-48 bg-gray-50 border border-gray-200 text-gray-800 rounded-xl focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all px-4 py-3 cursor-pointer">
                     <option value="">Semua Status</option>
                     @foreach(['Hari Ini', 'Mendatang', 'Lewat'] as $stat)
@@ -33,11 +33,7 @@
                             <th class="px-6 py-4 font-bold rounded-tl-2xl">No</th>
                             <th class="px-6 py-4 font-bold">Waktu & Tanggal</th>
                             <th class="px-6 py-4 font-bold">Judul</th>
-                            <th class="px-6 py-4 font-bold">Uraian</th>
                             <th class="px-6 py-4 font-bold">Lokasi</th>
-                            <th class="px-6 py-4 font-bold">Peserta</th>
-                            <th class="px-6 py-4 font-bold">Jumlah</th>
-                            <th class="px-6 py-4 font-bold">Keterangan</th>
                             <th class="px-6 py-4 font-bold">Status</th>
                             <th class="px-6 py-4 font-bold rounded-tr-2xl">Dibuat Oleh</th>
                         </tr>
@@ -55,20 +51,8 @@
                                 <td class="px-6 py-4 font-bold text-gray-900 min-w-[200px]">
                                     {{ $agenda->judul }}
                                 </td>
-                                <td class="px-6 py-4 text-gray-600 min-w-[250px] whitespace-pre-line">
-                                    {{ $agenda->uraian }}
-                                </td>
                                 <td class="px-6 py-4 text-gray-800 min-w-[150px]">
                                     {{ $agenda->lokasi }}
-                                </td>
-                                <td class="px-6 py-4 text-gray-600">
-                                    {{ $agenda->peserta ?? '-' }}
-                                </td>
-                                <td class="px-6 py-4 text-gray-600">
-                                    {{ $agenda->jumlah_peserta ?? '-' }}
-                                </td>
-                                <td class="px-6 py-4 text-gray-600 min-w-[150px]">
-                                    {{ $agenda->keterangan ?? '-' }}
                                 </td>
                                 <td class="px-6 py-4">
                                     @if($agenda->status == 'Hari Ini')
@@ -85,7 +69,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="10" class="px-6 py-12 text-center text-gray-500">
+                                <td colspan="6" class="px-6 py-12 text-center text-gray-500">
                                     <svg class="w-12 h-12 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                     Belum ada data agenda yang tersedia.
                                 </td>
