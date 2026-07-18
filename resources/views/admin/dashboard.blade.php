@@ -9,37 +9,168 @@
         <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-red-600 opacity-20 rounded-full blur-3xl"></div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <a href="{{ route('admin.banner.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
-            <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+    <!-- Statistik Ringkasan -->
+    <div class="mb-8">
+        <h4 class="text-xl font-bold text-gray-800 mb-4 px-2">Ringkasan Sistem</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Total Permohonan -->
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm font-medium mb-1">Total Permohonan</p>
+                    <h3 class="text-3xl font-black text-gray-800">{{ $stats['total_permohonan'] ?? 0 }}</h3>
+                </div>
+                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center">
+                    <i class="fas fa-file-signature text-2xl"></i>
+                </div>
             </div>
-            <h4 class="text-xl font-bold text-gray-800">Update Banner</h4>
-            <p class="text-gray-500 text-sm mt-1">Kelola gambar promosi halaman depan.</p>
+
+            <!-- Permohonan Menunggu -->
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm font-medium mb-1">Menunggu Review</p>
+                    <h3 class="text-3xl font-black text-orange-600">{{ $stats['pending_permohonan'] ?? 0 }}</h3>
+                </div>
+                <div class="w-16 h-16 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center">
+                    <i class="fas fa-clock text-2xl"></i>
+                </div>
+            </div>
+
+            <!-- Total Berita -->
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm font-medium mb-1">Berita Dipublikasi</p>
+                    <h3 class="text-3xl font-black text-gray-800">{{ $stats['total_berita'] ?? 0 }}</h3>
+                </div>
+                <div class="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center">
+                    <i class="fas fa-newspaper text-2xl"></i>
+                </div>
+            </div>
+
+            <!-- Total Dokumen -->
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm font-medium mb-1">Dokumen Tersedia</p>
+                    <h3 class="text-3xl font-black text-gray-800">{{ $stats['total_dokumen'] ?? 0 }}</h3>
+                </div>
+                <div class="w-16 h-16 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center">
+                    <i class="fas fa-folder-open text-2xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pintasan Cepat -->
+    <div class="mb-4 px-2">
+        <h4 class="text-xl font-bold text-gray-800">Pintasan Cepat</h4>
+        <p class="text-gray-500 text-sm">Akses cepat ke seluruh modul manajemen PPID.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Permohonan Informasi -->
+        <a href="{{ route('admin.permohonan.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block relative overflow-hidden">
+            <div class="w-14 h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
+                <i class="fas fa-envelope-open-text text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-gray-800">Permohonan</h4>
+            <p class="text-gray-500 text-sm mt-1">Kelola tiket permohonan informasi.</p>
         </a>
 
+        <!-- Berita -->
         <a href="{{ route('admin.berita.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
             <div class="w-14 h-14 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z"></path></svg>
+                <i class="fas fa-newspaper text-2xl"></i>
             </div>
-            <h4 class="text-xl font-bold text-gray-800">Update Berita</h4>
+            <h4 class="text-xl font-bold text-gray-800">Berita</h4>
             <p class="text-gray-500 text-sm mt-1">Publikasikan kegiatan terbaru.</p>
         </a>
 
+        <!-- Dokumen PPID -->
+        <a href="{{ route('admin.dokumen.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
+            <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
+                <i class="fas fa-folder-open text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-gray-800">Dokumen PPID</h4>
+            <p class="text-gray-500 text-sm mt-1">Kelola SOP, Laporan & Dasar Hukum.</p>
+        </a>
+
+        <!-- PPID Pelaksana -->
+        <a href="{{ route('admin.ppid_pelaksana.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
+            <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
+                <i class="fas fa-building text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-gray-800">PPID Pelaksana</h4>
+            <p class="text-gray-500 text-sm mt-1">Kelola data instansi, dinas & kecamatan.</p>
+        </a>
+
+        <!-- Pejabat -->
+        <a href="{{ route('admin.pejabat.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
+            <div class="w-14 h-14 bg-yellow-50 text-yellow-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
+                <i class="fas fa-user-tie text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-gray-800">Pejabat</h4>
+            <p class="text-gray-500 text-sm mt-1">Kelola profil pimpinan & pejabat.</p>
+        </a>
+
+        <!-- LHKPN -->
+        <a href="{{ route('admin.lhkpn.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
+            <div class="w-14 h-14 bg-cyan-50 text-cyan-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
+                <i class="fas fa-file-invoice-dollar text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-gray-800">LHKPN</h4>
+            <p class="text-gray-500 text-sm mt-1">Kelola laporan harta kekayaan.</p>
+        </a>
+
+        <!-- DIP -->
         <a href="{{ route('admin.dip.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
             <div class="w-14 h-14 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <i class="fas fa-list-ul text-2xl"></i>
             </div>
-            <h4 class="text-xl font-bold text-gray-800">Update DIP</h4>
+            <h4 class="text-xl font-bold text-gray-800">DIP</h4>
             <p class="text-gray-500 text-sm mt-1">Kelola Daftar Informasi Publik.</p>
         </a>
 
+        <!-- Regulasi -->
         <a href="{{ route('admin.regulasi.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
             <div class="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
+                <i class="fas fa-balance-scale text-2xl"></i>
             </div>
-            <h4 class="text-xl font-bold text-gray-800">Update Regulasi</h4>
+            <h4 class="text-xl font-bold text-gray-800">Regulasi</h4>
             <p class="text-gray-500 text-sm mt-1">Kelola dokumen hukum terbaru.</p>
+        </a>
+
+        <!-- Agenda -->
+        <a href="{{ route('admin.agenda.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
+            <div class="w-14 h-14 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
+                <i class="fas fa-calendar-alt text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-gray-800">Agenda</h4>
+            <p class="text-gray-500 text-sm mt-1">Kelola jadwal & acara pemkab.</p>
+        </a>
+
+        <!-- Struktur Organisasi -->
+        <a href="{{ route('admin.struktur-organisasi.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
+            <div class="w-14 h-14 bg-pink-50 text-pink-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
+                <i class="fas fa-sitemap text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-gray-800">Struktur</h4>
+            <p class="text-gray-500 text-sm mt-1">Kelola bagan struktur organisasi.</p>
+        </a>
+
+        <!-- Banner -->
+        <a href="{{ route('admin.banner.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
+            <div class="w-14 h-14 bg-gray-50 text-gray-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
+                <i class="fas fa-images text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-gray-800">Banner</h4>
+            <p class="text-gray-500 text-sm mt-1">Kelola gambar promosi & slider.</p>
+        </a>
+
+        <!-- Hari Libur -->
+        <a href="{{ route('admin.hari-libur.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
+            <div class="w-14 h-14 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
+                <i class="fas fa-calendar-times text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-gray-800">Hari Libur</h4>
+            <p class="text-gray-500 text-sm mt-1">Pengaturan operasional layanan.</p>
         </a>
     </div>
 </x-admin-panel-layout>

@@ -41,7 +41,7 @@ class LhkpnController extends Controller
         $request->validate([
             'pejabat_id' => 'required|exists:pejabats,id',
             'tahun' => 'required|digits:4|integer',
-            'file_pdf' => 'required|mimes:pdf|max:5120'
+            'file_pdf' => 'required|mimes:pdf|max:10240'
         ]);
 
         $file = $request->file('file_pdf');
@@ -70,7 +70,7 @@ class LhkpnController extends Controller
         $request->validate([
             'pejabat_id' => 'required|exists:pejabats,id',
             'tahun' => 'required|digits:4|integer',
-            'file_pdf' => 'nullable|mimes:pdf|max:5120'
+            'file_pdf' => 'nullable|mimes:pdf|max:10240'
         ]);
 
         $data = [
