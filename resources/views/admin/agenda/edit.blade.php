@@ -36,11 +36,6 @@
                         @error('judul') <span class="text-red-500 text-xs font-bold mt-2 block">{{ $message }}</span> @enderror
                     </div>
 
-                    <div class="md:col-span-2">
-                        <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Uraian / Deskripsi <span class="text-red-500">*</span></label>
-                        <textarea name="uraian" rows="4" placeholder="Tuliskan uraian ringkas kegiatan di sini..." class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all px-5 py-4 font-medium" required>{{ old('uraian', $agenda->uraian) }}</textarea>
-                        @error('uraian') <span class="text-red-500 text-xs font-bold mt-2 block">{{ $message }}</span> @enderror
-                    </div>
 
                     <div class="md:col-span-2">
                         <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Lokasi <span class="text-red-500">*</span></label>
@@ -48,23 +43,6 @@
                         @error('lokasi') <span class="text-red-500 text-xs font-bold mt-2 block">{{ $message }}</span> @enderror
                     </div>
 
-                    <div>
-                        <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Peserta / Sasaran (Opsional)</label>
-                        <input type="text" name="peserta" value="{{ old('peserta', $agenda->peserta) }}" placeholder="Misal: Seluruh Kepala OPD" class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all px-5 py-4 font-medium">
-                        @error('peserta') <span class="text-red-500 text-xs font-bold mt-2 block">{{ $message }}</span> @enderror
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Jumlah Peserta (Opsional)</label>
-                        <input type="text" name="jumlah_peserta" value="{{ old('jumlah_peserta', $agenda->jumlah_peserta) }}" placeholder="Misal: 100 Orang" class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all px-5 py-4 font-medium">
-                        @error('jumlah_peserta') <span class="text-red-500 text-xs font-bold mt-2 block">{{ $message }}</span> @enderror
-                    </div>
-
-                    <div class="md:col-span-2">
-                        <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Keterangan Tambahan (Opsional)</label>
-                        <textarea name="keterangan" rows="2" placeholder="Catatan tambahan, contoh: Pakaian Batik Bebas Rapi" class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all px-5 py-4 font-medium">{{ old('keterangan', $agenda->keterangan) }}</textarea>
-                        @error('keterangan') <span class="text-red-500 text-xs font-bold mt-2 block">{{ $message }}</span> @enderror
-                    </div>
 
                     <div class="md:col-span-2">
                         <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Dibuat Oleh (Instansi) <span class="text-red-500">*</span></label>

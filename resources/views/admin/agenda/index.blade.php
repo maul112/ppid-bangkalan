@@ -28,7 +28,7 @@
                         @endforeach
                     </select>
                     
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari judul/uraian/lokasi..." class="w-full sm:w-64 border border-gray-200 rounded-2xl text-sm font-bold text-gray-600 px-4 py-3 focus:ring-2 focus:ring-red-100 focus:border-red-300 transition-all">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari judul/lokasi..." class="w-full sm:w-64 border border-gray-200 rounded-2xl text-sm font-bold text-gray-600 px-4 py-3 focus:ring-2 focus:ring-red-100 focus:border-red-300 transition-all">
                     
                     <button type="submit" class="bg-gray-900 text-white px-6 py-3 rounded-2xl text-sm font-black shadow-lg shadow-gray-200 transition flex items-center gap-2 hover:bg-gray-800">
                         CARI
@@ -54,7 +54,7 @@
                     <thead>
                         <tr class="bg-gray-50/50 border-b border-gray-100">
                             <th class="px-8 py-5 text-left text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Tanggal</th>
-                            <th class="px-8 py-5 text-left text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Judul & Uraian</th>
+                            <th class="px-8 py-5 text-left text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Judul</th>
                             <th class="px-8 py-5 text-left text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Lokasi</th>
                             <th class="px-8 py-5 text-center text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Status</th>
                             <th class="px-8 py-5 text-center text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">Aksi</th>
@@ -69,7 +69,6 @@
                                 </td>
                                 <td class="px-8 py-6 align-top">
                                     <div class="font-bold text-gray-900 text-sm mb-1 line-clamp-2">{{ $agenda->judul }}</div>
-                                    <div class="text-xs text-gray-500 line-clamp-2 leading-relaxed">{{ $agenda->uraian }}</div>
                                 </td>
                                 <td class="px-8 py-6 align-top">
                                     <span class="text-sm text-gray-700 font-medium">{{ $agenda->lokasi }}</span>

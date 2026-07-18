@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agendas', function (Blueprint $table) {
+        Schema::create('ppid_dokumen_wajibs', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
-            $table->string('waktu')->nullable();
-            $table->string('judul');
-            $table->string('lokasi');
-            $table->string('dibuat_oleh');
+            $table->foreignId('ppid_pelaksana_id')->constrained('ppid_pelaksanas')->cascadeOnDelete();
+            $table->string('kategori_dokumen'); // SOTK, RENSTRA, IKU, RKT, PK, dll
+            $table->year('tahun');
+            $table->string('file_path');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agendas');
+        Schema::dropIfExists('ppid_dokumen_wajibs');
     }
 };

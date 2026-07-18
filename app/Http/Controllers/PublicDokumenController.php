@@ -58,7 +58,9 @@ class PublicDokumenController extends Controller
             ->latest('tahun')
             ->paginate(10);
 
-        return view('public.dokumen.lhkpn', compact('lhkpns'));
+        $title = 'LHKPN Pejabat - PPID Kabupaten Bangkalan';
+
+        return view('public.dokumen.lhkpn', compact('lhkpns', 'title'));
     }
 
     public function show($slug)

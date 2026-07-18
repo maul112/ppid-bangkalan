@@ -13,11 +13,7 @@ class Agenda extends Model
         'tanggal',
         'waktu',
         'judul',
-        'uraian',
         'lokasi',
-        'peserta',
-        'jumlah_peserta',
-        'keterangan',
         'dibuat_oleh'
     ];
 

@@ -27,4 +27,9 @@ class Pejabat extends Model
     {
         return $this->hasMany(PejabatLhkpn::class, 'pejabat_id');
     }
+
+    public function ppidPelaksana()
+    {
+        return $this->hasOne(PpidPelaksana::class, 'pejabat_id');
+    }
 }

@@ -27,7 +27,6 @@ class AgendaController extends Controller
         if ($search) {
             $query->where(function($q) use ($search) {
                 $q->where('judul', 'like', "%{$search}%")
-                  ->orWhere('uraian', 'like', "%{$search}%")
                   ->orWhere('lokasi', 'like', "%{$search}%");
             });
         }
@@ -47,11 +46,7 @@ class AgendaController extends Controller
             'tanggal' => 'required|date',
             'waktu' => 'nullable|string|max:255',
             'judul' => 'required|string|max:255',
-            'uraian' => 'required|string',
             'lokasi' => 'required|string|max:255',
-            'peserta' => 'nullable|string|max:255',
-            'jumlah_peserta' => 'nullable|string|max:255',
-            'keterangan' => 'nullable|string',
             'dibuat_oleh' => 'required|string|max:255',
         ]);
 
@@ -70,11 +65,7 @@ class AgendaController extends Controller
             'tanggal' => 'required|date',
             'waktu' => 'nullable|string|max:255',
             'judul' => 'required|string|max:255',
-            'uraian' => 'required|string',
             'lokasi' => 'required|string|max:255',
-            'peserta' => 'nullable|string|max:255',
-            'jumlah_peserta' => 'nullable|string|max:255',
-            'keterangan' => 'nullable|string',
             'dibuat_oleh' => 'required|string|max:255',
         ]);
 

@@ -15,7 +15,7 @@ class PublicAgendaController extends Controller
             $search = $request->search;
             $query->where(function($q) use ($search) {
                 $q->where('judul', 'like', "%{$search}%")
-                  ->orWhere('uraian', 'like', "%{$search}%");
+                  ->orWhere('lokasi', 'like', "%{$search}%");
             });
         }
 
