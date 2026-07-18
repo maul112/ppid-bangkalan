@@ -101,7 +101,7 @@
                     <div class="col-span-1 md:col-span-2 mt-4">
                         <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Foto Profil</label>
                         <input type="file" name="foto" accept="image/*" class="w-full bg-gray-50 border border-gray-200 text-gray-800 rounded-2xl file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100 transition-all px-4 py-2">
-                        <p class="text-xs text-gray-400 mt-2">Format: JPG, PNG. Maksimal 2MB.</p>
+                        <p class="text-xs text-gray-400 mt-2">Format: JPG, PNG. Maksimal 10MB.</p>
                         @error('foto') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                     </div>
                 </div>

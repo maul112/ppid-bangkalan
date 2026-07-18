@@ -59,7 +59,7 @@
                             <div class="relative group">
                                 <input type="file" name="file_pdf" accept=".pdf" class="w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 transition-all cursor-pointer bg-gray-50 rounded-2xl shadow-inner file:cursor-pointer">
                             </div>
-                            <p class="text-[11px] text-gray-400 mt-2 ml-1 font-medium"><i class="fa-solid fa-circle-info mr-1"></i> Biarkan kosong jika tidak ingin mengubah file PDF. Maks: 5MB</p>
+                            <p class="text-[11px] text-gray-400 mt-2 ml-1 font-medium"><i class="fa-solid fa-circle-info mr-1"></i> Biarkan kosong jika tidak ingin mengubah file PDF. Maks: 10MB</p>
                             @error('file_pdf') <p class="text-red-500 text-xs mt-2 ml-2">{{ $message }}</p> @enderror
                         </div>
                     </div>

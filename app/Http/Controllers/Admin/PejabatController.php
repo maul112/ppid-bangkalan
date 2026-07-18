@@ -36,21 +36,29 @@ class PejabatController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'kategori_pejabat' => 'required',
             'nama' => 'required',
             'jabatan_keterangan' => 'required',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'instansi' => 'nullable|string',
+            'nip' => 'nullable|string',
+            'pangkat' => 'nullable|string',
+            'golongan' => 'nullable|string',
+            'tempat_lahir' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
+            'riwayat_pendidikan' => 'nullable|string',
+            'riwayat_karir' => 'nullable|string',
+            'penghargaan' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
-        $data = $request->all();
-        $data['is_active'] = $request->has('is_active');
+        $validated['is_active'] = $request->has('is_active');
 
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('pejabat_fotos', 'public');
+            $validated['foto'] = $request->file('foto')->store('pejabat_fotos', 'public');
         }
 
-        $pejabat = Pejabat::create($data);
+        $pejabat = Pejabat::create($validated);
 
         return redirect()->route('admin.pejabat.index')->with('success', 'Pejabat berhasil ditambahkan.');
     }
@@ -62,31 +70,39 @@ class PejabatController extends Controller
 
     public function update(Request $request, Pejabat $pejabat)
     {
-        $request->validate([
+        $validated = $request->validate([
             'kategori_pejabat' => 'required',
             'nama' => 'required',
             'jabatan_keterangan' => 'required',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'instansi' => 'nullable|string',
+            'nip' => 'nullable|string',
+            'pangkat' => 'nullable|string',
+            'golongan' => 'nullable|string',
+            'tempat_lahir' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
+            'riwayat_pendidikan' => 'nullable|string',
+            'riwayat_karir' => 'nullable|string',
+            'penghargaan' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
-        $data = $request->all();
-        $data['is_active'] = $request->has('is_active');
+        $validated['is_active'] = $request->has('is_active');
 
         if ($request->hasFile('foto')) {
-            if ($pejabat->foto) {
+            if ($pejabat->foto && Storage::disk('public')->exists($pejabat->foto)) {
                 Storage::disk('public')->delete($pejabat->foto);
             }
-            $data['foto'] = $request->file('foto')->store('pejabat_fotos', 'public');
+            $validated['foto'] = $request->file('foto')->store('pejabat_fotos', 'public');
         }
 
-        $pejabat->update($data);
+        $pejabat->update($validated);
 
         return redirect()->route('admin.pejabat.index')->with('success', 'Pejabat berhasil diperbarui.');
     }
 
     public function destroy(Pejabat $pejabat)
     {
-        if ($pejabat->foto) {
+        if ($pejabat->foto && Storage::disk('public')->exists($pejabat->foto)) {
             Storage::disk('public')->delete($pejabat->foto);
         }
         $pejabat->delete();

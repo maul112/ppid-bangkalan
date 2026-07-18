@@ -117,8 +117,7 @@
                         <li><a href="{{ route('public.lhkpn') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">LHKPN</a></li>
                         <li><a href="{{ route('public.layanan_permohonan_informasi') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Permohonan Informasi</a></li>
                         <li><a href="{{ route('public.layanan_formulir_keberatan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Formulir Keberatan</a></li>
-                        <li><a href="{{ route('public.layanan_agenda_bulanan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Agenda Bulanan</a></li>
-                        <li><a href="{{ route('public.layanan_agenda_tahunan') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Agenda Tahunan</a></li>
+                        <li><a href="{{ route('public.layanan_agenda') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Agenda PPID</a></li>
                     </ul>
                 </li>
 

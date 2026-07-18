@@ -1,4 +1,6 @@
-<x-public-layout title="Detail {{ $dokumen->kategori }} - {{ $dokumen->judul }}">
+@extends('layouts.publik', ['title' => 'Detail ' . $dokumen->kategori . ' - ' . $dokumen->judul])
+
+@section('content')
     <!-- Header Section -->
     <section class="bg-blue-100 bg-opacity-20 rounded-xl text-blue-700 py-14 px-4 relative mt-10">
         <div class="max-w-5xl mx-auto text-center relative z-10">
@@ -88,4 +90,4 @@
             </div>
         </div>
     </section>
-</x-public-layout>
+@endsection

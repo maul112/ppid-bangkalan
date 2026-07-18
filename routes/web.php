@@ -70,7 +70,13 @@ Route::get('/permohonan/track/{nomor_tiket}', [PermohonanController::class, 'sho
 /* --- 2. HALAMAN ADMIN --- */
 Route::middleware(['auth', 'role:admin_ppid'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        $stats = [
+            'total_permohonan' => \App\Models\Permohonan::count(),
+            'pending_permohonan' => \App\Models\Permohonan::where('status', 'Pending')->count(),
+            'total_berita' => \App\Models\Berita::count(),
+            'total_dokumen' => \App\Models\Dokumen::count(),
+        ];
+        return view('admin.dashboard', compact('stats'));
     })->name('dashboard');
 
     Route::resource('banner', BannerController::class);

@@ -1,4 +1,6 @@
-<x-public-layout title="{{ $kategoriTitle }}">
+@extends('layouts.publik', ['title' => $kategoriTitle])
+
+@section('content')
     <x-public-header title="{{ $kategoriTitle }}" subtitle="Daftar Dokumen {{ $kategoriTitle }} PPID" />
 
     <!-- Content Section -->
@@ -43,4 +45,4 @@
             </div>
         </div>
     </section>
-</x-public-layout>
+@endsection
