@@ -81,7 +81,7 @@
                         <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.584l3.71-4.353a.75.75 0 111.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
                     </button>
                     <ul class="absolute hidden group-hover:block bg-white text-gray-800 shadow-xl rounded-lg w-56 z-50 max-h-96 overflow-y-auto py-2 border border-gray-100">
-                        <li><a href="{{ route('public.profil_pejabat_bupati') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Profil</a></li>
+                        {{-- <li><a href="{{ route('public.profil_pejabat_bupati') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Profil</a></li> --}}
                         <li><a href="{{ route('public.profil_pejabat', 'sekda') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Sekda</a></li>
                         <li><a href="{{ route('public.profil_pejabat', 'asisten') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Asisten</a></li>
                         <li><a href="{{ route('public.profil_pejabat', 'stafahli') }}" class="block px-4 py-2 hover:bg-blue-50 hover:text-blue-700">Staf Ahli</a></li>
