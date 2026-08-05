@@ -89,7 +89,7 @@
                         <div class="space-y-6">
                             
                             <div>
-                                <label class="block font-bold text-xs text-gray-500 uppercase tracking-wider mb-1">Informasi yang Dibutuhkan</label>
+                                <label class="block font-bold text-xs text-gray-500 uppercase tracking-wider mb-1">Informasi yang Dibutuhkan/Bisa berupa link </label>
                                 <textarea name="rincian_informasi" class="border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg shadow-sm w-full text-sm" rows="3" required placeholder="Sebutkan rincian data yang Anda minta secara spesifik">{{ old('rincian_informasi') }}</textarea>
                             </div>
 
