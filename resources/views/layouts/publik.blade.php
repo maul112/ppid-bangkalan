@@ -132,8 +132,7 @@
 
                 <!-- Transparansi -->
                 <li>
-                    <!-- <a href="{{ route('public.transparansi_pemkab') }}" class="block py-2 px-4 hover:text-yellow-300">Transparansi Pemkab</a> -->
-                    <a href="http://36.95.23.92/transparansi" class="block py-2 px-4 hover:text-yellow-300">Transparansi Pemkab</a>
+                    <a href="http://36.95.23.92/transparansi" class="block py-2 px-4 hover:text-yellow-300" target="_blank">Transparansi Pemkab</a>
                 </li>
 
                 <!-- PPID Pelaksana -->

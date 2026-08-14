@@ -10,7 +10,7 @@
 
         {{-- Call to Action: Ajukan Permohonan --}}
         <div class="flex justify-center mb-12">
-            <a href="{{ route('permohonan.buat') }}" class="px-8 py-4 bg-blue-600 text-white rounded-2xl font-black text-lg hover:bg-blue-700 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center gap-3">
+            <a href="{{ route('permohonan.buat') }}" class="bg-yellow-500 text-blue-900 px-12 py-5 text-lg md:text-xl rounded-full font-black hover:bg-yellow-400 hover:-translate-y-1 transition transform shadow-2xl ring-4 ring-yellow-500/30 flex items-center gap-3">
                 <i class="fa-solid fa-paper-plane"></i> AJUKAN PERMOHONAN SEKARANG
             </a>
         </div>

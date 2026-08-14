@@ -7,7 +7,6 @@ use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\DipController;
-use App\Http\Controllers\Admin\RegulasiController;
 use App\Http\Controllers\Admin\PermohonanAdminController;
 use App\Http\Controllers\Admin\PermohonanOpdController;
 use App\Http\Controllers\Admin\HariLiburController;
@@ -81,7 +80,6 @@ Route::middleware(['auth', 'role:admin_ppid'])->prefix('admin')->name('admin.')-
 
     Route::resource('banner', BannerController::class);
     Route::resource('berita', BeritaController::class);
-    Route::resource('regulasi', RegulasiController::class);
     Route::resource('dip', DipController::class);
 
     Route::get('/permohonan', [PermohonanAdminController::class, 'index'])->name('permohonan.index');
@@ -149,7 +147,7 @@ Route::get('/dip/sertamerta', [\App\Http\Controllers\PublicDipController::class,
 Route::get('/dip/dikecualikan', [\App\Http\Controllers\PublicDipController::class, 'dikecualikan'])->name('public.dip_dikecualikan');
 Route::get('/layanan/berita', [\App\Http\Controllers\PublicBeritaController::class, 'index'])->name('public.layanan_berita');
 Route::get('/layanan/berita/{slug}', [\App\Http\Controllers\PublicBeritaController::class, 'show'])->name('public.layanan_berita_show');
-Route::get('/layanan/regulasi', [\App\Http\Controllers\PublicRegulasiController::class, 'index'])->name('public.layanan_regulasi');
+
 Route::get('/layanan/lhkpn', [PublicDokumenController::class, 'lhkpn'])->name('public.lhkpn');
 Route::get('/layanan/permohonan-informasi', [\App\Http\Controllers\PermohonanController::class, 'layananInformasi'])->name('public.layanan_permohonan_informasi');
 Route::view('/layanan/formulir-keberatan', 'public.layanan.formulir-keberatan')->name('public.layanan_formulir_keberatan');

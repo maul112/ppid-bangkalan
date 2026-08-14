@@ -128,14 +128,6 @@
             <p class="text-gray-500 text-sm mt-1">Kelola Daftar Informasi Publik.</p>
         </a>
 
-        <!-- Regulasi -->
-        <a href="{{ route('admin.regulasi.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">
-            <div class="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all">
-                <i class="fas fa-balance-scale text-2xl"></i>
-            </div>
-            <h4 class="text-xl font-bold text-gray-800">Regulasi</h4>
-            <p class="text-gray-500 text-sm mt-1">Kelola dokumen hukum terbaru.</p>
-        </a>
 
         <!-- Agenda -->
         <a href="{{ route('admin.agenda.index') }}" class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all group block">

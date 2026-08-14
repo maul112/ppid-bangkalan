@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Berita;
-use App\Models\Regulasi;
 use App\Models\Dip;
 use Illuminate\Http\Request;
 
@@ -14,9 +13,8 @@ class HomeController extends Controller
     {
         $banners = Banner::all();
         $beritas = Berita::latest()->take(3)->get(); 
-        $regulasis = Regulasi::latest()->take(5)->get();
-
-        return view('welcome', compact('banners', 'beritas', 'regulasis'));
+        $total_dokumen = \App\Models\Dokumen::count();
+        return view('welcome', compact('banners', 'beritas', 'total_dokumen'));
     }
 
     public function struktur() {

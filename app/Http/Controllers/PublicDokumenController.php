@@ -52,15 +52,24 @@ class PublicDokumenController extends Controller
         return view('public.dokumen.index', compact('dokumens', 'kategoriTitle'));
     }
 
-    public function lhkpn()
+    public function lhkpn(\Illuminate\Http\Request $request)
     {
-        $lhkpns = \App\Models\PejabatLhkpn::with('pejabat')
-            ->latest('tahun')
-            ->paginate(10);
+        $query = \App\Models\Pejabat::whereIn('kategori_pejabat', ['Bupati', 'Wakil Bupati', 'Sekda', 'Asisten', 'Staf Ahli'])
+            ->with(['lhkpns' => function($q) {
+                $q->orderBy('tahun', 'desc');
+            }]);
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('nama', 'like', "%{$search}%");
+        }
+
+        $pejabats = $query->orderBy('id')->paginate(10);
+        $pejabats->appends($request->all());
 
         $title = 'LHKPN Pejabat - PPID Kabupaten Bangkalan';
 
-        return view('public.dokumen.lhkpn', compact('lhkpns', 'title'));
+        return view('public.dokumen.lhkpn', compact('pejabats', 'title'));
     }
 
     public function show($slug)
